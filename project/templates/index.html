@@ -1,0 +1,68 @@
+
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="center-block"> 
+      <div class="jumbotron" style="background:white;height:200px"> 
+          <img style="float:right;vertical-align:middle;" width=200px src="{{ url_for('static', filename='img/ton_gist_rainbow_O.png') }}">
+          <h1 style="padding:130px 0 0 0;">Łukasz Mentel</h1> 
+      </div> 
+    </div>
+  </div>
+</div>
+
+<br>
+
+<div class="container">
+  <div class="row">
+
+    <hr>
+
+    <p>
+      <h2>Welcome!</h2>
+    </p>
+    
+    <p>
+    I'm a theoretical chemist working currently in th Catalysis Group at the
+    <a href="http://www.uio.no">University of Oslo</a> in Norway.
+    The main focus of my current scientific efforts if to develop quantitative
+    models relating the structure of the zeotype acid catalysts to their catalytic
+    activity.
+    </p>
+
+    <p>
+    I did my PhD in the Section of Theoretical Chemistry at the VU University Amsterdam in the Netherlands.
+    </p>
+    <p>
+    I am also interested in the topic probem of optimal gaussian basis sets for
+    molecular calculations of energies and various properties. To simplify the
+    handling of basis sets and coenversions between formats of different quantum
+    chemical programs I've developed a python module called  <a href="basisset">basis set</a>
+    together with a convenient wrapper for optimizing the exponents of primitive
+    funcitons and plotting completeness profiles. You can find more information in
+    the <a href="software">software</a> section or at the
+    <a href="https://bitbucket.org/lukaszmentel/chemtools">chemtools</a> project webpage.
+    </p>
+
+    <p>
+    I am also a python enthusiast
+    </p>
+
+
+
+    <h2 class="page-heading">News</h2>
+
+    <ul class="page-list">
+      {% for page in pages %}
+        <li><a href="{{ url_for('page', path=page.path) }}">
+          {{ page.meta.title }}
+          </a>- {{ page.meta.date }}</li>
+      {% endfor %}
+    </ul>
+
+  </div>
+</div>
+
+{% endblock %}
