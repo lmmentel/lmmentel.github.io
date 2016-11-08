@@ -9,4 +9,6 @@ sys.path.insert(0, p)
 from flask_homepage import main
 
 if __name__ == '__main__':
+
     main.freezer.freeze()
+
