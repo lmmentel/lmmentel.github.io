@@ -1,37 +1,41 @@
+author: Lukasz
 layout: page
 title: About
-permalink: /about/
 
-# More about me:
+Here I summarize some highlights of my activities but you can find more by visiting
+my profiles on popular web services:
 
-* [curriculum vitae](/downloads/Mentel_CV.pdf)
-* rearcher id: [D-8194-2013](http://www.researcherid.com/rid/D-8194-2013)
+* researcher id: [D-8194-2013](http://www.researcherid.com/rid/D-8194-2013)
 * [google scholar profile](http://scholar.google.com/citations?user=TTL9ux0AAAAJ&hl=en)
+* [linkedin](https://www.linkedin.com/in/lukasz-mentel)
 
-## web presence
+# Curriculum Vitae
 
-- bitbucket
-- linkedin
-- github
-
-<h1> Ph.D. Thesis </h1>
-
-<p>
-My Ph.D. Thesis titled 
-
-<b>Reduced Density Matrix Inspired Approaches to
-    Electrocnic Structure Theory</b>is available at <a href="http://dx.doi.org/10.6084/m9.figshare.1494690"> figshare </a> or see below.
-  </p>
-
-<p>
-     The work presented in the thesis was done in the <a href="">Section of Theoretical
-     Chemistry</a> at the <a href="">VU University</a> in Amsterdam and 
-     <a href="">Center for Superfunctional
-     Materials</a> at <a href="">Pohang University of Science and Technology (POSTECH)</a> in Pohang, South
-     Korea. <br>
-    The thesis was supervied by Prof. E. J. Baerends and Dr O. V. Gritsenko.
-</p>
+<div class="row text-center" style="height:600px">
+  <iframe src="{{ url_for('static', filename='download/Mentel_CV.pdf') }}" width="80%" height="100%" style="border: none;">
+    This browser does not support PDFs. Please download the PDF to view it: <a href="{{ url_for('static', filename='download/Mentel_CV.pdf') }}">Download PDF</a>
+  </iframe>
 </div>
+
+# Code 
+
+If you want to find some of the packages/snippets/scripts that I wrote take a look into
+the [software section]({{ url_for('page', path='software') }})  or check out my repositories:
+
+- [bitbucket](https://bitbucket.org/lukaszmentel)
+- [github](https://github.com/lmmentel)
+
+# Ph.D. Thesis 
+
+My Ph.D. Thesis is titled 
+**Reduced Density Matrix Inspired Approaches to
+Electronic Structure Theory** is available at [figshare](http://dx.doi.org/10.6084/m9.figshare.1494690) but you can have a glimpse below.
+
+The work presented in the thesis was done in the [Section of Theoretical
+Chemistry](http://www.chem.vu.nl/en/research/division-theoretical-chemistry/) at the [VU University](http://vu.nl/en/index.aspx) in Amsterdam and  [Center for Superfunctional
+Materials](http://csm.postech.ac.kr/research/index.html) at [Pohang University of Science and Technology (POSTECH)](http://www.postech.ac.kr/eng/) in Pohang, South Korea.
+
+The thesis was supervised by Prof. E. J. Baerends and Dr O. V. Gritsenko.
 
 
 <div class="row text-center">
@@ -47,6 +51,11 @@ My Ph.D. Thesis titled
 # Publications
 
 <ol reversed>
+
+<li><p>O. V. Gritsenko, Ł. M. Mentel, E. J. Baerends, <br>
+ <em>On the errors of local density (LDA) and generalized gradient (GGA) approximations to the Kohn-Sham potential and orbital energies.</em><br> The Journal of Chemical Physics, <b>144</b>(20), 204114, (2016)
+ <a href="http://doi.org/10.1063/1.4950877">doi:10.1063/1.4950877</a>
+</p></li>
 
 <li><p> D. K<span>ę</span>dziera, <span>Ł</span>. Mentel, P. S. <span>Ż</span>uchowski and S. Knoop <br>
 <em>Ab initio interaction potentials and scattering lengths for ultracold mixtures of
@@ -112,7 +121,7 @@ Journal of Chemical Physics, <b>130</b>, no. 16, 164114 (2009)
 <a href="http://dx.doi.org/10.1063/1.3119714">doi:10.1063/1.3119714</a></p></li>
 </ol>
 
-# Conference Proceedings
+## Conference Proceedings
 
 <ol reversed>
 
@@ -121,6 +130,38 @@ Journal of Chemical Physics, <b>130</b>, no. 16, 164114 (2009)
 In AIP Conference Proceedings Vol. <b>1006</b>, pp. 1006–1008 (2014)
 <a href="http://dx.doi.org/10.1063/1.4897904">doi:10.1063/1.4897904</a></p></li>
 </ol>
+
+# Contact
+
+### Postal address
+
+University of Oslo <br>
+Department of Chemistry <br>
+Sem Sælands vei 26 <br>
+Kjemibygningen <br>
+0371 OSLO <br>
+
+### email
+
+If you want to contact me about an issue related to my scientific activities please use the 
+following address: 
+
+<ul><li>
+<script language="JavaScript">
+          u = 'lukasz.mentel';
+          s = 'smn.uio.no';
+          document.write('<a href=\"mailto:' + u + '@' + s + '\" target=\"_blank\">' + u + '@' + s );
+</script></a>
+</li></ul>
+
+For all the other things, including comments and suggestions about this page please use:
+<ul><li>
+<script language="JavaScript">
+          u = 'lmmentel';
+          s = 'gmail.com';
+          document.write('<a href=\"mailto:' + u + '@' + s + '\" target=\"_blank\">' + u + '@' + s );
+</script></a>
+</li></ul>
 
 <!---
 # posters
