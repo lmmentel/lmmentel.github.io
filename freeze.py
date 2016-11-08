@@ -3,7 +3,7 @@
 import os
 import sys
 
-p = os.path.join(os.getcwd(), 'project')
+p = os.path.join(os.getcwd(), 'flask-homepage')
 sys.path.insert(0, p)
 
 from project import main
