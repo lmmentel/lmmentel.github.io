@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link href="//fonts.googleapis.com/css?family=Asap:400,400italic,700,700italic&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+    <meta name="description" content="Homepage">
+    <meta name="author" content="Lukasz Mentel">
+    <!-- <link rel="icon" href="../../favicon.ico"> -->
+
+    <title>Lukasz Mentel Homepage</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+
+    <!-- Font Awesome  -->
+    <link rel="stylesheet" href="/static/css/font-awesome.css">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- <link href="static/css/ie10-viewport-bug-workaround.css" rel="stylesheet"> -->
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="/static/css/custom.css">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!-- <script src="static/js/ie-emulation-modes-warning.js"></script> -->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+
+          <a href="../" class="navbar-brand">Łukasz Mentel</a>
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="navbar-collapse collapse navbar-right" id="navbar-main">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="/about/"> About </a>
+            </li>
+            <li>
+              <a href="/software/"> Software </a>
+            </li>
+            <li>
+              <a href="/news/"> News </a>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    
+<h1>Software</h1>
+<p></p>
+<p>Here you can find a few software packages that I've developed. Since I'm a big
+supporter of the <a href="http://opensource.org/">open source initiative</a> all the
+packages are available under permissive open source licenses. If you want to have
+a full overview of my coding activities check out my repositories:</p>
+<ul>
+<li><a href="https://bitbucket.org/lukaszmentel">bitbucket</a></li>
+<li><a href="https://github.com/lmmentel">github</a></li>
+</ul>
+<h2><a href="https://github.com/lmmentel/batchcalculator">Batch Calculator</a></h2>
+<p>A GUI app based on <a href="https://wxpython.org/">wxPython</a> for calculating the correct amount of 
+reactants (batch) for a particular composition given by the molar ratio of its components. It is
+designed to assist chemical synthesis when it requires batch preparation. Besides offering a 
+quick and easy way of calculating the desired masses (or moles) it can also store information
+about chemicals, components and syntheses and generate lab reports in pdf format. You can find
+more information in the <a href="https://github.com/lmmentel/batchcalculator">github repository</a>.</p>
+<div class="row">
+    <img class="img-responsive center-block" width=700px src="/static/img/BC_014.png">
+</div>
+
+<h2><a href="http://mendeleev.readthedocs.org">mendeleev</a></h2>
+<p><a href="http://mendeleev.readthedocs.org">mendeleev</a> is my attempt to
+develop a database of atomic properties with an easy to use python API with
+convenient methods to formulate complex querries, tranfer data to
+<a href="http://numpy.org">numpy</a> and <a href="http://pandas.org">pandas</a> objects and visualize
+various properties is color mapped periodic tables (using <a href="http://bokeh.pydata.org/en/latest/">bokeh</a>).</p>
+<p>All the atomic properties are listed in the <a href="http://mendeleev.readthedocs.io/en/
+latest/data.html">data page</a> of the documentation with their respective references. A particularly 
+interesting feature is that the package includes 10 different electronegativity
+scales that are available directly or can be generated using appropriate functions from
+other stored properties.</p>
+<p>For more information visit:</p>
+<ul>
+<li><a href="https://pypi.python.org/pypi/mendeleev">PYPI page</a></li>
+<li><a href="http://bitbucket.org/lukaszmentel/mendeleev">project repository</a></li>
+<li><a href="http://mendeleev.readthedocs.org">documentaion</a></li>
+</ul>
+<div class="row">
+    <img class="img-responsive center-block" width=700px src="/static/img/mendeleev.png">
+</div>
+
+<p>Similar (python) efforts can be found on the web:</p>
+<ul>
+<li><a href="https://github.com/luisnaranjo733/periodic">periodic</a></li>
+<li><a href="http://www.reflectometry.org/danse/elements.html">periodictable</a></li>
+<li><a href="http://www.lfd.uci.edu/~gohlke/">elements</a> by Christoph Gohlke </li>
+</ul>
+<h2><a href="http://panther.readthedocs.io">panther</a></h2>
+<p>A Package for ANharmonic THERmochemistry - a python implementation for calculating
+anharmonic corrections to thermochemical functions in the independent mode approximation for 
+molecules and solids. The package was developed in collaboration with the
+<a href="https://www.chemie.hu-berlin.de/de/forschung/quantenchemie">group of Prof J. Sauer</a>
+in Berlin during my stay there and evolved from the work of G. Piccini. It is interfaced with
+the <a href="https://wiki.fysik.dtu.dk/ase/index.html">Atomic Simulation Environment (ASE)</a> and should
+work with most of the programs supported by it.</p>
+<div class="row">
+    <img class="img-responsive center-block" width=700px src="/static/img/mode1-animation.gif">
+</div>
+
+<p>For more information visit:</p>
+<ul>
+<li><a href="https://bitbucket.org/lukaszmentel/panther">panther repository</a></li>
+<li><a href="http://panther.readthedocs.io">panther documentation</a></li>
+</ul>
+<h2><a href="https://bitbucket.org/lukaszmentel/zefram">zefram</a></h2>
+<p>Is a convenience package for accessing various properties of zeolite frameworks combining
+the data available from:</p>
+<ul>
+<li><a href="http://www.iza-structure.org/databases/">IZA database of zeolite structures</a></li>
+<li><a href="http://helios.princeton.edu/zeomics/">ZEOMICS</a></li>
+</ul>
+<p>in a python package allowing easy access to the stored data.
+You can find more details on the <a href="https://bitbucket.org/lukaszmentel/zefram">project page</a>.</p>
+<h2><a href="https://bitbucket.org/lukaszmentel/chemtools">chemtools</a></h2>
+<p><a href="https://bitbucket.org/lukaszmentel/chemtools">chemtools</a> package evolved from a set of modules and scripts intended to help with
+automation of various tasks common in electronic structure calculations. </p>
+<p>It provides a quite powerful <a href="http://chemtools.readthedocs.io/en/latest/_reference/chemtools.basisset.html">BasisSet class</a> that allows one-particle basis sets to be handled efficiently. Some
+of the features include: </p>
+<ul>
+<li>conversion between various basis set formats<ul>
+<li>input: <a href="http://www.msg.ameslab.gov/GAMESS/">GamessUS</a>, <a href="http://www.molpro.net/">Molpro</a> and <a href="http://www.gaussian.com/">Gaussian</a></li>
+<li>output: <a href="http://www.msg.ameslab.gov/GAMESS/">GamessUS</a>, <a href="http://www.molpro.net/">Molpro</a>, <a href="http://www.gaussian.com/">Gaussian</a>, <a href="http://www.nwchem-sw.org/index.php/Main_Page">NWChem</a>, <a href="http://www.cfour.de/">CFour/AcesII</a>, <a href="http://www.daltonprogram.org/">Dalton</a></li>
+</ul>
+</li>
+<li>optimization of primitive exponents using a wrapper around
+  <a href="http://docs.scipy.org/doc/scipy/reference/optimize.html">scipy.optimize</a> module</li>
+<li>plotting basis set completeness profiles</li>
+</ul>
+<p>Another unique feature are the tools for writing, reading and parsing the files associated with
+<a href="http://www.msg.ameslab.gov/GAMESS/">GamessUS</a> calculations contained in the <a href="http://chemtools.readthedocs.io/en/latest/_reference/chemtools.calculators.html">calculators</a> subpackage, it supports:</p>
+<ul>
+<li>writing the input files,</li>
+<li>parsing the standard <code>log</code> files,</li>
+<li>parsing various parts of the <code>PUNCH</code> or <code>.dat</code> file</li>
+<li>reading the (direct access binary) dictionary file<code>.F10</code> records into <a href="http://numpy.org">numpy</a> arrays</li>
+<li>reading the (sequential unformatted binary) files with two-electron integrals (<code>.F08</code>, <code>.F09</code>), elements
+  of the reduced two-particle density matrix (<code>.F15</code>, <code>.F16</code>), CI coefficients (<code>.F12</code>) into <a href="http://numpy.org">numpy</a> arrays</li>
+</ul>
+<p>More information:</p>
+<ul>
+<li><a href="https://bitbucket.org/lukaszmentel/chemtools">chemtools repository</a></li>
+<li><a href="http://chemtools.readthedocs.io/en/latest/index.html">chemtools documentation</a></li>
+</ul>
+<h2><a href="https://github.com/lmmentel/ase-espresso">ase-espresso</a></h2>
+<p><a href="https://github.com/lmmentel/ase-espresso">ase-espresso</a> provides a Python interface compatible with
+<a href="https://wiki.fysik.dtu.dk/ase/index.html">Atomic Simulation Environment (ASE)</a> for manging calculations with <a href="http://www.quantum-espresso.org/">Quantum Espresso</a> - 
+the widely used open source package for plane wave Density Functional Theory (DFT) and molecular
+dynamics calculations.</p>
+<p>The current version started from a fork from <a href="https://github.com/vossjo/ase-espresso">vossjo</a> and since then considerably diverged
+offering various improvements over the original version, the most important ones include:</p>
+<ul>
+<li>python 3.x compatible</li>
+<li>installable through <a href="https://pip.pypa.io/en/stable/">pip</a> and [setuptools]</li>
+<li>documentation available through <a href="http://www.sphinx-doc.org/en/stable/">sphinx</a> with a lot of docstrings updated</li>
+<li>the <code>site.cfg</code> was replaced by a new <code>SiteConfig</code> class that dynamically gathers information about the execution environment </li>
+<li>the old <code>espresso</code> class is now split into two: <code>Espresso</code> preserving the standard functionality and
+  <code>iEspresso</code> responsible for dynamic/interactive jobs with a custom version of <code>pw.x</code></li>
+<li>the <code>Espresso</code> class were restructured according to <a href="https://wiki.fysik.dtu.dk/ase/index.html">ase</a> guidelines regarding calculator objects to
+  support full compatibility with <a href="https://wiki.fysik.dtu.dk/ase/index.html">ase</a></li>
+<li>most of the system call are now handled by <a href="https://pexpect.readthedocs.io/en/stable">pexpect</a> and [subprocess] instead of the old <code>os.system</code>,
+  <code>os.popen()</code>, <code>os.popen2()</code>, <code>os.popen3()</code></li>
+<li>tests were added</li>
+<li>code style and readability were improved</li>
+</ul>
+<h2><a href="https://bitbucket.org/lukaszmentel/colorcif">colorcif</a></h2>
+<p>A small utility python script based on <a href="https://wiki.fysik.dtu.dk/ase/index.html">Atomistic Simulation Environment</a>
+to generate high-quality images from <a href="https://en.wikipedia.org/wiki/Crystallographic_Information_File">cif</a>
+files with symmetry unique atoms colored with different colors:</p>
+<div style="text-align: center">
+<img style="width:200px" src="https://bytebucket.org/lukaszmentel/colorcif/raw/tip/example/gfx/ton_RdYlGn_T.png">
+<img style="width:200px" src="https://bytebucket.org/lukaszmentel/colorcif/raw/tip/example/gfx/ton_gist_rainbow_O.png">
+</div>
+
+<p>More details are given on the <a href="https://bitbucket.org/lukaszmentel/colorcif">project page</a>.</p>
+
+
+    <div class="row">
+      <div class="footer-col-wrapper">
+        <div class="col-md-12 text-center">
+
+          <hr/>
+
+          <p class="text-muted">
+            <i class="fa fa-copyright" aria-hidden="true"></i> Copyright 2016 by Łukasz Mentel
+          </p>
+
+          <p class="text-muted">
+            Proudly powered by <a href="https://python.org">Python 3</a> - <a href="http://flask.pocoo.org/">Flask</a> - <a href="http://pythonhosted.org/Frozen-Flask/"> Frozen Flask</a> - <a href="https://pythonhosted.org/Flask-FlatPages/">Flask FlatPages</a> - <a href="http://getbootstrap.com/">Bootstrap 3</a>
+          </p>
+
+          <div class=social style="font-size: 32px;">
+          <ul class="list-inline">
+
+        <script language="JavaScript">
+          u = 'lmmentel';
+          s = 'gmail.com';
+          document.write('<a href=\"mailto:' + u + '@' + s + '\" target=\"_blank\">');
+        </script>
+            <li><i class="fa fa-envelope-o" aria-hidden="true"></i> </li>
+        </a>
+
+
+          <li>
+            <a href="https://github.com/lmmentel"><i class="fa fa-github" aria-hidden="true"></i>  </a>
+          </li>
+
+          <li>
+            <a href="https://bitbucket.org/lukaszmentel"> <i class="fa fa-bitbucket" aria-hidden="true"></i>  </a>
+          </li>
+
+          <li>
+            <a href="https://www.linkedin.com/in/lukasz-mentel"> <i class="fa fa-linkedin" aria-hidden="true"></i>  </a>
+          </li>
+
+        </ul>
+        </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.js"></script>
+
+  </body>
+</html>
