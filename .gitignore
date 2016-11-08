@@ -1,3 +1,4 @@
 .*.swp
 _site
 .sass-cache
+flask-hompage/__pycache__/**
