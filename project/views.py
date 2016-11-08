@@ -4,15 +4,24 @@ from flask import render_template
 from app import app, pages
 
 
-@app.route('/')
-def home():
+def get_posts():
 
-    posts = [page for page in pages if 'date' in page.meta]
+    posts = [page for page in pages if 'date' in page.meta and
+             page.meta.get('publish', True)]
+
     # Sort pages by date
     sorted_posts = sorted(posts, reverse=True,
                           key=lambda page: page.meta['date'])
 
-    return render_template('index.html', pages=sorted_posts)
+    return sorted_posts
+
+
+@app.route('/')
+def home():
+
+    posts = get_posts()
+
+    return render_template('index.html', pages=posts)
 
 
 @app.route('/<path:path>/')
@@ -27,9 +36,6 @@ def page(path):
 @app.route('/news/')
 def news():
 
-    posts = [page for page in pages if 'date' in page.meta]
-    # Sort pages by date
-    sorted_posts = sorted(posts, reverse=True,
-                          key=lambda page: page.meta['date'])
+    posts = get_posts()
 
-    return render_template('news.html', pages=sorted_posts)
+    return render_template('news.html', pages=posts)
