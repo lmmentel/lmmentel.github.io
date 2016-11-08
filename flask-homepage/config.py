@@ -32,17 +32,16 @@ class Configuration(object):
 
     # freeze configuration
 
-    REPO_NAME = "flask-ghpages-lmmentel"  # Used for FREEZER_BASE_URL
-
     PROJECT_ROOT = parent_dir(APPLICATION_DIR)
 
     # In order to deploy to Github pages, you must build the static files to
     # the project root
-    FREEZER_DESTINATION = os.path.join(PROJECT_ROOT, 'build')
+    FREEZER_DESTINATION = PROJECT_ROOT
 
     # Since this is a repo page (not a Github user page),
     # we need to set the BASE_URL to the correct url as per GH Pages' standards
-    FREEZER_BASE_URL = "http://localhost/{0}".format(REPO_NAME)
+    REPO_NAME = "lmmentel.github.io"  # Used for FREEZER_BASE_URL
+    FREEZER_BASE_URL = "http://localhost/"
 
     FREEZER_REMOVE_EXTRA_FILES = False  # IMPORTANT: If this is True, all app files
                                          # will be deleted when you run the freezer
