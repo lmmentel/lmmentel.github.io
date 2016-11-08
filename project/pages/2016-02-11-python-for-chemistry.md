@@ -2,7 +2,7 @@ layout: post
 title:  "Python 4 chemistry"
 date:   2015-08-31 16:09:34
 categories: python, chemistry, packages, scripts, tools
-
+publish: False
 
 
 

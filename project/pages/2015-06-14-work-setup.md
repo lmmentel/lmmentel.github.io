@@ -1,7 +1,8 @@
-layout: post
+author: Lukasz
 title:  "My work setup"
 date:   2015-06-14 18:10:34
 categories: linux, open source, research
+publish: False
 
 
 Here is the setup I use at work on my Thinkpad X250:

@@ -1,4 +1,6 @@
+author: Lukasz
 title: python stuff
+publish: False
 
 ## zip and unzip
 
