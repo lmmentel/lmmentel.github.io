@@ -1,1 +1,1 @@
-rm -rf about news software static index.html 2015-* 2016-*
+rm -rf about news software static latest.atom index.html
