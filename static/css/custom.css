@@ -22,11 +22,20 @@ body{
 }
 
 h1,h2,h3,h4,h5,h6{
-    font-weight:bold;
-    line-height:30.800000000000004px;
+    font-weight: bold;
+    line-height: 30.800000000000004px;
 }
 
-div.footer a                { color: #888; }
+.spaced {
+  margin: 25px 25px 25px 25px; 
+}
+
+.icon-small {
+  font-size: 25%;
+  vertical-align: middle;
+}
+
+div.footer a                { color: #888; font-weight: bold;}
 div.footer p                { margin: 0 auto; }
 
 div.social                  { padding-top: 20px; padding-bottom: 10px;}
