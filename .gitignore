@@ -2,3 +2,5 @@
 _site
 .sass-cache
 flask_homepage/__pycache__/**
+lukaszmentelcom.sublime-project
+lukaszmentelcom.sublime-workspace
