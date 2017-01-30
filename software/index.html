@@ -21,6 +21,9 @@
     <!-- Font Awesome  -->
     <link rel="stylesheet" href="../static/css/font-awesome.css">
 
+    <!-- Pygments -->
+    <link rel="stylesheet" type="text/css" href="../static/css/codehilite.css">
+
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!-- <link href="static/css/ie10-viewport-bug-workaround.css" rel="stylesheet"> -->
 
@@ -80,7 +83,7 @@ a full overview of my coding activities check out my repositories:</p>
 <li><a href="https://bitbucket.org/lukaszmentel">bitbucket</a></li>
 <li><a href="https://github.com/lmmentel">github</a></li>
 </ul>
-<h2><a href="https://lmmentel.github.io/batchcalculator/">Batch Calculator</a></h2>
+<h2 id="batch-calculator"><a href="https://lmmentel.github.io/batchcalculator/">Batch Calculator</a></h2>
 <p>A GUI app based on <a href="https://wxpython.org/">wxPython</a> for calculating the correct amount of 
 reactants (batch) for a particular composition given by the molar ratio of its components. It is
 designed to assist chemical synthesis when it requires batch preparation. Besides offering a 
@@ -91,7 +94,7 @@ more information in the <a href="https://github.com/lmmentel/batchcalculator">gi
     <img class="img-responsive center-block" width=700px src="../static/img/BC_014.png">
 </div>
 
-<h2><a href="http://mendeleev.readthedocs.org">mendeleev</a></h2>
+<h2 id="mendeleev"><a href="http://mendeleev.readthedocs.org">mendeleev</a></h2>
 <p><a href="http://mendeleev.readthedocs.org">mendeleev</a> is my attempt to
 develop a database of atomic properties with an easy to use python API with
 convenient methods to formulate complex querries, tranfer data to
@@ -118,7 +121,7 @@ other stored properties.</p>
 <li><a href="http://www.reflectometry.org/danse/elements.html">periodictable</a></li>
 <li><a href="http://www.lfd.uci.edu/~gohlke/">elements</a> by Christoph Gohlke </li>
 </ul>
-<h2><a href="http://panther.readthedocs.io">panther</a></h2>
+<h2 id="panther"><a href="http://panther.readthedocs.io">panther</a></h2>
 <p>A Package for ANharmonic THERmochemistry - a python implementation for calculating
 anharmonic corrections to thermochemical functions in the independent mode approximation for 
 molecules and solids. The package was developed in collaboration with the
@@ -135,7 +138,7 @@ work with most of the programs supported by it.</p>
 <li><a href="https://bitbucket.org/lukaszmentel/panther">panther repository</a></li>
 <li><a href="http://panther.readthedocs.io">panther documentation</a></li>
 </ul>
-<h2><a href="https://bitbucket.org/lukaszmentel/zefram">zefram</a></h2>
+<h2 id="zefram"><a href="https://bitbucket.org/lukaszmentel/zefram">zefram</a></h2>
 <p>Is a convenience package for accessing various properties of zeolite frameworks combining
 the data available from:</p>
 <ul>
@@ -144,7 +147,7 @@ the data available from:</p>
 </ul>
 <p>in a python package allowing easy access to the stored data.
 You can find more details on the <a href="https://bitbucket.org/lukaszmentel/zefram">project page</a>.</p>
-<h2><a href="https://bitbucket.org/lukaszmentel/chemtools">chemtools</a></h2>
+<h2 id="chemtools"><a href="https://bitbucket.org/lukaszmentel/chemtools">chemtools</a></h2>
 <p><a href="https://bitbucket.org/lukaszmentel/chemtools">chemtools</a> package evolved from a set of modules and scripts intended to help with
 automation of various tasks common in electronic structure calculations. </p>
 <p>It provides a quite powerful <a href="http://chemtools.readthedocs.io/en/latest/_reference/chemtools.basisset.html">BasisSet class</a> that allows one-particle basis sets to be handled efficiently. Some
@@ -174,7 +177,7 @@ of the features include: </p>
 <li><a href="https://bitbucket.org/lukaszmentel/chemtools">chemtools repository</a></li>
 <li><a href="http://chemtools.readthedocs.io/en/latest/index.html">chemtools documentation</a></li>
 </ul>
-<h2><a href="https://github.com/lmmentel/ase-espresso">ase-espresso</a></h2>
+<h2 id="ase-espresso"><a href="https://github.com/lmmentel/ase-espresso">ase-espresso</a></h2>
 <p><a href="https://github.com/lmmentel/ase-espresso">ase-espresso</a> provides a Python interface compatible with
 <a href="https://wiki.fysik.dtu.dk/ase/index.html">Atomic Simulation Environment (ASE)</a> for manging calculations with <a href="http://www.quantum-espresso.org/">Quantum Espresso</a> - 
 the widely used open source package for plane wave Density Functional Theory (DFT) and molecular
@@ -195,7 +198,7 @@ offering various improvements over the original version, the most important ones
 <li>tests were added</li>
 <li>code style and readability were improved</li>
 </ul>
-<h2><a href="https://bitbucket.org/lukaszmentel/colorcif">colorcif</a></h2>
+<h2 id="colorcif"><a href="https://bitbucket.org/lukaszmentel/colorcif">colorcif</a></h2>
 <p>A small utility python script based on <a href="https://wiki.fysik.dtu.dk/ase/index.html">Atomistic Simulation Environment</a>
 to generate high-quality images from <a href="https://en.wikipedia.org/wiki/Crystallographic_Information_File">cif</a>
 files with symmetry unique atoms colored with different colors:</p>
@@ -214,11 +217,11 @@ files with symmetry unique atoms colored with different colors:</p>
 
           <hr/>
 
-          <p class="text-muted">
-            <i class="fa fa-copyright" aria-hidden="true"></i> Copyright 2016 by Łukasz Mentel
+          <p class="text-muted" style="text-align: center;">
+            <i class="fa fa-copyright" aria-hidden="true"></i> Copyright 2017 by Łukasz Mentel
           </p>
 
-          <p class="text-muted">
+          <p class="text-muted" style="text-align: center;">
             Proudly powered by <a href="https://python.org">Python 3</a>
             <i class="fa fa-circle icon-small" aria-hidden="true"></i>
             <a href="http://flask.pocoo.org/">Flask</a>
