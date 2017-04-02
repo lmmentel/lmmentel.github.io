@@ -2,13 +2,152 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title type="text">Latest Blog Posts</title>
   <id>http://localhost/latest.atom/</id>
-  <updated>2017-01-28T12:00:00Z</updated>
+  <updated>2017-03-28T12:00:00Z</updated>
   <link href="http://localhost/" />
   <link href="http://localhost/latest.atom/" rel="self" />
   <author>
     <name>http://localhost/</name>
   </author>
   <generator>Werkzeug</generator>
+  <entry xml:base="http://localhost/latest.atom/">
+    <title type="text">Zeolite Framework Classification</title>
+    <id>http://localhost/news/zeolite-classification/</id>
+    <updated>2017-03-28T12:00:00Z</updated>
+    <published>2017-03-28T12:00:00Z</published>
+    <link href="http://localhost/news/zeolite-classification/" />
+    <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;Zeolites are fascinating materials with quite unique properties. They belong to what
+is often referred to as microporous materials which means that they contain
+pores that do not exceed 2 nm (20 &amp;#8491;). That is probably why they earned
+the name of &lt;em&gt;molecular sieves&lt;/em&gt; since the pores match the sizes of small
+molecules allowing for size based discrimination. Initially they were a
+curiosity to mineralogists but since their discovery they opened a rich field
+of scientific activities and fallen under investigation by chemists,
+mathematicians, physicists, material scientists, biologists and probably some
+more.&lt;/p&gt;
+&lt;p&gt;From a structural point of view zeolites are built from tetrahedrons that have
+oxygen atoms at vertices and an atom of valency 4 at their centers. Those
+tetrahedrons connect with each other by sharing O atoms (vertices) and form
+intricate networks with repeatable patterns resulting in a variety of periodic
+crystalline materials.&lt;/p&gt;
+&lt;p&gt;Due to the number of possible ways that the network of interconnected tetrahedra
+can be arranged in space the number of resulting structures in overwhelmingly large,
+however not all of the possibilities will be energetically stable and even a
+smaller fraction is feasible to synthesize or find in nature.&lt;/p&gt;
+&lt;p&gt;As an illustration have a look below at the two possible frameworks that are
+labeled AFI and MTT. Both are composed of silicon (beige spheres) and oxygen atoms (red
+spheres) with AFI having 12 Si and 12 O atoms forming channels and MTT 10 Si and O
+atoms form the channels.&lt;/p&gt;
+&lt;div class=&quot;row&quot; style=&quot;padding-top: 30px;padding-bottom: 30px;&quot;&gt;
+  &lt;figure&gt;
+    &lt;img class=&quot;img-responsive center-block&quot; width=760px src=&quot;../../static/img/afi.png&quot;&gt;
+    &lt;figcaption class=&quot;text-muted&quot; style=&quot;text-align: center;&quot;&gt;AFI framework&lt;/figcaption&gt;
+  &lt;/figure&gt; 
+&lt;/div&gt;
+
+&lt;div class=&quot;row&quot; style=&quot;padding-top: 30px;padding-bottom: 30px;&quot;&gt;
+  &lt;figure&gt;
+    &lt;img class=&quot;img-responsive center-block&quot; width=492px src=&quot;../../static/img/mtt.png&quot;&gt;
+    &lt;figcaption class=&quot;text-muted&quot; style=&quot;text-align: center;&quot;&gt;MTT framework&lt;/figcaption&gt;
+  &lt;/figure&gt; 
+&lt;/div&gt;
+
+&lt;p&gt;The list of all the zeolite frameworks that are currently available is curated by the
+&lt;a href=&quot;http://www.iza-structure.org/&quot;&gt;International Zeolite Association (IZA)&lt;/a&gt; which also makes
+a catalog with the basic properties of each framework accessible 
+either as the &lt;a href=&quot;http://europe.iza-structure.org/IZA-SC/ftc_table.php&quot;&gt;Database of Zeolite Frameworks&lt;/a&gt;
+or in a published form as the &lt;a href=&quot;http://www.sciencedirect.com/science/book/9780444530646&quot;&gt;Atlas of Zeolite Framework Types&lt;/a&gt; available from the &lt;a href=&quot;http://www.iza-structure.org/IZA-SC_Publications.htm&quot;&gt;IZA publications page&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;There are many parameters that can be used to characterize the frameworks and
+the empty space that can be found inside. Usually the internal voids are
+categorized as cages and channels with their sizes given as the number of
+tetrahedrally coordinated atoms (T atoms) forming the ring or units of length
+suitable for the atomic scale such as &amp;#8491;ngstrom.&lt;/p&gt;
+&lt;p&gt;Here I would just like to mention two of characteristic variables namely the
+channel size given as the number of T atoms and channel system dimensionality
+since those two parameters to a large extent determine the applications
+of a given framework.&lt;/p&gt;
+&lt;p&gt;The channels present in a given framework are generally classified according to the size
+of the largest channel into:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;small&lt;/em&gt;, if the largest channel is assembled with 8 T atoms (and the same number of oxygen atoms),&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;medium&lt;/em&gt;, if the largest channel is assembled with 10 T atoms,&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;large&lt;/em&gt;, if the largest channel is assembled with 12 T atoms,&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;extra large&lt;/em&gt; if the number of T atoms is greater than 12.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The channel system dimensionality on the other hand determines the number of
+dimensions &lt;em&gt;&lt;strong&gt;D&lt;/strong&gt;&lt;/em&gt; that a guest molecule can freely travel through 
+the framework once it enters the pores. Frameworks that have only cages or
+channels composed of 6 and less T atoms are considered inaccessible and therefore
+their dimensionality is 0 (&lt;em&gt;&lt;strong&gt;D&lt;/strong&gt;&lt;/em&gt;=0). Frameworks with channels composed of more
+than 6 T atoms and running only in one direction have &lt;em&gt;&lt;strong&gt;D&lt;/strong&gt;&lt;/em&gt;=1. In the case of frameworks
+with multiple channels running in more than one direction the pore dimensionality
+is dependent on how the channels are mutually connected. If a molecule can move
+between two channel systems &lt;em&gt;&lt;strong&gt;D&lt;/strong&gt;&lt;/em&gt;=2, and when it can move between three channel
+systems &lt;em&gt;&lt;strong&gt;D&lt;/strong&gt;&lt;/em&gt;=3.&lt;/p&gt;
+&lt;p&gt;By the current count there are 229 unique topologies recognized by IZA.
+The complete listing of the channel system details for each framework can be 
+found in the &lt;a href=&quot;http://www.sciencedirect.com/science/article/pii/B9780444530646503686&quot;&gt;Appendix E – Channel System Dimensions&lt;/a&gt; of the &lt;a href=&quot;http://www.sciencedirect.com/science/book/9780444530646&quot;&gt;Atlas of Zeolite Framework Types&lt;/a&gt;.&lt;/p&gt;
+&lt;h1 id=&quot;graphs&quot;&gt;Graphs&lt;/h1&gt;
+&lt;p&gt;Having a convenient way for accessing the data on zeolite frameworks
+through the &lt;a href=&quot;https://bitbucket.org/lukaszmentel/zefram&quot;&gt;zefram package&lt;/a&gt;
+we can explore how certain features are distributed. To 
+perform the basic data analysis and produce the nice visualizations below
+I chose &lt;a href=&quot;http://bokeh.pydata.org/en/latest/&quot;&gt;Bokeh&lt;/a&gt; package since it's a very handy tool.&lt;/p&gt;
+&lt;h2 id=&quot;channel-size-distribution&quot;&gt;Channel size distribution&lt;/h2&gt;
+&lt;p&gt;Let us start by looking at a histogram below showing the frequencies of the
+largest channel size (given as the number of T atoms) with a subdivision
+into different pore system dimensionalities. &lt;/p&gt;
+&lt;div class=&quot;row&quot; style=&quot;padding-top: 30px;padding-bottom: 30px;&quot;&gt;
+    &lt;img class=&quot;img-responsive center-block&quot; width=760px src=&quot;../../static/img/zeolite_histogram.png&quot;&gt;
+&lt;/div&gt;
+
+&lt;p&gt;What can be immediately inferred from the graph is that frameworks with
+even numbered rings dominate over the odd numbered ones. Within the even
+numbered frameworks there are 74 frameworks with 8 membered ring (MR) channels,
+66 with 12 MR and 45 with 10 MR. When it comes to the dimensionality the largest
+group is composed of three-dimensional frameworks (94), then one-dimensional (63),
+two-dimensional (51) and zero-dimensional (21).&lt;/p&gt;
+&lt;p&gt;The details about the distribution of different channel sizes for a given
+pore system dimensionality are visualized in the four figures below. Channels
+that belong to one of the categories described above as &lt;em&gt;small&lt;/em&gt;, &lt;em&gt;medium&lt;/em&gt; and
+&lt;em&gt;large&lt;/em&gt; are color coded. Additionally if a given framework is composed solely
+of even numbered rings it is labeled as AlPO since it would be hypothetically
+possible to synthesize it as an aluminum phosphate (AlPO). &lt;/p&gt;
+&lt;h2 id=&quot;zero-dimensional-frameworks&quot;&gt;Zero-dimensional Frameworks&lt;/h2&gt;
+&lt;div style=&quot;padding-top: 30px;padding-bottom: 30px;&quot;&gt;
+&lt;img class=&quot;img-responsive center-block&quot;
+    src=&quot;../../static/img/zero_dimensional_frameworks.png&quot;
+    alt=&quot;Zero dimensional Zeolite Topologies&quot; &gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;one-dimensional-frameworks&quot;&gt;One-dimensional Frameworks&lt;/h2&gt;
+&lt;div style=&quot;padding-top: 30px;padding-bottom: 30px;&quot;&gt;
+&lt;img class=&quot;img-responsive center-block&quot; style=&quot;width:750px;margin: 0 auto;&quot;
+    src=&quot;../../static/img/one_dimensional_frameworks.png&quot;
+    alt=&quot;Unidirectional Zeolite Topologies&quot;&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;two-dimensional-frameworks&quot;&gt;Two-dimensional Frameworks&lt;/h1&gt;
+&lt;div style=&quot;padding-top: 30px;padding-bottom: 30px;&quot;&gt;
+&lt;img class=&quot;img-responsive center-block&quot;
+    src=&quot;../../static/img/two_dimensional_frameworks.png&quot;
+    alt=&quot;Bidirectional Zeolite Topologies&quot;&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;three-dimensional-frameworks&quot;&gt;Three-dimensional Frameworks&lt;/h1&gt;
+&lt;div style=&quot;text-align:right;padding-top: 30px;padding-bottom: 30px;&quot;&gt;
+&lt;img class=&quot;img-responsive center-block&quot;
+    src=&quot;../../static/img/three_dimensional_frameworks.png&quot;
+    alt=&quot;Tridirectional Zeolite Topologies&quot;&gt;
+&lt;/div&gt;
+
+&lt;p&gt;If you are interested how to create similar plots to the ones above I uploaded a
+&lt;a href=&quot;http://nbviewer.jupyter.org/github/lmmentel/zeolite-classification/blob/master/zeolite_categories.ipynb&quot;&gt;jupyter notebook&lt;/a&gt;
+that I used the generate the plots to a &lt;a href=&quot;https://github.com/lmmentel/zeolite-classification&quot;&gt;github repo&lt;/a&gt;. There are also additional plots showing some of the other
+descriptors for the channels and cages size for a given pore system (from &lt;a href=&quot;http://helios.princeton.edu/zeomics/&quot;&gt;ZEOMICS&lt;/a&gt; database), such as
+largest cavity diameter, pore limiting diameter and maximum diameter of a
+sphere that can be included.&lt;/p&gt;</content>
+  </entry>
   <entry xml:base="http://localhost/latest.atom/">
     <title type="text">Awesome Python Chemistry</title>
     <id>http://localhost/news/awesome-python-chemistry/</id>
