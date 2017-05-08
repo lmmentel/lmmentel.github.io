@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title type="text">Latest Blog Posts</title>
   <id>http://localhost/latest.atom/</id>
-  <updated>2017-03-28T12:00:00Z</updated>
+  <updated>2017-04-22T12:00:00Z</updated>
   <link href="http://localhost/" />
   <link href="http://localhost/latest.atom/" rel="self" />
   <author>
@@ -10,11 +10,73 @@
   </author>
   <generator>Werkzeug</generator>
   <entry xml:base="http://localhost/latest.atom/">
+    <title type="text">Zeolite Framework Classification II</title>
+    <id>http://localhost/blog/zeolite-classification-ii/</id>
+    <updated>2017-04-22T12:00:00Z</updated>
+    <published>2017-04-22T12:00:00Z</published>
+    <link href="http://localhost/blog/zeolite-classification-ii/" />
+    <content type="html">&lt;p&gt;In my &lt;a href=&quot;../blog/zeolite-classification/index.html&quot;&gt;previous post&lt;/a&gt;
+I was exploring the database of of zeolite frameworks
+using &lt;a href=&quot;https://www.python.org/&quot;&gt;Python&lt;/a&gt;, &lt;a href=&quot;http://bokeh.pydata.org/en/latest/&quot;&gt;bokeh&lt;/a&gt;, &lt;a href=&quot;http://pandas.pydata.org/&quot;&gt;pandas&lt;/a&gt; and my own &lt;a href=&quot;https://bitbucket.org/lukaszmentel/zefram&quot;&gt;zefram&lt;/a&gt; package that provided
+easy access to the data on zeolite frameworks available from the &lt;a href=&quot;http://www.iza-structure.org/databases/&quot;&gt;IZA
+database&lt;/a&gt; and &lt;a href=&quot;http://helios.princeton.edu/zeomics/&quot;&gt;ZEOMICS&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To explore the topic further I thought that a grouping of the frameworks into
+one-dimensional (&lt;em&gt;&lt;strong&gt;D&lt;/strong&gt;&lt;/em&gt;=1) and multidimensional (&lt;em&gt;&lt;strong&gt;D&lt;/strong&gt;&lt;/em&gt;=2 or &lt;em&gt;&lt;strong&gt;D&lt;/strong&gt;&lt;/em&gt;=3)
+might be useful. Such a distinction is largely related to the applications
+since multidimensional frameworks have unique topological features such as
+channel intersections that allow different phenomena to happen.&lt;/p&gt;
+&lt;p&gt;Among the frameworks with multidimensional channel structures there are ones
+that have multiple channels of the same size, for example &lt;em&gt;AEI&lt;/em&gt; having 3
+distinct channels each along [100], [110] and [001]. The complementary group
+would be the frameworks that have at least two intersecting channels that are
+of different size. The latter group is usually referred to as &lt;em&gt;multipore
+zeolites&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;An important phenomenon contributing to the unique properties of multidimensional frameworks is the so called
+&lt;a href=&quot;http://www.sciencedirect.com/science/article/pii/0021951780903280&quot;&gt;molecular traffic control&lt;/a&gt;
+which occurs where there are at least two molecules of different size or shape
+where one of them prefers to travel (diffuse) along one channel system and the other one
+travels along a different channel system. This fact together with the knowledge of the relationship between
+the molecule's size and it's preference to choose a channel of specific size can be
+used to tune catalytic processes occurring over zeolites. A 
+&lt;a href=&quot;http://onlinelibrary.wiley.com/doi/10.1002/anie.201406344/abstract&quot;&gt;recent review article&lt;/a&gt;
+about multipore zeolites explores their catalytic applications and the
+role of &lt;em&gt;molecular traffic control&lt;/em&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;figures&quot;&gt;Figures&lt;/h2&gt;
+&lt;p&gt;The figure below presents all the frameworks with the zero- and one-dimensional
+ones not colored. The multidimensional frameworks can be either two- or three-dimensional
+which is indicated by the color of the outer ring. The inside of each circle indicates
+the composition of the channel structure in terms of the distinct channel sizes. If a framework
+is three-dimensional but only has channels on one size, such as &lt;em&gt;AEI&lt;/em&gt; it will be filled with
+a single color. If there are channels with more than 12 T atoms they are considered extra
+large (&lt;em&gt;XL&lt;/em&gt;). Since extra large channels exhibit very poor selectivity no distinction is made
+here between them and they are treated as a channel of single (but very large) size.&lt;/p&gt;
+&lt;div class=&quot;row&quot; style=&quot;padding-top: 20px;padding-bottom: 20px;&quot;&gt;
+  &lt;figure&gt;
+    &lt;img class=&quot;img-responsive center-block&quot; width=760px src=&quot;../../static/img/2d-and-3d-channels.png&quot;&gt;
+    &lt;figcaption class=&quot;text-muted&quot; style=&quot;text-align: center;&quot;&gt;2D and 3D channels&lt;/figcaption&gt;
+  &lt;/figure&gt; 
+&lt;/div&gt;
+
+&lt;p&gt;Finally since I mentioned that multipore zeolites are often teated as a separate category
+I decided to created a separate figure where only the multidimensional frameworks that have
+at least two channels with different sizes are highlighted.&lt;/p&gt;
+&lt;div class=&quot;row&quot; style=&quot;padding-top: 20px;padding-bottom: 20px;&quot;&gt;
+  &lt;figure&gt;
+    &lt;img class=&quot;img-responsive center-block&quot; width=760px src=&quot;../../static/img/multipore-frameworks.png&quot;&gt;
+    &lt;figcaption class=&quot;text-muted&quot; style=&quot;text-align: center;&quot;&gt;Multipore frameworks&lt;/figcaption&gt;
+  &lt;/figure&gt; 
+&lt;/div&gt;
+
+&lt;p&gt;As in the previous case uploaded a
+&lt;a href=&quot;http://nbviewer.jupyter.org/github/lmmentel/zeolite-classification/blob/master/multipore_zeolites.ipynb&quot;&gt;jupyter notebook&lt;/a&gt;
+that I used the generate the plots to a &lt;a href=&quot;https://github.com/lmmentel/zeolite-classification&quot;&gt;github repo&lt;/a&gt;. There are also some additional plots at the bottom of the notebook.&lt;/p&gt;</content>
+  </entry>
+  <entry xml:base="http://localhost/latest.atom/">
     <title type="text">Zeolite Framework Classification</title>
-    <id>http://localhost/news/zeolite-classification/</id>
+    <id>http://localhost/blog/zeolite-classification/</id>
     <updated>2017-03-28T12:00:00Z</updated>
     <published>2017-03-28T12:00:00Z</published>
-    <link href="http://localhost/news/zeolite-classification/" />
+    <link href="http://localhost/blog/zeolite-classification/" />
     <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 &lt;p&gt;Zeolites are fascinating materials with quite unique properties. They belong to what
 is often referred to as microporous materials which means that they contain
@@ -150,10 +212,10 @@ sphere that can be included.&lt;/p&gt;</content>
   </entry>
   <entry xml:base="http://localhost/latest.atom/">
     <title type="text">Awesome Python Chemistry</title>
-    <id>http://localhost/news/awesome-python-chemistry/</id>
+    <id>http://localhost/blog/awesome-python-chemistry/</id>
     <updated>2017-01-28T12:00:00Z</updated>
     <published>2017-01-28T12:00:00Z</published>
-    <link href="http://localhost/news/awesome-python-chemistry/" />
+    <link href="http://localhost/blog/awesome-python-chemistry/" />
     <content type="html">&lt;p&gt;&lt;a href=&quot;https://www.python.org/&quot;&gt;Python&lt;/a&gt; programming language is becoming the language of choice for large number of scientists and
 it doesn't take much effort to realize why this is happening. One of the most important reasons is
 it's simplicity that does not compromise it's power. It has a relatively low entry point since simple
@@ -283,10 +345,10 @@ sound difficult you can always write a commend below or drop me an email.&lt;/p&
   </entry>
   <entry xml:base="http://localhost/latest.atom/">
     <title type="text">mendeleev web app</title>
-    <id>http://localhost/news/mendeleev-web-app/</id>
+    <id>http://localhost/blog/mendeleev-web-app/</id>
     <updated>2017-01-22T12:00:00Z</updated>
     <published>2017-01-22T12:00:00Z</published>
-    <link href="http://localhost/news/mendeleev-web-app/" />
+    <link href="http://localhost/blog/mendeleev-web-app/" />
     <content type="html">&lt;h3 id=&quot;in-short&quot;&gt;In Short:&lt;/h3&gt;
 &lt;p&gt;&lt;em&gt;&lt;a href=&quot;https://mendeleev.herokuapp.com&quot;&gt;mendeleev app&lt;/a&gt; is a web app that
 allows interactive explorations of the periodic table and relationships
@@ -390,10 +452,10 @@ your new feature or a bugfix.&lt;/p&gt;</content>
   </entry>
   <entry xml:base="http://localhost/latest.atom/">
     <title type="text">Geilo Winter School </title>
-    <id>http://localhost/news/geilo-winter-school/</id>
+    <id>http://localhost/blog/geilo-winter-school/</id>
     <updated>2017-01-21T12:00:00Z</updated>
     <published>2017-01-21T12:00:00Z</published>
-    <link href="http://localhost/news/geilo-winter-school/" />
+    <link href="http://localhost/blog/geilo-winter-school/" />
     <content type="html">&lt;div style=&quot;text-align:center;padding-top: 30px;padding-bottom: 30px;&quot;&gt;
 &lt;a href=&quot;https://www.sintef.no/projectweb/geilowinterschool/&quot;&gt;
 &lt;img src=&quot;https://www.sintef.no/globalassets/project/geilowinterschool/2017/placeholder_logo.png&quot;
@@ -425,37 +487,5 @@ with people from various backgrounds since as it turned out I was the only chemi
 &lt;div class=&quot;row&quot; style=&quot;padding-top: 30px;padding-bottom: 30px;&quot;&gt;
     &lt;img class=&quot;img-responsive center-block&quot; src=&quot;../../static/img/geilo.jpg&quot; style=&quot;width: 760px&quot;&gt;
 &lt;/div&gt;</content>
-  </entry>
-  <entry xml:base="http://localhost/latest.atom/">
-    <title type="text">Batch Calculator v0.3.0 released</title>
-    <id>http://localhost/news/batch-calculator-030/</id>
-    <updated>2016-11-11T12:00:00Z</updated>
-    <published>2016-11-11T12:00:00Z</published>
-    <link href="http://localhost/news/batch-calculator-030/" />
-    <content type="html">&lt;h1 id=&quot;batch-calculator-v030-is-available&quot;&gt;&lt;a href=&quot;https://lmmentel.github.io/batchcalculator/&quot;&gt;Batch Calculator v0.3.0 is available&lt;/a&gt;&lt;/h1&gt;
-&lt;div class=&quot;row&quot;&gt;
-    &lt;img class=&quot;img-responsive center-block&quot; width=700px src=&quot;../../static/img/BC_014.png&quot;&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;new-features&quot;&gt;New features:&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;New improved layout, with one output frame and buttons to control scaling&lt;/li&gt;
-&lt;li&gt;New option to store, extract, load and export synthesis recipes&lt;/li&gt;
-&lt;li&gt;First draft of the sphinx based documentation &lt;/li&gt;
-&lt;li&gt;Database with essential components and chemicals for zeolite synthesis already included&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;fixes-and-improvements&quot;&gt;Fixes and improvements&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;A lot of internal improvements and fixes with considerable simplifications to the code base&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p style=&quot;text-align: center&quot;&gt;
-    &lt;a href=&quot;https://github.com/lmmentel/batchcalculator/releases/tag/v0.3.0&quot; class=&quot;btn btn-primary btn-lg&quot; role=&quot;button&quot;&gt;Download&lt;/a&gt;
-&lt;/p&gt;
-
-&lt;h2 id=&quot;more-info&quot;&gt;More info:&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://lmmentel.github.io/batchcalculator/&quot;&gt;Batch Calculator webpage&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/lmmentel/batchcalculator&quot;&gt;Batch Calculator repository&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content>
   </entry>
 </feed>
