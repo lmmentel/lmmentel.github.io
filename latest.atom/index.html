@@ -48,11 +48,6 @@ the notebook, that I think are interesting to try out:&lt;/p&gt;
 &lt;p&gt;The list above is by no means complete and there are probably some other great
 tools that provide similar functionality, so if you think I skipped some important
 alternative - let me know.&lt;/p&gt;
-&lt;h3 id=&quot;note&quot;&gt;Note&lt;/h3&gt;
-&lt;p&gt;Although it is mentioned in the official documentation that &lt;a href=&quot;https://chemview.readthedocs.io/en/latest/&quot;&gt;chemview&lt;/a&gt; is
-compatible with &lt;a href=&quot;http://jupyter.org/&quot;&gt;Jupyter&lt;/a&gt; and I tried my best to make it work with my
-current setup I couldn't get the viewer to display any structures. I'll
-probably wait for a new release and get back to it.&lt;/p&gt;
 &lt;!-- | Software  | Version                 |
 |-----------|-------------------------|
 | Python    | 3.6.1                   | 
@@ -377,7 +372,86 @@ objects and returns a json representation compatible with &lt;a href=&quot;https
     &lt;span class=&quot;n&quot;&gt;mol&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pybel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Molecule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;obmol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;imolecule&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;format_converter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pybel_to_json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content>
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1 id=&quot;chemview&quot;&gt;chemview&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&quot;https://chemview.readthedocs.io/en/latest/&quot;&gt;chemview&lt;/a&gt; is another option which utilizes the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API&quot;&gt;WebGL&lt;/a&gt;
+and &lt;a href=&quot;http://threejs.org/&quot;&gt;three.js&lt;/a&gt; libraries. It is pretty easy to install since it can be done
+using &lt;a href=&quot;https://www.continuum.io/&quot;&gt;conda&lt;/a&gt;:&lt;/p&gt;
+&lt;div class=&quot;codehilite&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;conda install -c http://conda.binstar.org/gabrielelanaro
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;however I had to clone latest repository and install it through pip&lt;/p&gt;
+&lt;div class=&quot;codehilite&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git clone https://github.com/gabrielelanaro/chemview
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; chemview
+pip install .
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;due to some dependency conflicts for Python 3.6.1. After installing I had to manually enable the widget
+with jupyter:&lt;/p&gt;
+&lt;div class=&quot;codehilite&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;jupyter nbextension &lt;span class=&quot;nb&quot;&gt;enable&lt;/span&gt; widgetsnbextension --user --py
+jupyter nbextension install --user --py --symlink chemview
+jupyter nbextension &lt;span class=&quot;nb&quot;&gt;enable&lt;/span&gt; --user --py  chemview
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The &lt;code&gt;MolecularViewer&lt;/code&gt; class that is responsible for creating the visualization
+accepts the (x, y, z) coordinates and additional &lt;code&gt;topology&lt;/code&gt; dictionary that specifies
+a list of chemical symbols and chemical bonds as a list of connected atom indices.
+As in the case of &lt;a href=&quot;https://github.com/patrickfuller/imolecule&quot;&gt;imolecule&lt;/a&gt; we can convert the &lt;code&gt;ase.Atoms&lt;/code&gt; instance into the required
+format using the code below.&lt;/p&gt;
+&lt;div class=&quot;codehilite&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;atoms_to_chemview&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;atoms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;infer_bonds&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;sd&quot;&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;sd&quot;&gt;    Convert ase.Atoms instance into a dict of kwargs for the chemview.MolecularViewer&lt;/span&gt;
+
+&lt;span class=&quot;sd&quot;&gt;    Args:&lt;/span&gt;
+&lt;span class=&quot;sd&quot;&gt;        atoms       : ase.Atoms&lt;/span&gt;
+&lt;span class=&quot;sd&quot;&gt;        infer_bonds : bool&lt;/span&gt;
+&lt;span class=&quot;sd&quot;&gt;            Get the list of indices of connected atoms, (requires pybel)&lt;/span&gt;
+
+&lt;span class=&quot;sd&quot;&gt;    Returns:&lt;/span&gt;
+&lt;span class=&quot;sd&quot;&gt;        data : dict&lt;/span&gt;
+&lt;span class=&quot;sd&quot;&gt;            A dict with kwargs that can be passed to chemview.MolecularViewer&lt;/span&gt;
+&lt;span class=&quot;sd&quot;&gt;    &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;dict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# convert the coordinates to nanometers&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;coordinates&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;atoms&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_positions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;10.0&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;topology&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;dict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;topology&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;atom_types&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;atoms&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_chemical_symbols&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;infer_bonds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+
+        &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pybel&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;ob&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pybel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ob&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;obmol&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ob&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;OBMol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;obmol&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BeginModify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;atom&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;atoms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;obatom&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;obmol&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NewAtom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;obatom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SetAtomicNum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;atom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;obatom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SetVector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;atom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tolist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;obmol&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ConnectTheDots&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;obmol&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PerceiveBondOrders&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;bonds&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GetBeginAtom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GetIndex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GetEndAtom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GetIndex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()]&lt;/span&gt;
+                 &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ob&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;OBMolBondIter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;obmol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;topology&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;bonds&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bonds&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Here I used &lt;a href=&quot;https://openbabel.org/docs/dev/UseTheLibrary/Python_Pybel.html&quot;&gt;pybel&lt;/a&gt; again to get the information about chemical bonds. Notice
+also that I converted the coordinates to nanometers since it looks a lot nicer,
+although I didn't found any information in the &lt;a href=&quot;https://chemview.readthedocs.io/en/latest/&quot;&gt;chemview&lt;/a&gt;'s docs that this is the default unit used. &lt;/p&gt;
+&lt;p&gt;If you want to see a working example see &lt;a href=&quot;https://github.com/lmmentel/ase-jnb/blob/master/ase-chemview.ipynb&quot;&gt;this notebook&lt;/a&gt;
+where the above function is used to display a couple of &lt;a href=&quot;https://wiki.fysik.dtu.dk/ase/&quot;&gt;ASE&lt;/a&gt; structures.&lt;/p&gt;</content>
   </entry>
   <entry xml:base="http://localhost/latest.atom/">
     <title type="text">Visualizing reactor simulation results</title>

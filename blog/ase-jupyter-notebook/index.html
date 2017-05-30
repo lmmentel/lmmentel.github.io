@@ -113,11 +113,6 @@ the notebook, that I think are interesting to try out:</p>
 <p>The list above is by no means complete and there are probably some other great
 tools that provide similar functionality, so if you think I skipped some important
 alternative - let me know.</p>
-<h3 id="note">Note</h3>
-<p>Although it is mentioned in the official documentation that <a href="https://chemview.readthedocs.io/en/latest/">chemview</a> is
-compatible with <a href="http://jupyter.org/">Jupyter</a> and I tried my best to make it work with my
-current setup I couldn't get the viewer to display any structures. I'll
-probably wait for a new release and get back to it.</p>
 <!-- | Software  | Version                 |
 |-----------|-------------------------|
 | Python    | 3.6.1                   | 
@@ -443,6 +438,85 @@ objects and returns a json representation compatible with <a href="https://githu
 
     <span class="k">return</span> <span class="n">imolecule</span><span class="o">.</span><span class="n">format_converter</span><span class="o">.</span><span class="n">pybel_to_json</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 </pre></div>
+
+
+<h1 id="chemview">chemview</h1>
+<p><a href="https://chemview.readthedocs.io/en/latest/">chemview</a> is another option which utilizes the <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API">WebGL</a>
+and <a href="http://threejs.org/">three.js</a> libraries. It is pretty easy to install since it can be done
+using <a href="https://www.continuum.io/">conda</a>:</p>
+<div class="codehilite"><pre><span></span>conda install -c http://conda.binstar.org/gabrielelanaro
+</pre></div>
+
+
+<p>however I had to clone latest repository and install it through pip</p>
+<div class="codehilite"><pre><span></span>git clone https://github.com/gabrielelanaro/chemview
+<span class="nb">cd</span> chemview
+pip install .
+</pre></div>
+
+
+<p>due to some dependency conflicts for Python 3.6.1. After installing I had to manually enable the widget
+with jupyter:</p>
+<div class="codehilite"><pre><span></span>jupyter nbextension <span class="nb">enable</span> widgetsnbextension --user --py
+jupyter nbextension install --user --py --symlink chemview
+jupyter nbextension <span class="nb">enable</span> --user --py  chemview
+</pre></div>
+
+
+<p>The <code>MolecularViewer</code> class that is responsible for creating the visualization
+accepts the (x, y, z) coordinates and additional <code>topology</code> dictionary that specifies
+a list of chemical symbols and chemical bonds as a list of connected atom indices.
+As in the case of <a href="https://github.com/patrickfuller/imolecule">imolecule</a> we can convert the <code>ase.Atoms</code> instance into the required
+format using the code below.</p>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">atoms_to_chemview</span><span class="p">(</span><span class="n">atoms</span><span class="p">,</span> <span class="n">infer_bonds</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Convert ase.Atoms instance into a dict of kwargs for the chemview.MolecularViewer</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        atoms       : ase.Atoms</span>
+<span class="sd">        infer_bonds : bool</span>
+<span class="sd">            Get the list of indices of connected atoms, (requires pybel)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        data : dict</span>
+<span class="sd">            A dict with kwargs that can be passed to chemview.MolecularViewer</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="c1"># convert the coordinates to nanometers</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;coordinates&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">atoms</span><span class="o">.</span><span class="n">get_positions</span><span class="p">()</span> <span class="o">/</span> <span class="mf">10.0</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;topology&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;topology&#39;</span><span class="p">][</span><span class="s1">&#39;atom_types&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">atoms</span><span class="o">.</span><span class="n">get_chemical_symbols</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">infer_bonds</span><span class="p">:</span>
+
+        <span class="kn">import</span> <span class="nn">pybel</span>
+        <span class="n">ob</span> <span class="o">=</span> <span class="n">pybel</span><span class="o">.</span><span class="n">ob</span>
+
+        <span class="n">obmol</span> <span class="o">=</span> <span class="n">ob</span><span class="o">.</span><span class="n">OBMol</span><span class="p">()</span>
+        <span class="n">obmol</span><span class="o">.</span><span class="n">BeginModify</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">atoms</span><span class="p">:</span>
+            <span class="n">obatom</span> <span class="o">=</span> <span class="n">obmol</span><span class="o">.</span><span class="n">NewAtom</span><span class="p">()</span>
+            <span class="n">obatom</span><span class="o">.</span><span class="n">SetAtomicNum</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">number</span><span class="p">))</span>
+            <span class="n">obatom</span><span class="o">.</span><span class="n">SetVector</span><span class="p">(</span><span class="o">*</span><span class="n">atom</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+
+        <span class="n">obmol</span><span class="o">.</span><span class="n">ConnectTheDots</span><span class="p">()</span>
+        <span class="n">obmol</span><span class="o">.</span><span class="n">PerceiveBondOrders</span><span class="p">()</span>
+
+        <span class="n">bonds</span> <span class="o">=</span> <span class="p">[[</span><span class="n">b</span><span class="o">.</span><span class="n">GetBeginAtom</span><span class="p">()</span><span class="o">.</span><span class="n">GetIndex</span><span class="p">(),</span> <span class="n">b</span><span class="o">.</span><span class="n">GetEndAtom</span><span class="p">()</span><span class="o">.</span><span class="n">GetIndex</span><span class="p">()]</span>
+                 <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">ob</span><span class="o">.</span><span class="n">OBMolBondIter</span><span class="p">(</span><span class="n">obmol</span><span class="p">)]</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;topology&#39;</span><span class="p">][</span><span class="s1">&#39;bonds&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bonds</span>
+
+    <span class="k">return</span> <span class="n">data</span>
+</pre></div>
+
+
+<p>Here I used <a href="https://openbabel.org/docs/dev/UseTheLibrary/Python_Pybel.html">pybel</a> again to get the information about chemical bonds. Notice
+also that I converted the coordinates to nanometers since it looks a lot nicer,
+although I didn't found any information in the <a href="https://chemview.readthedocs.io/en/latest/">chemview</a>'s docs that this is the default unit used. </p>
+<p>If you want to see a working example see <a href="https://github.com/lmmentel/ase-jnb/blob/master/ase-chemview.ipynb">this notebook</a>
+where the above function is used to display a couple of <a href="https://wiki.fysik.dtu.dk/ase/">ASE</a> structures.</p>
 
   <div class="row">
 
