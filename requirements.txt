@@ -1,0 +1,11 @@
+flask
+Flask-Admin
+Flask-FlatPages
+flask-paginate
+Flask-SQLAlchemy
+Frozen-Flask
+jinja2
+Markdown
+pygments
+SQLAlchemy
+sqlite
