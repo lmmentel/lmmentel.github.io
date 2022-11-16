@@ -1,0 +1,339 @@
+$primary: #c9266a;
+$logo-color: #676a81;
+$codehilite-bg: #362c2c;
+$text-accent: #584a66;
+
+$font-family-serif: 'Sanchez', serif;
+$font-family-sans-serif: 'Raleway', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$font-family-monospace: 'Roboto Mono', SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+// light theme
+$bg-light: #F0F0F5;
+$text-color: #43485c;
+$text-navbar: #e5e5e5;
+$codehilite-bg: #362c2c;
+$light-theme-text: #333;
+
+// dark theme
+$bg-dark: #1a1a1a;
+$dark-theme-text: #f2f1f3;
+// $header-dark: #9B69CC;
+$header-dark: #D8D5DD;
+
+@import "../../../node_modules/bootstrap/scss/bootstrap";
+
+html {
+    line-height: 1.2;
+    height: 100%;
+}
+
+body {
+    background: $bg-light;
+    color: $text-color;
+    font-family: $font-family-serif;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 0 auto;
+    max-width: 1920px;
+    overflow-x: hidden;
+    text-align: left;
+}
+
+
+body.theme-dark {
+    background: $bg-dark;
+    color: $dark-theme-text;
+}
+
+html,
+body {
+    height: 100%;
+    position: relative;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: $codehilite-bg;
+    font-family: $font-family-sans-serif;
+    font-weight: normal;
+}
+
+.theme-dark h1,
+.theme-dark h2,
+.theme-dark h3,
+.theme-dark h4,
+.theme-dark h5,
+.theme-dark h6 {
+    color: $header-dark;
+}
+
+h1,
+h2 {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-transform: capitalize;
+}
+
+h1 {
+    font-size: 2.369rem;
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: 1.777rem;
+}
+
+h3 {
+    font-size: 1.333rem;
+}
+
+h4 {
+    font-size: 1rem;
+}
+
+h5 {
+    font-size: 1rem;
+}
+
+img {
+    border: none;
+    max-width: 100%;
+    height: auto;
+}
+
+hr {
+    background-color: transparent;
+    border: 0;
+    display: block;
+    font-size: 24px;
+    letter-spacing: 12px;
+    margin-bottom: 2.0rem;
+    margin-top: 1.5rem;
+    overflow: visible;
+    text-align: center;
+}
+
+hr:after {
+    content: "...";
+    display: inline-block;
+    margin-left: 0.6em;
+    color: rgba(0, 0, 0, 0.80);
+    position: relative;
+    top: -18px;
+}
+
+.navbar {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    font-family: $font-family-sans-serif;
+    border-bottom: 1px solid $text-navbar;
+}
+
+.navbar .nav-link {
+    color: rgb(0, 0, 0);
+}
+
+.navbar-toggler {
+    border: 1px solid $light-theme-text;
+}
+
+.theme-dark .navbar-toggler {
+    border: 1px solid $dark-theme-text;
+    color: $dark-theme-text;
+}
+
+.theme-dark .navbar .nav-link {
+    color: $dark-theme-text;
+}
+
+.navbar-brand {
+    font-size: larger;
+}
+
+.navbar-nav .nav-item:hover .nav-link {
+    color: $light-theme-text;
+}
+
+.toggle-theme:hover {
+    color: $primary;
+}
+
+.toggle-theme {
+    border: 0;
+    background: transparent;
+    background-image: none;
+    padding: 0.4rem 0.5rem 0 0.5rem;
+    color: $light-theme-text;
+    cursor: pointer;
+    position: relative;
+    align-items: center;
+}
+
+.toggle-theme .icon-light {
+    display: none;
+    color: $text-navbar;
+}
+
+.toggle-theme .icon-light:hover {
+    color: $primary;
+}
+
+.toggle-theme .icon-dark {
+    position: inline;
+}
+
+.theme-dark .toggle-theme .icon-dark {
+    display: none;
+}
+
+.theme-dark .toggle-theme .icon-light {
+    display: inline;
+}
+
+.post {
+    max-width: 800px;
+}
+
+.subtitle {
+    color: $codehilite-bg;
+}
+
+.theme-dark .subtitle {
+    color: $header-dark;
+}
+
+.logo-thin {
+    font-size: 2.0rem;
+    font-weight: 200;
+    color: $logo-color;
+    text-transform: lowercase;
+}
+
+.logo-thick {
+    font-size: 2.0rem;
+    font-weight: 600;
+    color: $logo-color;
+    text-transform: lowercase;
+}
+
+a {
+    text-decoration: none;
+    background-color: transparent;
+    color: $primary;
+}
+
+a:hover,
+a:active,
+a:focus {
+    display: inline-block;
+    text-decoration: none;
+    color: $primary;
+}
+
+.tag,
+a.tag {
+    background-color: #d4d4d4;
+    border-radius: 10px;
+    color: $dark;
+    display: inline-block;
+    font-family: $font-family-monospace;
+    font-size: 90%;
+    line-height: 1.5em;
+    padding: 0 .5em;
+    vertical-align: central;
+    text-transform: lowercase;
+}
+
+a.tag:hover {
+    color: #fff;
+    background-color: $text-accent;
+}
+
+.blog-footer {
+    margin-top: 30px;
+    padding-bottom: 0px;
+    padding-top: 1.0rem;
+    color: #999;
+    text-align: center;
+    border-top: 1px solid $text-navbar;
+    margin-bottom: 0px;
+}
+
+.spaced {
+    margin: 25px 25px 25px 25px;
+}
+
+.dense {
+    margin: 0 0 0 0;
+}
+
+.close {
+    margin-bottom: 0.4rem;
+}
+
+
+div.social a {
+    color: #888;
+    text-decoration: none;
+}
+
+div.social ul {
+    margin: 0;
+    padding: 5px 0 15px 0px;
+    list-style: none;
+}
+
+div.social ul li {
+    display: inline;
+    margin: 0 2px;
+    padding: 10px;
+}
+
+footer a {
+    color: #888;
+}
+
+#socialicons a[title="Bitbucket"]:hover {
+    color: #0747A6;
+}
+
+#socialicons a[title="GitHub"]:hover {
+    color: #286da3;
+}
+
+#socialicons a[title="Gmail"]:hover {
+    color: #f66;
+}
+
+#socialicons a[title="LinkedIn"]:hover {
+    color: #0077B5;
+}
+
+#socialicons a[title="Mendeley"]:hover {
+    color: #9C061F;
+}
+
+#socialicons a[title="GoogleScholar"]:hover {
+    color: #357DF3;
+}
+
+#socialicons a[title="ResearchGate"]:hover {
+    color: #00CCBB;
+}
+
+#socialicons a[title="Atom"]:hover {
+    color: #FF6501;
+}
+
+
+.codehilite {
+    background-color: $codehilite-bg;
+    font-family: $font-family-monospace;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}

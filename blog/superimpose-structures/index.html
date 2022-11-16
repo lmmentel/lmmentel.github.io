@@ -1,0 +1,292 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Homepage">
+    <meta name="author" content="Łukasz Mentel">
+    <meta name="copyright" content="Łukasz Mentel">
+
+    <title>Superimpose chemical structures</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;400;600&family=Roboto+Mono&family=Sanchez&display=swap" rel="stylesheet">
+
+    <link rel="icon" href="../../static/img/favicon.ico">
+
+    <!-- Font Awesome  -->
+    <link rel="stylesheet" href="../../static/css/font-awesome.min.css">
+
+    <!-- Acadmicons  -->
+    <link rel="stylesheet" href="../../static/css/academicons.min.css">
+
+    <!-- Pygments -->
+    <link rel="stylesheet" type="text/css" href="../../static/css/codehilite.monokai.css">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="../../static/css/styling.css">
+
+    <!-- MathJax -->
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+
+  <body class="d-flex flex-column min-vh-100">
+
+  <nav class="navbar navbar-expand-lg container-lg justify-content-center py-3 post mx-auto">
+    <div class="container-xl">
+        <a href="../../index.html" class="navbar-brand me-auto"><span class="logo-thin">Łukasz</span><span class="logo-thick">Mentel</span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive">
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="navbar-collapse collapse w-100" id="navbarResponsive">
+            <ul class="nav navbar-nav ms-auto">
+              <li class="nav-item">
+                <a href="../index.html" class="nav-link"> Writing </a>
+              </li>
+              <li class="nav-item">
+                <a href="../../software/index.html" class="nav-link"> Projects </a>
+              </li>
+              <li class="nav-item">
+                <a href="../../about/index.html" class="nav-link"> About </a>
+              </li>
+              <li class="nav-item">
+                <a href="../../contact/index.html" class="nav-link"> Contact </a>
+              </li>
+              <li class="nav-item">
+                <button title="Switch Theme" aria-label="Switch Theme" class="toggle-theme"id="themeSwitch">
+                  <svg width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" stroke="none" class="icon-dark">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                  </svg>
+                  <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-light">
+                      <circle cx="12" cy="12" r="5" fill="currentColor"></circle>
+                      <line x1="12" y1="1" x2="12" y2="3"></line>
+                      <line x1="12" y1="21" x2="12" y2="23"></line>
+                      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                      <line x1="1" y1="12" x2="3" y2="12"></line>
+                      <line x1="21" y1="12" x2="23" y2="12"></line>
+                      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                  </svg>
+                </button>
+              </li>
+            </ul>
+        </div>
+    </div>
+  </nav>
+
+
+  
+
+  <div class="container">
+    <div class="row">
+      <div class="col post mx-auto">
+
+        <p class="text-muted mt-3 text-end">
+          
+            <a href="../../tag/graphics/index.html" class="tag">graphics</a>
+          
+            <a href="../../tag/python/index.html" class="tag">python</a>
+          
+            <a href="../../tag/chemistry/index.html" class="tag">chemistry</a>
+          
+            <a href="../../tag/povray/index.html" class="tag">povray</a>
+          
+            <a href="../../tag/ase/index.html" class="tag">ase</a>
+          
+          28 September 2017
+        </p>
+        <h1>Superimpose chemical structures</h1>
+        <h2 class="subtitle">How to make nice graphics from multiple structures</h2>
+        <hr>
+        <p>I was struggling recently how to present multiple chemical structures that differed
+slightly in their geometry but  </p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span> <span class="nn">ase</span> <span class="kn">import</span> <span class="n">Atoms</span>
+<span class="kn">import</span> <span class="nn">ase.io</span>
+
+
+<span class="k">def</span> <span class="nf">read_structures</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">fpatt</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Read all the structures from `path` that match the `fpatt` pattern</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="n">fpatt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">fpatt</span><span class="p">)</span>
+
+    <span class="n">out</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;II&#39;</span><span class="p">:</span> <span class="n">OrderedDict</span><span class="p">(),</span> <span class="s1">&#39;III&#39;</span><span class="p">:</span> <span class="n">OrderedDict</span><span class="p">(),</span> <span class="s1">&#39;IV&#39;</span><span class="p">:</span> <span class="n">OrderedDict</span><span class="p">()}</span>
+
+    <span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">fpatt</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">m</span><span class="p">:</span>
+            <span class="n">symbol</span><span class="p">,</span> <span class="n">oxs</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">out</span><span class="p">[</span><span class="n">oxs</span><span class="p">][</span><span class="n">symbol</span><span class="p">]</span> <span class="o">=</span> <span class="n">ase</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">fname</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ERROR &#39;</span><span class="p">,</span> <span class="n">fname</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Read: &#39;</span><span class="p">,</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">out</span><span class="o">.</span><span class="n">items</span><span class="p">()]))</span>
+
+    <span class="k">return</span> <span class="n">out</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+
+    <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;AlPO-5-H&#39;</span>
+    <span class="n">patt</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;([A-Za-z]+)\(([IV]+)\)-AlPO-5-O2-H\.traj&#39;</span>
+
+    <span class="n">halpo</span> <span class="o">=</span> <span class="n">read_structures</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">patt</span><span class="p">)</span>
+
+    <span class="n">atoms</span> <span class="o">=</span> <span class="n">Atoms</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">me</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">halpo</span><span class="p">[</span><span class="s1">&#39;IV&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">atoms</span> <span class="o">=</span> <span class="n">atoms</span> <span class="o">+</span> <span class="n">a</span>
+
+    <span class="n">transmittances</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.8</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span>
+
+    <span class="n">ase</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Me-AlPO-5-H.pov&#39;</span><span class="p">,</span> <span class="n">atoms</span><span class="p">,</span>
+        <span class="n">rotation</span><span class="o">=</span><span class="s1">&#39;-15y&#39;</span><span class="p">,</span>
+        <span class="n">show_unit_cell</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">run_povray</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">pause</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">canvas_width</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
+        <span class="n">camera_type</span><span class="o">=</span><span class="s1">&#39;perspective&#39;</span><span class="p">,</span>
+        <span class="n">transmittances</span><span class="o">=</span><span class="n">transmittances</span><span class="p">)</span>
+
+    <span class="n">ase</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Me-AlPO-5-H_0y.pov&#39;</span><span class="p">,</span> <span class="n">atoms</span><span class="p">,</span>
+        <span class="n">rotation</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="n">show_unit_cell</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">run_povray</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">pause</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">canvas_width</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
+        <span class="n">camera_type</span><span class="o">=</span><span class="s1">&#39;perspective&#39;</span><span class="p">,</span>
+        <span class="n">transmittances</span><span class="o">=</span><span class="n">transmittances</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Rendering the scenes for multiple structures was a bit too slow for my laptop so I had to use
+a supercomputer to speed things up.</p>
+<p>This is a bit of a special case since the structures are taken from a periodic crystals
+and therefore all have the same unit cell size. It simpifies things a lot since then all
+the coordinates are given with respect to origin of the unit cell which is the same for
+all the materials. For (non-periodic) molecules we would have to align the molecules first
+since their coordinates can be defined with respect to different origins. One possible solution
+is to minimize the <a href="https://en.wikipedia.org/wiki/Root-mean-square_deviation_of_atomic_positions">root mean square deviation</a> between the structures in order
+to realign them which is usually done using the <a href="https://doi.org/10.1107/S0567739476001873">Kabsch</a> algorithm. For those curious
+to see it in practice e is also a python available <a href="https://github.com/charnley/rmsd">rmsdpy</a>.</p>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col post mx-auto">
+        <script src="https://utteranc.es/client.js"
+          repo="lmmentel/lmmentel.github.io"
+          issue-term="title"
+          theme="github-light"
+          crossorigin="anonymous"
+          async>
+        </script>
+      </div>
+    </div>
+  </div>
+
+
+  
+  <footer class="blog-footer mx-auto mt-auto">
+    <div class="row">
+      <div class="col">
+        <p class="text-muted text-center">
+          <i class="fa fa-copyright" aria-hidden="true"></i> Copyright 2015-2022 by Łukasz Mentel
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="social text-center" style="font-size: 32px;">
+          <ul class="list-inline" id="socialicons">
+
+          <script language="JavaScript">
+            u = 'lmmentel';
+            s = 'gmail.com';
+            document.write('<a href=\"mailto:' + u + '@' + s + '\" target=\"_blank\" title=\"Gmail\">');
+          </script>
+              <li><i class="fa fa-envelope-o" aria-hidden="true"></i> </li>
+          </a>
+
+            <li><a href="https://github.com/lmmentel" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a></li>
+            <li><a href="https://bitbucket.org/lukaszmentel" title="Bitbucket"><i class="fa fa-bitbucket" aria-hidden="true"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/lukasz-mentel" title="LinkedIn"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+            <li><a href="https://www.mendeley.com/profiles/lukasz-mentel2/" title="Mendeley"><i class="ai ai-mendeley"></i></a></li>
+            <li><a href="http://scholar.google.com/citations?user=TTL9ux0AAAAJ&hl=en" title="GoogleScholar"><i class="ai ai-google-scholar"></i></a></li>
+            <li><a href="https://www.researchgate.net/profile/Lukasz_Mentel/" title="ResearchGate"><i class="ai ai-researchgate"></i></a></li>
+            <li><a href="../../latest.atom/index.html" title="Atom"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div><a href="../../credits/index.html" class="text-muted">Credits</a></div>
+  </footer>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <!-- Google Analytics code -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-87210403-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
+    <script>
+      const changeThemeToDark = () => {
+          document.body.classList.add('theme-dark')
+          localStorage.setItem("data-theme", "dark")
+      }
+      const changeThemeToLight = () => {
+          document.body.classList.remove('theme-dark')
+          localStorage.setItem("data-theme", 'light')
+      }
+      // set initial value
+      let theme = localStorage.getItem('data-theme');
+      console.log(theme);
+      if (theme === 'dark') {
+          changeThemeToDark()
+        }
+        else {
+          changeThemeToLight()  
+        };
+
+      document.getElementById('themeSwitch').addEventListener('click',()=>{
+        let theme = localStorage.getItem('data-theme');
+        console.log(theme);
+        if (theme === 'dark') {
+            changeThemeToLight()
+          }
+          else {
+            changeThemeToDark()  
+          }
+      })
+    </script>
+
+    
+    
+
+  </body>
+</html>

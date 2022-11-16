@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title type="text">Latest Blog Posts</title>
   <id>http://localhost/latest.atom/</id>
-  <updated>2017-05-28T12:00:00Z</updated>
+  <updated>2017-12-27T12:00:00Z</updated>
   <link href="http://localhost/" />
   <link href="http://localhost/latest.atom/" rel="self" />
   <author>
@@ -10,921 +10,240 @@
   </author>
   <generator>Werkzeug</generator>
   <entry xml:base="http://localhost/latest.atom/">
-    <title type="text">Visualizing ASE structures in Jupyter notebook</title>
-    <id>http://localhost/blog/ase-jupyter-notebook/</id>
-    <updated>2017-05-28T12:00:00Z</updated>
-    <published>2017-05-28T12:00:00Z</published>
-    <link href="http://localhost/blog/ase-jupyter-notebook/" />
-    <content type="html">&lt;p&gt;Since I first heard about the &lt;a href=&quot;http://jupyter.org/&quot;&gt;Jupyter notebook&lt;/a&gt; (around that time it
-was called &lt;em&gt;ipython notebook&lt;/em&gt;) I instantly adopted it into my work flow for
-rapid testing, developing and most of all experimenting and playing around
-with &lt;a href=&quot;https://www.python.org/&quot;&gt;Python&lt;/a&gt; code. I realized quickly how comfortable it is as a working
-environment and started creating notebooks using more and more of the
-capabilities. I began integrating plots, images,
-&lt;a href=&quot;https://en.wikipedia.org/wiki/Markdown&quot;&gt;markdown&lt;/a&gt; notes and even creating
-slide presentation in &lt;a href=&quot;http://jupyter.org/&quot;&gt;jupyter&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Since I'm a computational chemist I manipulate the chemical structures a lot
-and the package I've been using a lot lately is the &lt;a href=&quot;https://wiki.fysik.dtu.dk/ase/&quot;&gt;Atomic Simulation
-Environment (ASE)&lt;/a&gt;. Mostly because it's written in &lt;a href=&quot;https://www.python.org/&quot;&gt;Python&lt;/a&gt; and has a
-great assortment of methods for running and analyzing DFT calculations. It
-also provides a set of convenient methods for handling chemical structures
-including periodic ones. The package comes with it's on GUI, that does a
-decent job when it comes to displaying and handling structures however
-when working in a notebook it would be great to have a tool that allows
-embedding the viewer inside the notebook. Some time ago there was even
-a &lt;a href=&quot;https://listserv.fysik.dtu.dk/pipermail/ase-users/2016-December/003305.html&quot;&gt;thread on the ase-users&lt;/a&gt;
-mailing list where a question about embedding &lt;a href=&quot;https://wiki.fysik.dtu.dk/ase/&quot;&gt;ASE&lt;/a&gt; structures in a
-&lt;a href=&quot;http://jupyter.org/&quot;&gt;Jupyter notebook&lt;/a&gt; was raised.&lt;/p&gt;
-&lt;p&gt;I found a few ways that enable the interactive visualization of chemical
-structures given as the &lt;code&gt;Atoms&lt;/code&gt; objects (internal representation in ASE) in
-the notebook, that I think are interesting to try out:&lt;/p&gt;
+    <title type="text">Automating slide presentations</title>
+    <id>http://localhost/blog/cookiecutter-mdbeamer/</id>
+    <updated>2017-12-27T12:00:00Z</updated>
+    <published>2017-12-27T12:00:00Z</published>
+    <link href="http://localhost/blog/cookiecutter-mdbeamer/" />
+    <content type="html">&lt;p&gt;Delivering an interesting and engaging talk is hard.&lt;/p&gt;
+&lt;p&gt;Creating beautiful and visually appealing presentations is undoubtedly an art. The process is usally
+not so straightforward since there a  lot of moving parts, formats. My weapon
+of choice was always LaTeX equipped with beamer that does an amazing job in
+figuring out some of the aesthetics for you. However to be honest most of the
+standard beamer themes offered do not look very modern and to say the least are
+far away from being stunning. Potentially this can easily be be fixed since
+LaTeX is extremely flexible and configurable but would require a peculiar set
+of skills namely graphic design and high level of proficiency in LaTeX
+internals. I guess no one should be surprized that those two rarely come
+together in a form that would benefit a larger community.&lt;/p&gt;
+&lt;p&gt;The main idea is to automate as much of the process as possiblee, so that once
+everything is set up and configured you can focus only on creating the actual
+content&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#html&quot;&gt;html&lt;/a&gt; using &lt;a href=&quot;https://wiki.fysik.dtu.dk/ase/&quot;&gt;ASE&lt;/a&gt;'s native
-  &lt;a href=&quot;https://wiki.fysik.dtu.dk/ase/ase/io/io.html#module-ase.io&quot;&gt;html writer&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#imolecule&quot;&gt;imolecule&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#nglview&quot;&gt;nglview&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://chemview.readthedocs.io/en/latest/&quot;&gt;chemview&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The list above is by no means complete and there are probably some other great
-tools that provide similar functionality, so if you think I skipped some important
-alternative - let me know.&lt;/p&gt;
-&lt;!-- | Software  | Version                 |
-|-----------|-------------------------|
-| Python    | 3.6.1                   | 
-| IPython   | 6.0.0                   |
-| ase       | 3.13.0                  |
-| jupyter   | 1.0.0                   |
-| OS        | Linux 3.16.0 debian 8.8 | --&gt;
-
-&lt;h1 id=&quot;html&quot;&gt;html&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&quot;https://wiki.fysik.dtu.dk/ase/&quot;&gt;ASE&lt;/a&gt; has a builtin format
-&lt;a href=&quot;https://wiki.fysik.dtu.dk/ase/ase/io/io.html#module-ase.io&quot;&gt;converter&lt;/a&gt; (or
-writer) to html that uses the &lt;a href=&quot;https://www.x3dom.org/&quot;&gt;x3dom&lt;/a&gt; library to
-create an interactive view of the molecular structure once you open or embed
-the generated html in a browser. You can interact with your molecule by
-rotating, translating zooming and panning the view. To embed the view in one
-of the &lt;a href=&quot;http://jupyter.org/&quot;&gt;Jupyter&lt;/a&gt; output cells we can use the native &lt;code&gt;HTML&lt;/code&gt; function
-from the &lt;code&gt;IPython.display&lt;/code&gt; module&lt;/p&gt;
-&lt;div class=&quot;codehilite&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;IPython.display&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HTML&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;A small hurdle is that we would like to have the html as a string that can be
-passed to the &lt;code&gt;HTML&lt;/code&gt; functions but the ASE html writer needs to write a physical
-file. One of the ways of fixing this behavior is a to use a
-&lt;a href=&quot;https://docs.python.org/3/library/tempfile.html#tempfile.NamedTemporaryFile&quot;&gt;named temporary file&lt;/a&gt;
-from the &lt;a href=&quot;https://docs.python.org/3/library/tempfile.html&quot;&gt;tempfile&lt;/a&gt; package and
-a custom function that takes the &lt;code&gt;Atoms&lt;/code&gt; objects and returns the html string.&lt;/p&gt;
-&lt;div class=&quot;codehilite&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;atoms_to_html&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;atoms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;&amp;#39;Return the html representation the atoms object as string&amp;#39;&lt;/span&gt;
-
-    &lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;tempfile&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NamedTemporaryFile&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NamedTemporaryFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;r+&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;suffix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;.html&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ntf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;atoms&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ntf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;html&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;ntf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;seek&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;html&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ntf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;html&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;Then to display any structure available as an &lt;code&gt;Atoms&lt;/code&gt; instance, we could do&lt;/p&gt;
-&lt;div class=&quot;codehilite&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt;  &lt;span class=&quot;nn&quot;&gt;ase.build&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;molecule&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;tbut&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;molecule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;trans-butane&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
-&lt;span class=&quot;n&quot;&gt;tbut_html&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;atoms_to_html&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tbut&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;HTML&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tbut_html&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;If everything went well you should see a view widget with a trans-butene molecule
-displayed, similar to the one below. If you want to try it yourself on a couple 
-more examples see, the short &lt;a href=&quot;http://nbviewer.jupyter.org/github/lmmentel/ase-jnb/blob/master/ase-html.ipynb&quot;&gt;notebook&lt;/a&gt; I used to test this code.&lt;/p&gt;
-&lt;p&gt;&lt;div&gt;
-  &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot;
-   href=&quot;https://www.x3dom.org/x3dom/release/x3dom.css&quot;&gt;
-  &lt;/link&gt;
-  &lt;script type=&quot;text/javascript&quot;
-   src=&quot;https://www.x3dom.org/x3dom/release/x3dom.js&quot;&gt;
-  &lt;/script&gt;&lt;/p&gt;
-&lt;p&gt;&lt;X3D style=&quot;margin:0; padding:0; width:100%; height:100%; border:none;&quot;&gt;
-   &lt;Scene&gt;
-    &lt;Transform translation=&quot;0.70 1.82 0.00&quot;&gt;
-     &lt;Shape&gt;
-      &lt;Appearance&gt;
-       &lt;Material diffuseColor=&quot;0.565 0.565 0.565&quot; specularColor=&quot;0.5 0.5 0.5&quot;&gt;
-       &lt;/Material&gt;
-      &lt;/Appearance&gt;
-      &lt;Sphere radius=&quot;0.76&quot;&gt;
-      &lt;/Sphere&gt;
-     &lt;/Shape&gt;
-    &lt;/Transform&gt;
-    &lt;Transform translation=&quot;0.70 0.30 0.00&quot;&gt;
-     &lt;Shape&gt;
-      &lt;Appearance&gt;
-       &lt;Material diffuseColor=&quot;0.565 0.565 0.565&quot; specularColor=&quot;0.5 0.5 0.5&quot;&gt;
-       &lt;/Material&gt;
-      &lt;/Appearance&gt;
-      &lt;Sphere radius=&quot;0.76&quot;&gt;
-      &lt;/Sphere&gt;
-     &lt;/Shape&gt;
-    &lt;/Transform&gt;
-    &lt;Transform translation=&quot;-0.70 -0.30 0.00&quot;&gt;
-     &lt;Shape&gt;
-      &lt;Appearance&gt;
-       &lt;Material diffuseColor=&quot;0.565 0.565 0.565&quot; specularColor=&quot;0.5 0.5 0.5&quot;&gt;
-       &lt;/Material&gt;
-      &lt;/Appearance&gt;
-      &lt;Sphere radius=&quot;0.76&quot;&gt;
-      &lt;/Sphere&gt;
-     &lt;/Shape&gt;
-    &lt;/Transform&gt;
-    &lt;Transform translation=&quot;-0.70 -1.82 0.00&quot;&gt;
-     &lt;Shape&gt;
-      &lt;Appearance&gt;
-       &lt;Material diffuseColor=&quot;0.565 0.565 0.565&quot; specularColor=&quot;0.5 0.5 0.5&quot;&gt;
-       &lt;/Material&gt;
-      &lt;/Appearance&gt;
-      &lt;Sphere radius=&quot;0.76&quot;&gt;
-      &lt;/Sphere&gt;
-     &lt;/Shape&gt;
-    &lt;/Transform&gt;
-    &lt;Transform translation=&quot;1.72 2.22 0.00&quot;&gt;
-     &lt;Shape&gt;
-      &lt;Appearance&gt;
-       &lt;Material diffuseColor=&quot;1.000 1.000 1.000&quot; specularColor=&quot;0.5 0.5 0.5&quot;&gt;
-       &lt;/Material&gt;
-      &lt;/Appearance&gt;
-      &lt;Sphere radius=&quot;0.31&quot;&gt;
-      &lt;/Sphere&gt;
-     &lt;/Shape&gt;
-    &lt;/Transform&gt;
-    &lt;Transform translation=&quot;-1.72 -2.22 0.00&quot;&gt;
-     &lt;Shape&gt;
-      &lt;Appearance&gt;
-       &lt;Material diffuseColor=&quot;1.000 1.000 1.000&quot; specularColor=&quot;0.5 0.5 0.5&quot;&gt;
-       &lt;/Material&gt;
-      &lt;/Appearance&gt;
-      &lt;Sphere radius=&quot;0.31&quot;&gt;
-      &lt;/Sphere&gt;
-     &lt;/Shape&gt;
-    &lt;/Transform&gt;
-    &lt;Transform translation=&quot;0.19 2.21 0.88&quot;&gt;
-     &lt;Shape&gt;
-      &lt;Appearance&gt;
-       &lt;Material diffuseColor=&quot;1.000 1.000 1.000&quot; specularColor=&quot;0.5 0.5 0.5&quot;&gt;
-       &lt;/Material&gt;
-      &lt;/Appearance&gt;
-      &lt;Sphere radius=&quot;0.31&quot;&gt;
-      &lt;/Sphere&gt;
-     &lt;/Shape&gt;
-    &lt;/Transform&gt;
-    &lt;Transform translation=&quot;0.19 2.21 -0.88&quot;&gt;
-     &lt;Shape&gt;
-      &lt;Appearance&gt;
-       &lt;Material diffuseColor=&quot;1.000 1.000 1.000&quot; specularColor=&quot;0.5 0.5 0.5&quot;&gt;
-       &lt;/Material&gt;
-      &lt;/Appearance&gt;
-      &lt;Sphere radius=&quot;0.31&quot;&gt;
-      &lt;/Sphere&gt;
-     &lt;/Shape&gt;
-    &lt;/Transform&gt;
-    &lt;Transform translation=&quot;-0.19 -2.21 0.88&quot;&gt;
-     &lt;Shape&gt;
-      &lt;Appearance&gt;
-       &lt;Material diffuseColor=&quot;1.000 1.000 1.000&quot; specularColor=&quot;0.5 0.5 0.5&quot;&gt;
-       &lt;/Material&gt;
-      &lt;/Appearance&gt;
-      &lt;Sphere radius=&quot;0.31&quot;&gt;
-      &lt;/Sphere&gt;
-     &lt;/Shape&gt;
-    &lt;/Transform&gt;
-    &lt;Transform translation=&quot;-0.19 -2.21 -0.88&quot;&gt;
-     &lt;Shape&gt;
-      &lt;Appearance&gt;
-       &lt;Material diffuseColor=&quot;1.000 1.000 1.000&quot; specularColor=&quot;0.5 0.5 0.5&quot;&gt;
-       &lt;/Material&gt;
-      &lt;/Appearance&gt;
-      &lt;Sphere radius=&quot;0.31&quot;&gt;
-      &lt;/Sphere&gt;
-     &lt;/Shape&gt;
-    &lt;/Transform&gt;
-    &lt;Transform translation=&quot;1.25 -0.07 -0.88&quot;&gt;
-     &lt;Shape&gt;
-      &lt;Appearance&gt;
-       &lt;Material diffuseColor=&quot;1.000 1.000 1.000&quot; specularColor=&quot;0.5 0.5 0.5&quot;&gt;
-       &lt;/Material&gt;
-      &lt;/Appearance&gt;
-      &lt;Sphere radius=&quot;0.31&quot;&gt;
-      &lt;/Sphere&gt;
-     &lt;/Shape&gt;
-    &lt;/Transform&gt;
-    &lt;Transform translation=&quot;1.25 -0.07 0.88&quot;&gt;
-     &lt;Shape&gt;
-      &lt;Appearance&gt;
-       &lt;Material diffuseColor=&quot;1.000 1.000 1.000&quot; specularColor=&quot;0.5 0.5 0.5&quot;&gt;
-       &lt;/Material&gt;
-      &lt;/Appearance&gt;
-      &lt;Sphere radius=&quot;0.31&quot;&gt;
-      &lt;/Sphere&gt;
-     &lt;/Shape&gt;
-    &lt;/Transform&gt;
-    &lt;Transform translation=&quot;-1.25 0.07 -0.88&quot;&gt;
-     &lt;Shape&gt;
-      &lt;Appearance&gt;
-       &lt;Material diffuseColor=&quot;1.000 1.000 1.000&quot; specularColor=&quot;0.5 0.5 0.5&quot;&gt;
-       &lt;/Material&gt;
-      &lt;/Appearance&gt;
-      &lt;Sphere radius=&quot;0.31&quot;&gt;
-      &lt;/Sphere&gt;
-     &lt;/Shape&gt;
-    &lt;/Transform&gt;
-    &lt;Transform translation=&quot;-1.25 0.07 0.88&quot;&gt;
-     &lt;Shape&gt;
-      &lt;Appearance&gt;
-       &lt;Material diffuseColor=&quot;1.000 1.000 1.000&quot; specularColor=&quot;0.5 0.5 0.5&quot;&gt;
-       &lt;/Material&gt;
-      &lt;/Appearance&gt;
-      &lt;Sphere radius=&quot;0.31&quot;&gt;
-      &lt;/Sphere&gt;
-     &lt;/Shape&gt;
-    &lt;/Transform&gt;
-   &lt;/Scene&gt;
-  &lt;/X3D&gt;
-&lt;/div&gt; &lt;/p&gt;
-&lt;h1 id=&quot;nglview&quot;&gt;nglview&lt;/h1&gt;
-&lt;p&gt;The most feature rich option is offered by the &lt;a href=&quot;https://github.com/arose/nglview&quot;&gt;nglview&lt;/a&gt; package that provides a
-&lt;a href=&quot;http://jupyter.org/&quot;&gt;Jupyter&lt;/a&gt; widget for interactive visualizations of chemical structures and
-trajectories. It is built on top of the &lt;a href=&quot;https://github.com/arose/ngl&quot;&gt;NGL Viewer&lt;/a&gt;
-and it supports some of the more popular
-formats through a number of convenience functions. The supported formats include:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http:www.rcsb.org&quot;&gt;RCSB PDB&lt;/a&gt;,&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/arose/simpletraj&quot;&gt;simpletraj&lt;/a&gt;,&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://mdtraj.org/&quot;&gt;mdtraj&lt;/a&gt;,&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://amber-md.github.io/pytraj/latest/index.html&quot;&gt;pytraj&lt;/a&gt;,&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.mdanalysis.org/&quot;&gt;mdanalysis&lt;/a&gt;,&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://parmed.github.io/ParmEd/&quot;&gt;ParmEd&lt;/a&gt;,&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/rdkit/rdkit&quot;&gt;rdkit&lt;/a&gt;,&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/Acellera/htmd&quot;&gt;HTMD&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Most importantly it also supports &lt;code&gt;ase.Atoms&lt;/code&gt; though &lt;code&gt;nglview.showase&lt;/code&gt; function, which
-displays a single structure and &lt;code&gt;nglview.showasetraj&lt;/code&gt; that is capable of showing an
-animation based on the images in the trajectory file.&lt;/p&gt;
-&lt;p&gt;The installation is pretty straightforward with &lt;a href=&quot;https://www.continuum.io/&quot;&gt;conda&lt;/a&gt;:&lt;/p&gt;
-&lt;div class=&quot;codehilite&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;conda install nglview -c bioconda
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;or pip:&lt;/p&gt;
-&lt;div class=&quot;codehilite&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install nglview
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;but I found I also need to enable it with&lt;/p&gt;
-&lt;div class=&quot;codehilite&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;jupyter-nbextension &lt;span class=&quot;nb&quot;&gt;enable&lt;/span&gt; nglview --py --sys-prefix
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;The feature that I really like, that is not available in other viewers, is
-displaying trajectories and sequences of structures, which makes it possible
-to visualize molecular vibrations, structure relaxation steps or reaction
-paths. As an example consider viewing a vibrational mode from the trajectory
-file:&lt;/p&gt;
-&lt;div class=&quot;codehilite&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;ase.io&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;mode30&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;io&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;vib.30.traj&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;:&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;nglview&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;show_asetraj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mode30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;Moreover &lt;a href=&quot;https://github.com/arose/nglview&quot;&gt;nglview&lt;/a&gt; let you save the movie as gif file.&lt;/p&gt;
-&lt;p&gt;If you need more control for tweaking the display you can activate the &lt;code&gt;gui&lt;/code&gt; mode by
-passing an additional parameter to the viewer&lt;/p&gt;
-&lt;div class=&quot;codehilite&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nglview&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;show_asetraj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mode30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gui&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;that will show a menu with a lot of options to adjust.&lt;/p&gt;
-&lt;h1 id=&quot;imolecule&quot;&gt;imolecule&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/patrickfuller/imolecule&quot;&gt;imolecule&lt;/a&gt; is an embeddable
-&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API&quot;&gt;WebGL&lt;/a&gt;
-viewer that comes with a convenient chemical format
-converting features that largely rely on the capabilities on &lt;a href=&quot;http://openbabel.org/wiki/Main_Page&quot;&gt;openbabel&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;The embedding capabilities are nicely illustrated on the
-&lt;a href=&quot;http://patrickfuller.github.io/imolecule/examples/mof.html&quot;&gt;page provided by the author&lt;/a&gt;
-and the compatibility with &lt;a href=&quot;http://jupyter.org/&quot;&gt;Jupyter&lt;/a&gt; 
-is demonstrated in this &lt;a href=&quot;http://patrickfuller.github.io/imolecule/examples/ipython.html&quot;&gt;example notebook&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;The installation is as simple as running:&lt;/p&gt;
-&lt;div class=&quot;codehilite&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install imolecule
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;The &lt;a href=&quot;https://github.com/patrickfuller/imolecule&quot;&gt;imolecule&lt;/a&gt; package can handle multiple file formats, and can take string
-representation of structures as well a read files, however it cannot handle
-the default &lt;a href=&quot;https://wiki.fysik.dtu.dk/ase/&quot;&gt;ASE&lt;/a&gt; format. It uses it's own molecule representation internally that is
-based on &lt;a href=&quot;https://en.wikipedia.org/wiki/JSON&quot;&gt;json&lt;/a&gt; so we can write a small
-function for converting &lt;code&gt;ase.Atoms&lt;/code&gt; to json. The are probably a few alternative ways
-of getting it done but I chose to convert &lt;code&gt;ase.Atoms&lt;/code&gt; to &lt;code&gt;OBMol&lt;/code&gt; first and then
-use the converter from &lt;a href=&quot;https://github.com/patrickfuller/imolecule&quot;&gt;imolecule&lt;/a&gt; to do the rest. I chose that solution since
-by default &lt;code&gt;ase.Atoms&lt;/code&gt; has no information about chemical bonds, and we can 
-infer that information by using &lt;a href=&quot;http://openbabel.org/wiki/Main_Page&quot;&gt;openbabel&lt;/a&gt;. The bonding data is then used to
-correctly render the stick part of the &lt;em&gt;ball and stick&lt;/em&gt; representation of structures.
-The &lt;code&gt;atoms_to_json&lt;/code&gt; function does the above conversion, it takes the &lt;code&gt;ase.Atoms&lt;/code&gt;
-objects and returns a json representation compatible with &lt;a href=&quot;https://github.com/patrickfuller/imolecule&quot;&gt;imolecule&lt;/a&gt;.&lt;/p&gt;
-&lt;div class=&quot;codehilite&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;atoms_to_json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;aseatoms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;infer_bonds&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;sd&quot;&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
-&lt;span class=&quot;sd&quot;&gt;    Convert ASE Atoms isntance into the json format compatible with&lt;/span&gt;
-
-&lt;span class=&quot;sd&quot;&gt;    Args:&lt;/span&gt;
-&lt;span class=&quot;sd&quot;&gt;        aseatoms : ase.Atoms&lt;/span&gt;
-&lt;span class=&quot;sd&quot;&gt;            Instance of Atoms from ase package&lt;/span&gt;
-&lt;span class=&quot;sd&quot;&gt;        infer_bonds : bool&lt;/span&gt;
-&lt;span class=&quot;sd&quot;&gt;            If `True` bonds will be inferred using openbabel&lt;/span&gt;
-
-&lt;span class=&quot;sd&quot;&gt;    Returns:&lt;/span&gt;
-&lt;span class=&quot;sd&quot;&gt;        mol : dist&lt;/span&gt;
-&lt;span class=&quot;sd&quot;&gt;            A dictionary with the json format of the molecule&lt;/span&gt;
-&lt;span class=&quot;sd&quot;&gt;    &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
-
-    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pybel&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;ob&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pybel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ob&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;obmol&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ob&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;OBMol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;obmol&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BeginModify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;atom&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;aseatoms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;obatom&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;obmol&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NewAtom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;obatom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SetAtomicNum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;atom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;obatom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SetVector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;atom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tolist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;# If there is no bond data, try to infer them&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;infer_bonds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;obmol&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ConnectTheDots&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;obmol&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PerceiveBondOrders&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;# Check for unit cell data&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;aseatoms&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pbc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;uc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ob&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;OBUnitCell&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;uc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SetData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ob&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vector3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;aseatoms&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_cell&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()))&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;uc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SetSpaceGroup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;P1&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;obmol&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CloneData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;uc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;obmol&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;EndModify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;mol&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pybel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Molecule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;obmol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;imolecule&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;format_converter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pybel_to_json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;h1 id=&quot;chemview&quot;&gt;chemview&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&quot;https://chemview.readthedocs.io/en/latest/&quot;&gt;chemview&lt;/a&gt; is another option which utilizes the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API&quot;&gt;WebGL&lt;/a&gt;
-and &lt;a href=&quot;http://threejs.org/&quot;&gt;three.js&lt;/a&gt; libraries. It is pretty easy to install since it can be done
-using &lt;a href=&quot;https://www.continuum.io/&quot;&gt;conda&lt;/a&gt;:&lt;/p&gt;
-&lt;div class=&quot;codehilite&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;conda install -c http://conda.binstar.org/gabrielelanaro
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;however I had to clone latest repository and install it through pip&lt;/p&gt;
-&lt;div class=&quot;codehilite&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git clone https://github.com/gabrielelanaro/chemview
-&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; chemview
-pip install .
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;due to some dependency conflicts for Python 3.6.1. After installing I had to manually enable the widget
-with jupyter:&lt;/p&gt;
-&lt;div class=&quot;codehilite&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;jupyter nbextension &lt;span class=&quot;nb&quot;&gt;enable&lt;/span&gt; widgetsnbextension --user --py
-jupyter nbextension install --user --py --symlink chemview
-jupyter nbextension &lt;span class=&quot;nb&quot;&gt;enable&lt;/span&gt; --user --py  chemview
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;The &lt;code&gt;MolecularViewer&lt;/code&gt; class that is responsible for creating the visualization
-accepts the (x, y, z) coordinates and additional &lt;code&gt;topology&lt;/code&gt; dictionary that specifies
-a list of chemical symbols and chemical bonds as a list of connected atom indices.
-As in the case of &lt;a href=&quot;https://github.com/patrickfuller/imolecule&quot;&gt;imolecule&lt;/a&gt; we can convert the &lt;code&gt;ase.Atoms&lt;/code&gt; instance into the required
-format using the code below.&lt;/p&gt;
-&lt;div class=&quot;codehilite&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;atoms_to_chemview&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;atoms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;infer_bonds&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;sd&quot;&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
-&lt;span class=&quot;sd&quot;&gt;    Convert ase.Atoms instance into a dict of kwargs for the chemview.MolecularViewer&lt;/span&gt;
-
-&lt;span class=&quot;sd&quot;&gt;    Args:&lt;/span&gt;
-&lt;span class=&quot;sd&quot;&gt;        atoms       : ase.Atoms&lt;/span&gt;
-&lt;span class=&quot;sd&quot;&gt;        infer_bonds : bool&lt;/span&gt;
-&lt;span class=&quot;sd&quot;&gt;            Get the list of indices of connected atoms, (requires pybel)&lt;/span&gt;
-
-&lt;span class=&quot;sd&quot;&gt;    Returns:&lt;/span&gt;
-&lt;span class=&quot;sd&quot;&gt;        data : dict&lt;/span&gt;
-&lt;span class=&quot;sd&quot;&gt;            A dict with kwargs that can be passed to chemview.MolecularViewer&lt;/span&gt;
-&lt;span class=&quot;sd&quot;&gt;    &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;dict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# convert the coordinates to nanometers&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;coordinates&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;atoms&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_positions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;10.0&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;topology&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;dict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;topology&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;atom_types&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;atoms&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_chemical_symbols&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;infer_bonds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-
-        &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pybel&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;ob&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pybel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ob&lt;/span&gt;
-
-        &lt;span class=&quot;n&quot;&gt;obmol&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ob&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;OBMol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;obmol&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BeginModify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-
-        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;atom&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;atoms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;obatom&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;obmol&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NewAtom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;obatom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SetAtomicNum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;atom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;obatom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SetVector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;atom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tolist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-
-        &lt;span class=&quot;n&quot;&gt;obmol&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ConnectTheDots&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;obmol&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PerceiveBondOrders&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-
-        &lt;span class=&quot;n&quot;&gt;bonds&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GetBeginAtom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GetIndex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GetEndAtom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GetIndex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()]&lt;/span&gt;
-                 &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ob&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;OBMolBondIter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;obmol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;topology&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;bonds&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bonds&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;Here I used &lt;a href=&quot;https://openbabel.org/docs/dev/UseTheLibrary/Python_Pybel.html&quot;&gt;pybel&lt;/a&gt; again to get the information about chemical bonds. Notice
-also that I converted the coordinates to nanometers since it looks a lot nicer,
-although I didn't found any information in the &lt;a href=&quot;https://chemview.readthedocs.io/en/latest/&quot;&gt;chemview&lt;/a&gt;'s docs that this is the default unit used. &lt;/p&gt;
-&lt;p&gt;If you want to see a working example see &lt;a href=&quot;https://github.com/lmmentel/ase-jnb/blob/master/ase-chemview.ipynb&quot;&gt;this notebook&lt;/a&gt;
-where the above function is used to display a couple of &lt;a href=&quot;https://wiki.fysik.dtu.dk/ase/&quot;&gt;ASE&lt;/a&gt; structures.&lt;/p&gt;</content>
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Beamer_(LaTeX)&#34;&gt;beamer&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://cookiecutter.readthedocs.io/en/latest/installation.html&#34;&gt;cookiecutter&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://pandoc.org/&#34;&gt;pandoc&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://daringfireball.net/projects/markdown/&#34;&gt;markdown&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http&#34;&gt;metropolis theme&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;[lualatex]&lt;/li&gt;
+&lt;/ul&gt;</content>
   </entry>
   <entry xml:base="http://localhost/latest.atom/">
-    <title type="text">Visualizing reactor simulation results</title>
-    <id>http://localhost/blog/coke-profile-animation/</id>
-    <updated>2017-05-22T12:00:00Z</updated>
-    <published>2017-05-22T12:00:00Z</published>
-    <link href="http://localhost/blog/coke-profile-animation/" />
-    <content type="html">&lt;p&gt;Recently I was involved in a project where I was simulating a chemical
-reaction network leading to the deactivation of a solid catalyst in a tubular
-reactor. As a result of those simulations I obtained concentrations of several
-species involved in the reactions that were defined for a specific point in
-space (reactor coordinate) and time - usually referred to as time on stream
-(TOS). Naturally this kind of data fit very well to be stored in a matrix
-form, and since I wanted to &lt;strong&gt;see&lt;/strong&gt; the data to understand it a bit better
-I started exploring options for visualizing matrix datasets using one of the
-most powerful python plotting libraries, namely &lt;a href=&quot;https://matplotlib.org/&quot;&gt;matplotlib&lt;/a&gt;.&lt;/p&gt;
-&lt;!-- The same colormap was chosen for all the visualizations for easier visual comparison
-between the results. --&gt;
-
-&lt;h3 id=&quot;the-data&quot;&gt;The data&lt;/h3&gt;
-&lt;p&gt;Going into a detailed description of the particular model used to produce the
-data deserves a separate post and therefore I'll just mention a few important
-points here and probably write a full length post about it some time in the future.&lt;/p&gt;
-&lt;p&gt;First of all the model used in the simulation was designed to closely
-approximate the actual catalysts deactivation processes that are also studied
-experimentally.&lt;/p&gt;
-&lt;p&gt;In the simulations the tubular reactor is approximated by the
-&lt;a href=&quot;https://en.wikipedia.org/wiki/Plug_flow_reactor_model&quot;&gt;plug flow reactor model&lt;/a&gt;
-to which a mixture of reactant gases are fed at specified flow conditions.&lt;/p&gt;
-&lt;p&gt;In order to solve the model equations the reactor was divided into 200
-separate segments and the reactions were evolved for 438 discrete time steps
-therefore the resulting concentrations profiles are given as arrays of the
-shape 438 x 200. This means that for a given specie each row of the array
-holds it's concentration profile along the reactor at a specific time.
-Analogously each column of the array stores the evolution of the concentration
-in a discrete reactor segment.&lt;/p&gt;
-&lt;h2 id=&quot;heatmap&quot;&gt;Heatmap&lt;/h2&gt;
-&lt;p&gt;A &lt;a href=&quot;https://en.wikipedia.org/wiki/Heat_map&quot;&gt;heat map&lt;/a&gt; is probably the most
-obvious way of graphically representing a 3D dataset on a flat 2D plot. Each
-value of the matrix is mapped into (or encoded with) a color patch placed at
-the coordinates specified by the row and column. The color is usually
-determined from a specially designed palette called a &lt;em&gt;colormap&lt;/em&gt;. There are
-many colormaps available in &lt;a href=&quot;https://matplotlib.org/&quot;&gt;matplotlib&lt;/a&gt; and choosing the right depends on a
-particular application and probably your sense of aesthetics. I highly
-recommend reading
-&lt;a href=&quot;https://jakevdp.github.io/blog/2014/10/16/how-bad-is-your-colormap/&quot;&gt;this blog post&lt;/a&gt;
-to learn more about avoiding common bad choices.&lt;/p&gt;
-&lt;!-- The heatmap below is a representing the data deactivation data ranging --&gt;
-
-&lt;div class=&quot;row&quot; style=&quot;padding-top: 20px;padding-bottom: 20px;&quot;&gt;
-  &lt;figure&gt;
-    &lt;img class=&quot;img-responsive center-block&quot; width=760px src=&quot;../../static/img/simulated_coke_profile.png&quot;&gt;
-  &lt;/figure&gt; 
-&lt;/div&gt;
-
-&lt;p&gt;This particular heatmap was generated with &lt;a href=&quot;https://seaborn.pydata.org/&quot;&gt;seaborn&lt;/a&gt; package that provides a lot of
-convenient, high-level methods for visualizing data with &lt;a href=&quot;https://matplotlib.org/&quot;&gt;matplotlib&lt;/a&gt;. The
-plot can be generated by a single line (line 9 in the code below) however to
-have meaningful axis labels and tick values I tweaked some of the respective
-settings.&lt;/p&gt;
-&lt;script src=&quot;https://gist.github.com/lmmentel/688d0c5d4101a2cfdb3bb3913c9aa674.js&quot;&gt;&lt;/script&gt;
-
-&lt;h2 id=&quot;3d-plot&quot;&gt;3D Plot&lt;/h2&gt;
-&lt;p&gt;Since the data we have is 3-dimensional in a sense that we can assign an &lt;em&gt;x&lt;/em&gt;,
-&lt;em&gt;y&lt;/em&gt; and &lt;em&gt;z&lt;/em&gt; axes it seems only natural to try and plot it in 3D (more
-accurately a 2D projection of a 3D plot). Since we can safely assume that the
-physical quantity being modeled on a discrete grid is in principle continuous
-therefore the most suitable choice seems to be 3D surface plot.&lt;/p&gt;
-&lt;div class=&quot;row&quot; style=&quot;padding-top: 20px;padding-bottom: 20px;&quot;&gt;
-  &lt;figure&gt;
-    &lt;img class=&quot;img-responsive center-block&quot; width=760px src=&quot;../../static/img/simulated_coke_profile_3d.png&quot;&gt;
-  &lt;/figure&gt; 
-&lt;/div&gt;
-
-&lt;p&gt;Creating a surface plot requires a bit more data manipulation since the
-&lt;code&gt;plot_surface&lt;/code&gt; method expects coordinate matrices and not coordinate
-vectors. Fortunately &lt;a href=&quot;http://www.numpy.org/&quot;&gt;numpy&lt;/a&gt; provides a convenient
-&lt;a href=&quot;https://docs.scipy.org/doc/numpy/reference/generated/numpy.meshgrid.html&quot;&gt;meshgrid&lt;/a&gt;
-method to do the work for us. As in the previous case rest of the code is mostly updating some
-of the display settings of the axes and labels.&lt;/p&gt;
-&lt;script src=&quot;https://gist.github.com/lmmentel/5ef001dece7165f71d4b114fbe43c2a9.js&quot;&gt;&lt;/script&gt;
-
-&lt;h2 id=&quot;animation&quot;&gt;Animation&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://matplotlib.org/&quot;&gt;matplotlib&lt;/a&gt; also allows making
-&lt;a href=&quot;http://matplotlib.org/examples/animation/&quot;&gt;animations&lt;/a&gt; and saving them as
-gifs or one of the video formats. Here I'll animate the deactivation data
-showing one row of the data matrix at a time, one after another. The plot area
-below can be thought of as the tubular reactor with the inlet on the left hand
-side and the outlet on the right hand side. With the flow of gas reactant
-mixture and passage of time the catalyst will deactivate, which in this
-particular case can be observed as the gradual change in color from yellowish
-to black.&lt;/p&gt;
-&lt;div class=&quot;row&quot; style=&quot;padding-top: 20px;padding-bottom: 20px;&quot;&gt;
-  &lt;figure&gt;
-    &lt;img class=&quot;img-responsive center-block&quot; width=760px src=&quot;../../static/img/coke_animation_magma.gif&quot;&gt;
-  &lt;/figure&gt; 
-&lt;/div&gt;
-
-&lt;p&gt;For comparison I also made the same animation but using the &lt;code&gt;Greys&lt;/code&gt; colormap
-since it is more realistic compared to the actual deactivation. This is because
-the fresh catalyst is a white powder and when it gets deactivated it turns
-black.&lt;/p&gt;
-&lt;div class=&quot;row&quot; style=&quot;padding-top: 20px;padding-bottom: 20px;&quot;&gt;
-  &lt;figure&gt;
-    &lt;img class=&quot;img-responsive center-block&quot; width=760px src=&quot;../../static/img/coke_animation_greys.gif&quot;&gt;
-  &lt;/figure&gt; 
-&lt;/div&gt;
-
-&lt;p&gt;The particular method used in this example is &lt;code&gt;FuncAnimation&lt;/code&gt; that requires
-two additional functions to be defined, one that will be responsible for
-updating the plot values (in our case called &lt;code&gt;update&lt;/code&gt;) and an initialization
-function that sets the values for the first frame of the animation
-(&lt;code&gt;init_coke&lt;/code&gt;). The plotting is done through the &lt;code&gt;pcolormesh&lt;/code&gt; function that
-creates a pseudocolor plot of a 2D array and can be thought of as a low-level
-function for creating heatmaps.&lt;/p&gt;
-&lt;script src=&quot;https://gist.github.com/lmmentel/1154b9289eb4a06e4823ffb38f4f3a7a.js&quot;&gt;&lt;/script&gt;
-
-&lt;h2 id=&quot;summary&quot;&gt;Summary&lt;/h2&gt;
-&lt;p&gt;Out of the three visualization methods above I think the most intuitive one is
-the animation since it quickly conveys the message and it's mostly self
-explanatory. This makes it a preferable choice for slide presentations, web pages
-and other digital formats, however it would be a poor choice for any printable
-media.&lt;/p&gt;
-&lt;p&gt;When it comes to creating graphics for articles, books and anything else that
-is expected to be printable I would recommend the heat map over the 3D surface
-plot since I find it easier to see the overall trend of the data changes and
-also to read the value for a specific coordinate pair. The surface plot looks
-much cooler but it might harder to read the (&lt;em&gt;x&lt;/em&gt;, &lt;em&gt;y&lt;/em&gt;, &lt;em&gt;z&lt;/em&gt;) values having only
-one projection. Moreover deciding which projection to choose or in other words
-how to position the axes with  respect to the viewer is another issue that has
-to be decided based on some trials and the features of the dataset. &lt;/p&gt;</content>
-  </entry>
-  <entry xml:base="http://localhost/latest.atom/">
-    <title type="text">Zeolite Framework Classification II</title>
-    <id>http://localhost/blog/zeolite-classification-ii/</id>
-    <updated>2017-04-22T12:00:00Z</updated>
-    <published>2017-04-22T12:00:00Z</published>
-    <link href="http://localhost/blog/zeolite-classification-ii/" />
-    <content type="html">&lt;p&gt;In my &lt;a href=&quot;http://lukaszmentel.com/blog/zeolite-classification/index.html&quot;&gt;previous post&lt;/a&gt;
-I was exploring the database of of zeolite frameworks
-using &lt;a href=&quot;https://www.python.org/&quot;&gt;Python&lt;/a&gt;, &lt;a href=&quot;http://bokeh.pydata.org/en/latest/&quot;&gt;bokeh&lt;/a&gt;, &lt;a href=&quot;http://pandas.pydata.org/&quot;&gt;pandas&lt;/a&gt; and my own &lt;a href=&quot;https://bitbucket.org/lukaszmentel/zefram&quot;&gt;zefram&lt;/a&gt; package that provided
-easy access to the data on zeolite frameworks available from the &lt;a href=&quot;http://www.iza-structure.org/databases/&quot;&gt;IZA
-database&lt;/a&gt; and &lt;a href=&quot;http://helios.princeton.edu/zeomics/&quot;&gt;ZEOMICS&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;To explore the topic further I thought that a grouping of the frameworks into
-one-dimensional (&lt;em&gt;&lt;strong&gt;D&lt;/strong&gt;&lt;/em&gt;=1) and multidimensional (&lt;em&gt;&lt;strong&gt;D&lt;/strong&gt;&lt;/em&gt;=2 or &lt;em&gt;&lt;strong&gt;D&lt;/strong&gt;&lt;/em&gt;=3)
-might be useful. Such a distinction is largely related to the applications
-since multidimensional frameworks have unique topological features such as
-channel intersections that allow different phenomena to happen.&lt;/p&gt;
-&lt;p&gt;Among the frameworks with multidimensional channel structures there are ones
-that have multiple channels of the same size, for example &lt;em&gt;AEI&lt;/em&gt; having 3
-distinct channels each along [100], [110] and [001]. The complementary group
-would be the frameworks that have at least two intersecting channels that are
-of different size. The latter group is usually referred to as &lt;em&gt;multipore
-zeolites&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;An important phenomenon contributing to the unique properties of multidimensional frameworks is the so called
-&lt;a href=&quot;http://www.sciencedirect.com/science/article/pii/0021951780903280&quot;&gt;molecular traffic control&lt;/a&gt;
-which occurs where there are at least two molecules of different size or shape
-where one of them prefers to travel (diffuse) along one channel system and the other one
-travels along a different channel system. This fact together with the knowledge of the relationship between
-the molecule's size and it's preference to choose a channel of specific size can be
-used to tune catalytic processes occurring over zeolites. A 
-&lt;a href=&quot;http://onlinelibrary.wiley.com/doi/10.1002/anie.201406344/abstract&quot;&gt;recent review article&lt;/a&gt;
-about multipore zeolites explores their catalytic applications and the
-role of &lt;em&gt;molecular traffic control&lt;/em&gt;.&lt;/p&gt;
-&lt;h2 id=&quot;figures&quot;&gt;Figures&lt;/h2&gt;
-&lt;p&gt;The figure below presents all the frameworks with the zero- and one-dimensional
-ones not colored. The multidimensional frameworks can be either two- or three-dimensional
-which is indicated by the color of the outer ring. The inside of each circle indicates
-the composition of the channel structure in terms of the distinct channel sizes. If a framework
-is three-dimensional but only has channels on one size, such as &lt;em&gt;AEI&lt;/em&gt; it will be filled with
-a single color. If there are channels with more than 12 T atoms they are considered extra
-large (&lt;em&gt;XL&lt;/em&gt;). Since extra large channels exhibit very poor selectivity no distinction is made
-here between them and they are treated as a channel of single (but very large) size.&lt;/p&gt;
-&lt;div class=&quot;row&quot; style=&quot;padding-top: 20px;padding-bottom: 20px;&quot;&gt;
-  &lt;figure&gt;
-    &lt;img class=&quot;img-responsive center-block&quot; width=760px src=&quot;../../static/img/2d-and-3d-channels.png&quot;&gt;
-    &lt;figcaption class=&quot;text-muted&quot; style=&quot;text-align: center;&quot;&gt;2D and 3D channels&lt;/figcaption&gt;
-  &lt;/figure&gt; 
-&lt;/div&gt;
-
-&lt;p&gt;Finally since I mentioned that multipore zeolites are often teated as a separate category
-I decided to created a separate figure where only the multidimensional frameworks that have
-at least two channels with different sizes are highlighted.&lt;/p&gt;
-&lt;div class=&quot;row&quot; style=&quot;padding-top: 20px;padding-bottom: 20px;&quot;&gt;
-  &lt;figure&gt;
-    &lt;img class=&quot;img-responsive center-block&quot; width=760px src=&quot;../../static/img/multipore-frameworks.png&quot;&gt;
-    &lt;figcaption class=&quot;text-muted&quot; style=&quot;text-align: center;&quot;&gt;Multipore frameworks&lt;/figcaption&gt;
-  &lt;/figure&gt; 
-&lt;/div&gt;
-
-&lt;p&gt;For clarity and easier navigation I also created a graphic where only the
-multipore frameworks are included with the same color coding as above.&lt;/p&gt;
-&lt;div class=&quot;row&quot; style=&quot;padding-top: 20px;padding-bottom: 20px;&quot;&gt;
-  &lt;figure&gt;
-    &lt;img class=&quot;img-responsive center-block&quot; width=760px src=&quot;../../static/img/multipore-frameworks-only.png&quot;&gt;
-    &lt;figcaption class=&quot;text-muted&quot; style=&quot;text-align: center;&quot;&gt;Multipore frameworks only&lt;/figcaption&gt;
-  &lt;/figure&gt; 
-&lt;/div&gt;
-
-&lt;p&gt;As in the previous case uploaded a
-&lt;a href=&quot;http://nbviewer.jupyter.org/github/lmmentel/zeolite-classification/blob/master/multipore_zeolites.ipynb&quot;&gt;jupyter notebook&lt;/a&gt;
-that I used the generate the plots to a &lt;a href=&quot;https://github.com/lmmentel/zeolite-classification&quot;&gt;github repo&lt;/a&gt;. There are also some additional plots at the bottom of the notebook.&lt;/p&gt;</content>
-  </entry>
-  <entry xml:base="http://localhost/latest.atom/">
-    <title type="text">Zeolite Framework Classification</title>
-    <id>http://localhost/blog/zeolite-classification/</id>
-    <updated>2017-03-28T12:00:00Z</updated>
-    <published>2017-03-28T12:00:00Z</published>
-    <link href="http://localhost/blog/zeolite-classification/" />
-    <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
-&lt;p&gt;Zeolites are fascinating materials with quite unique properties. They belong to what
-is often referred to as microporous materials which means that they contain
-pores that do not exceed 2 nm (20 &amp;#8491;). That is probably why they earned
-the name of &lt;em&gt;molecular sieves&lt;/em&gt; since the pores match the sizes of small
-molecules allowing for size based discrimination. Initially they were a
-curiosity to mineralogists but since their discovery they opened a rich field
-of scientific activities and fallen under investigation by chemists,
-mathematicians, physicists, material scientists, biologists and probably some
-more.&lt;/p&gt;
-&lt;p&gt;From a structural point of view zeolites are built from tetrahedrons that have
-oxygen atoms at vertices and an atom of valency 4 at their centers. Those
-tetrahedrons connect with each other by sharing O atoms (vertices) and form
-intricate networks with repeatable patterns resulting in a variety of periodic
-crystalline materials.&lt;/p&gt;
-&lt;p&gt;Due to the number of possible ways that the network of interconnected tetrahedra
-can be arranged in space the number of resulting structures in overwhelmingly large,
-however not all of the possibilities will be energetically stable and even a
-smaller fraction is feasible to synthesize or find in nature.&lt;/p&gt;
-&lt;p&gt;As an illustration have a look below at the two possible frameworks that are
-labeled AFI and MTT. Both are composed of silicon (beige spheres) and oxygen atoms (red
-spheres) with AFI having 12 Si and 12 O atoms forming channels and MTT 10 Si and O
-atoms form the channels.&lt;/p&gt;
-&lt;div class=&quot;row&quot; style=&quot;padding-top: 30px;padding-bottom: 30px;&quot;&gt;
-  &lt;figure&gt;
-    &lt;img class=&quot;img-responsive center-block&quot; width=760px src=&quot;../../static/img/afi.png&quot;&gt;
-    &lt;figcaption class=&quot;text-muted&quot; style=&quot;text-align: center;&quot;&gt;AFI framework&lt;/figcaption&gt;
-  &lt;/figure&gt; 
-&lt;/div&gt;
-
-&lt;div class=&quot;row&quot; style=&quot;padding-top: 30px;padding-bottom: 30px;&quot;&gt;
-  &lt;figure&gt;
-    &lt;img class=&quot;img-responsive center-block&quot; width=492px src=&quot;../../static/img/mtt.png&quot;&gt;
-    &lt;figcaption class=&quot;text-muted&quot; style=&quot;text-align: center;&quot;&gt;MTT framework&lt;/figcaption&gt;
-  &lt;/figure&gt; 
-&lt;/div&gt;
-
-&lt;p&gt;The list of all the zeolite frameworks that are currently available is curated by the
-&lt;a href=&quot;http://www.iza-structure.org/&quot;&gt;International Zeolite Association (IZA)&lt;/a&gt; which also makes
-a catalog with the basic properties of each framework accessible 
-either as the &lt;a href=&quot;http://europe.iza-structure.org/IZA-SC/ftc_table.php&quot;&gt;Database of Zeolite Frameworks&lt;/a&gt;
-or in a published form as the &lt;a href=&quot;http://www.sciencedirect.com/science/book/9780444530646&quot;&gt;Atlas of Zeolite Framework Types&lt;/a&gt; available from the &lt;a href=&quot;http://www.iza-structure.org/IZA-SC_Publications.htm&quot;&gt;IZA publications page&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;There are many parameters that can be used to characterize the frameworks and
-the empty space that can be found inside. Usually the internal voids are
-categorized as cages and channels with their sizes given as the number of
-tetrahedrally coordinated atoms (T atoms) forming the ring or units of length
-suitable for the atomic scale such as &amp;#8491;ngstrom.&lt;/p&gt;
-&lt;p&gt;Here I would just like to mention two of characteristic variables namely the
-channel size given as the number of T atoms and channel system dimensionality
-since those two parameters to a large extent determine the applications
-of a given framework.&lt;/p&gt;
-&lt;p&gt;The channels present in a given framework are generally classified according to the size
-of the largest channel into:&lt;/p&gt;
+    <title type="text">Lists in Dataframe cells</title>
+    <id>http://localhost/blog/lists-in-dataframes/</id>
+    <updated>2017-11-06T12:00:00Z</updated>
+    <published>2017-11-06T12:00:00Z</published>
+    <link href="http://localhost/blog/lists-in-dataframes/" />
+    <content type="html">&lt;p&gt;&lt;a href=&#34;http://pandas.pydata.org/&#34;&gt;Pandas&lt;/a&gt; DataFrame is an essential tool for everyone doing data analysis with &lt;a href=&#34;https://python.org&#34;&gt;Python&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Much of the power comes from allowing tabular data to be contained together despite  having different types.
+It also provides an extensive set of  operations to manipulate the
+heterogeneous data on equal footing.&lt;/p&gt;
+&lt;p&gt;The entries can go beyond primitive types such as: boolean, integer, float and
+string. It can also store lists, dicts, tuples,custom classes. Of all those
+objects the one I&#39;ve used most often is lists since dicts acn easily be
+integrated into a DataFrame with keys as columns names and values in the cells.&lt;/p&gt;
+&lt;p&gt;Lists however give you the possiblity to store data of unknown length in a
+column and then do column-wise operations on it.&lt;/p&gt;
+&lt;h2&gt;Setting&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;em&gt;small&lt;/em&gt;, if the largest channel is assembled with 8 T atoms (and the same number of oxygen atoms),&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;medium&lt;/em&gt;, if the largest channel is assembled with 10 T atoms,&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;large&lt;/em&gt;, if the largest channel is assembled with 12 T atoms,&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;extra large&lt;/em&gt; if the number of T atoms is greater than 12.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The channel system dimensionality on the other hand determines the number of
-dimensions &lt;em&gt;&lt;strong&gt;D&lt;/strong&gt;&lt;/em&gt; that a guest molecule can freely travel through 
-the framework once it enters the pores. Frameworks that have only cages or
-channels composed of 6 and less T atoms are considered inaccessible and therefore
-their dimensionality is 0 (&lt;em&gt;&lt;strong&gt;D&lt;/strong&gt;&lt;/em&gt;=0). Frameworks with channels composed of more
-than 6 T atoms and running only in one direction have &lt;em&gt;&lt;strong&gt;D&lt;/strong&gt;&lt;/em&gt;=1. In the case of frameworks
-with multiple channels running in more than one direction the pore dimensionality
-is dependent on how the channels are mutually connected. If a molecule can move
-between two channel systems &lt;em&gt;&lt;strong&gt;D&lt;/strong&gt;&lt;/em&gt;=2, and when it can move between three channel
-systems &lt;em&gt;&lt;strong&gt;D&lt;/strong&gt;&lt;/em&gt;=3.&lt;/p&gt;
-&lt;p&gt;By the current count there are 229 unique topologies recognized by IZA.
-The complete listing of the channel system details for each framework can be 
-found in the &lt;a href=&quot;http://www.sciencedirect.com/science/article/pii/B9780444530646503686&quot;&gt;Appendix E – Channel System Dimensions&lt;/a&gt; of the &lt;a href=&quot;http://www.sciencedirect.com/science/book/9780444530646&quot;&gt;Atlas of Zeolite Framework Types&lt;/a&gt;.&lt;/p&gt;
-&lt;h1 id=&quot;graphs&quot;&gt;Graphs&lt;/h1&gt;
-&lt;p&gt;Having a convenient way for accessing the data on zeolite frameworks
-through the &lt;a href=&quot;https://bitbucket.org/lukaszmentel/zefram&quot;&gt;zefram package&lt;/a&gt;
-we can explore how certain features are distributed. To 
-perform the basic data analysis and produce the nice visualizations below
-I chose &lt;a href=&quot;http://bokeh.pydata.org/en/latest/&quot;&gt;Bokeh&lt;/a&gt; package since it's a very handy tool.&lt;/p&gt;
-&lt;h2 id=&quot;channel-size-distribution&quot;&gt;Channel size distribution&lt;/h2&gt;
-&lt;p&gt;Let us start by looking at a histogram below showing the frequencies of the
-largest channel size (given as the number of T atoms) with a subdivision
-into different pore system dimensionalities. &lt;/p&gt;
-&lt;div class=&quot;row&quot; style=&quot;padding-top: 30px;padding-bottom: 30px;&quot;&gt;
-    &lt;img class=&quot;img-responsive center-block&quot; width=760px src=&quot;../../static/img/zeolite_histogram.png&quot;&gt;
-&lt;/div&gt;
-
-&lt;p&gt;What can be immediately inferred from the graph is that frameworks with
-even numbered rings dominate over the odd numbered ones. Within the even
-numbered frameworks there are 74 frameworks with 8 membered ring (MR) channels,
-66 with 12 MR and 45 with 10 MR. When it comes to the dimensionality the largest
-group is composed of three-dimensional frameworks (94), then one-dimensional (63),
-two-dimensional (51) and zero-dimensional (21).&lt;/p&gt;
-&lt;p&gt;The details about the distribution of different channel sizes for a given
-pore system dimensionality are visualized in the four figures below. Channels
-that belong to one of the categories described above as &lt;em&gt;small&lt;/em&gt;, &lt;em&gt;medium&lt;/em&gt; and
-&lt;em&gt;large&lt;/em&gt; are color coded. Additionally if a given framework is composed solely
-of even numbered rings it is labeled as AlPO since it would be hypothetically
-possible to synthesize it as an aluminum phosphate (AlPO). &lt;/p&gt;
-&lt;h2 id=&quot;zero-dimensional-frameworks&quot;&gt;Zero-dimensional Frameworks&lt;/h2&gt;
-&lt;div style=&quot;padding-top: 30px;padding-bottom: 30px;&quot;&gt;
-&lt;img class=&quot;img-responsive center-block&quot;
-    src=&quot;../../static/img/zero_dimensional_frameworks.png&quot;
-    alt=&quot;Zero dimensional Zeolite Topologies&quot; &gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;one-dimensional-frameworks&quot;&gt;One-dimensional Frameworks&lt;/h2&gt;
-&lt;div style=&quot;padding-top: 30px;padding-bottom: 30px;&quot;&gt;
-&lt;img class=&quot;img-responsive center-block&quot; style=&quot;width:750px;margin: 0 auto;&quot;
-    src=&quot;../../static/img/one_dimensional_frameworks.png&quot;
-    alt=&quot;Unidirectional Zeolite Topologies&quot;&gt;
-&lt;/div&gt;
-
-&lt;h1 id=&quot;two-dimensional-frameworks&quot;&gt;Two-dimensional Frameworks&lt;/h1&gt;
-&lt;div style=&quot;padding-top: 30px;padding-bottom: 30px;&quot;&gt;
-&lt;img class=&quot;img-responsive center-block&quot;
-    src=&quot;../../static/img/two_dimensional_frameworks.png&quot;
-    alt=&quot;Bidirectional Zeolite Topologies&quot;&gt;
-&lt;/div&gt;
-
-&lt;h1 id=&quot;three-dimensional-frameworks&quot;&gt;Three-dimensional Frameworks&lt;/h1&gt;
-&lt;div style=&quot;text-align:right;padding-top: 30px;padding-bottom: 30px;&quot;&gt;
-&lt;img class=&quot;img-responsive center-block&quot;
-    src=&quot;../../static/img/three_dimensional_frameworks.png&quot;
-    alt=&quot;Tridirectional Zeolite Topologies&quot;&gt;
-&lt;/div&gt;
-
-&lt;p&gt;If you are interested how to create similar plots to the ones above I uploaded a
-&lt;a href=&quot;http://nbviewer.jupyter.org/github/lmmentel/zeolite-classification/blob/master/zeolite_categories.ipynb&quot;&gt;jupyter notebook&lt;/a&gt;
-that I used the generate the plots to a &lt;a href=&quot;https://github.com/lmmentel/zeolite-classification&quot;&gt;github repo&lt;/a&gt;. There are also additional plots showing some of the other
-descriptors for the channels and cages size for a given pore system (from &lt;a href=&quot;http://helios.princeton.edu/zeomics/&quot;&gt;ZEOMICS&lt;/a&gt; database), such as
-largest cavity diameter, pore limiting diameter and maximum diameter of a
-sphere that can be included.&lt;/p&gt;</content>
-  </entry>
-  <entry xml:base="http://localhost/latest.atom/">
-    <title type="text">Awesome Python Chemistry</title>
-    <id>http://localhost/blog/awesome-python-chemistry/</id>
-    <updated>2017-01-28T12:00:00Z</updated>
-    <published>2017-01-28T12:00:00Z</published>
-    <link href="http://localhost/blog/awesome-python-chemistry/" />
-    <content type="html">&lt;p&gt;&lt;a href=&quot;https://www.python.org/&quot;&gt;Python&lt;/a&gt; programming language is becoming the language of choice for large number of scientists and
-it doesn't take much effort to realize why this is happening. One of the most important reasons is
-it's simplicity that does not compromise it's power. It has a relatively low entry point since simple
-python expressions resemble statements in English but at the same time it's a mature language used
-as an indispensable tool in many operating systems, it powers up web services, and is used in large
-scale applications. Moreover it has a great documentation system, helpful community and a lot of
-online resources that offer everything from short tutorials to university programming courses.&lt;/p&gt;
-&lt;p&gt;It is so popular among scientists between a broad range of domains that there is now a meeting
-called &lt;a href=&quot;https://conference.scipy.org/&quot;&gt;SciPy conference&lt;/a&gt; dedicated to scientific applications of
-&lt;a href=&quot;https://www.python.org/&quot;&gt;Python&lt;/a&gt;. It is a great initiative that encourages collaboration and blurs the lines between
-different fields of scientific inquiry like: chemistry, physics, mathematics, computer science and many more, which is
-crucial for research innovations.&lt;/p&gt;
-&lt;p&gt;The popularity didn't go unnoticed by an even wider audience since one of the most influential
-scientific journals (Nature) published &lt;a href=&quot;http://www.nature.com/news/programming-pick-
-up-python-1.16833&quot;&gt;this article&lt;/a&gt; that recommends picking up &lt;a href=&quot;https://www.python.org/&quot;&gt;Python&lt;/a&gt; to work much more efficiently, improve
-handling of big data sets and create beautiful visualizations. You could also communicate your
-research results more efficiently through building websites or web applications (also with Python
-tools). Collaboration and publishing also became more efficient with &lt;a href=&quot;http://jupyter.org/&quot;&gt;Jupyter notebooks&lt;/a&gt;
-that were highlighted in another &lt;a href=&quot;http://www.nature.com/news/interactive-notebooks-sharing-the-code-1.16261&quot;&gt;article&lt;/a&gt;.
-If you are curious to see &lt;a href=&quot;https://www.python.org/&quot;&gt;Python&lt;/a&gt; and &lt;a href=&quot;http://jupyter.org/&quot;&gt;Jupyter&lt;/a&gt; working together for various applications
-(including scientific ones) have a look at the
-&lt;a href=&quot;https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-and-IPython-Notebooks&quot;&gt;gallery of interesting Jupyter notebooks&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;There are already a lot of useful tools, packages and libraries written in &lt;a href=&quot;https://www.python.org/&quot;&gt;Python&lt;/a&gt; to help
-you improve your research and most of them can be found on &lt;a href=&quot;https://pypi.python.org/pypi&quot;&gt;PyPI&lt;/a&gt; or
-&lt;a href=&quot;https://github.com&quot;&gt;github&lt;/a&gt;. However finding relevant content might be a bit difficult due to to
-the sheer number of packages on &lt;a href=&quot;https://pypi.python.org/pypi&quot;&gt;PyPI&lt;/a&gt; or repositories on
-&lt;a href=&quot;https://github.com&quot;&gt;github&lt;/a&gt;, therefore I decided to create a list of packages that are related to
-chemistry (since I'm a chemist) inspired by the &lt;a href=&quot;https://github.com/sindresorhus/awesome&quot;&gt;awesome list repo&lt;/a&gt;.
-You can find the list in a &lt;a href=&quot;https://github.com/lmmentel/awesome-python-chemistry&quot;&gt;repository on github&lt;/a&gt; and
-below in this post. Additionally I included some of the more useful scientific packages from the
-&lt;a href=&quot;https://awesome-python.com&quot;&gt;awesome-python&lt;/a&gt; list.&lt;/p&gt;
-&lt;p&gt;I am quite sure that the list below is not complete and there are a lot more useful packages
-that should be included. If you would like to suggest a package that is not mentioned yet, please
-write an &lt;a href=&quot;https://github.com/lmmentel/awesome-python-chemistry/issues&quot;&gt;issue on github&lt;/a&gt; or submit a
-&lt;a href=&quot;https://github.com/lmmentel/awesome-python-chemistry/pulls&quot;&gt;pull request&lt;/a&gt;. If both of the above
-sound difficult you can always write a commend below or drop me an email.&lt;/p&gt;
-&lt;h1 id=&quot;awesome-python-chemistry&quot;&gt;Awesome Python Chemistry&lt;/h1&gt;
-&lt;p&gt;A curated list of awesome Python frameworks, libraries, software and resources related to Chemistry.&lt;/p&gt;
-&lt;p&gt;Inspired by &lt;a href=&quot;https://awesome-python.com&quot;&gt;awesome-python&lt;/a&gt;.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#awesome-python-chemistry&quot;&gt;Awesome Python Chemistry&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#general-chemistry&quot;&gt;General Chemistry&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#simulations&quot;&gt;Simulations&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#molecular-visualization&quot;&gt;Molecular Visualization&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#general-scientific-packages&quot;&gt;General Scientific Packages&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#data-visualization&quot;&gt;Data Visualization&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;li&gt;to set new values as list the type of the column needs to be &lt;code&gt;object&lt;/code&gt;
+  https://stackoverflow.com/questions/38133961/pandas-how-to-store-a-list-in-a-dataframe&lt;/li&gt;
+&lt;li&gt;setting individual cell to lists&lt;/li&gt;
+&lt;li&gt;setting individual lists values
+https://stackoverflow.com/questions/34887957/subsetting-pandas-dataframe-with-list-in-cell&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;appending to a list&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;converting a string column (comma separated) into a list&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&quot;general-chemistry&quot;&gt;General Chemistry&lt;/h2&gt;
-&lt;p&gt;&lt;em&gt;Packages and tools for general chemistry.&lt;/em&gt;&lt;/p&gt;
+&lt;h2&gt;Getting&lt;/h2&gt;
+&lt;h2&gt;Transforming&lt;/h2&gt;
+&lt;p&gt;calculating min, max, len&lt;/p&gt;
+&lt;h2&gt;wide/long&lt;/h2&gt;
+&lt;p&gt;how to extend the list to a wide version (separate values into columns) and a long version (separate values into rows)
+https://chrisalbon.com/python/pandas_expand_cells_containing_lists.html
+https://stackoverflow.com/questions/27263805/pandas-when-cell-contents-are-lists-create-a-row-for-each-element-in-the-list&lt;/p&gt;
+&lt;p&gt;fetching/loading related object to/from dbs&lt;/p&gt;
+&lt;p&gt;z listy do long format through wide
+pandas.apply(pd.Series).&lt;/p&gt;
+&lt;p&gt;z long format to list&lt;/p&gt;</content>
+  </entry>
+  <entry xml:base="http://localhost/latest.atom/">
+    <title type="text">Zeolite pore size oddity</title>
+    <id>http://localhost/blog/zeolite-pore-size-oddity/</id>
+    <updated>2017-10-31T12:00:00Z</updated>
+    <published>2017-10-31T12:00:00Z</published>
+    <link href="http://localhost/blog/zeolite-pore-size-oddity/" />
+    <content type="html">&lt;p&gt;One of the ways to classify zeolites is usually by the size of their pore
+openings given in the peculiar unit of T atom count. T atom stands for
+tetrachedrally coordinated atoms, usually the term lumps together silicon and aluminum in case of
+zeolites or aluminum and phosphorus in case of aluminumphpsphates. The
+structural units characterising pores are usually rings from which the tube-like channels are formed
+(as shown below) and therefore the as described as &lt;em&gt;n&lt;/em&gt; membered rings or &lt;em&gt;n&lt;/em&gt;MR
+in short. Where &lt;em&gt;n&lt;/em&gt; can be as small as 4 and as large as 20.&lt;/p&gt;
+&lt;p&gt;[picture of 8MR, 10MR and 12MR with a corresponding tube]&lt;/p&gt;
+&lt;p&gt;By inspecting the figure below showing the distribution of ring sizes among the
+known zeolite structures it is easy to see that 8, 10, and 12 MR structures
+dominate over the remaining topologies. Which justifies the why this parameter
+might serve as a good classification. It should also be taken into account that
+for most of the interesting applications topologies with MR &amp;lt; 8 are not
+intersting since molecules cannot enter the small channels and channels larger
+than 14 would have very similar properties.&lt;/p&gt;
+&lt;p&gt;IUPAC classification into nano, micro and mesoporous structures in a &lt;a href=&#34;https://doi.org/10.1351/pac199466081739&#34;&gt;technical
+report&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;It is customary to call 8, 10 and 12MR, &lt;em&gt;small&lt;/em&gt;, &lt;em&gt;medium&lt;/em&gt; and &lt;em&gt;large&lt;/em&gt; pore
+zeolites suggesting that this classification provides distinct groups of
+similar characteristing being size. While intuitively and qualitatively correct,
+applying it directly can lead to incorrect insights since this MR measure
+provides limited structural information. A closer inspection of each class
+revelas that in each class there is a distribution of sizes as evaluated by
+different criteria actually associated with a more functional definition of
+pore size.&lt;/p&gt;
+&lt;p&gt;apply clustering based on size largst cavity diameter (LCD) and some other
+features related to functional size and compare them to the classification
+based on MR and see which are misclassified.&lt;/p&gt;</content>
+  </entry>
+  <entry xml:base="http://localhost/latest.atom/">
+    <title type="text">Superimpose chemical structures</title>
+    <id>http://localhost/blog/superimpose-structures/</id>
+    <updated>2017-09-28T12:00:00Z</updated>
+    <published>2017-09-28T12:00:00Z</published>
+    <link href="http://localhost/blog/superimpose-structures/" />
+    <content type="html">&lt;p&gt;I was struggling recently how to present multiple chemical structures that differed
+slightly in their geometry but  &lt;/p&gt;
+&lt;div class=&#34;codehilite&#34;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;os&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;re&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;collections&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;OrderedDict&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;ase&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Atoms&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;ase.io&lt;/span&gt;
+
+
+&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;read_structures&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fpatt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;verbose&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;False&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+    &lt;span class=&#34;sd&#34;&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;sd&#34;&gt;    Read all the structures from `path` that match the `fpatt` pattern&lt;/span&gt;
+&lt;span class=&#34;sd&#34;&gt;    &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+
+    &lt;span class=&#34;n&#34;&gt;fpatt&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;re&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;compile&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;fpatt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+    &lt;span class=&#34;n&#34;&gt;out&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;II&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;OrderedDict&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(),&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;III&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;OrderedDict&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(),&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;IV&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;OrderedDict&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()}&lt;/span&gt;
+
+    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fname&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;os&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;listdir&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;m&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fpatt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;match&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;fname&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+            &lt;span class=&#34;n&#34;&gt;symbol&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;oxs&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;group&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;group&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+            &lt;span class=&#34;n&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;oxs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;][&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;symbol&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ase&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;read&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;os&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;path&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;join&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fname&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+            &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;verbose&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+                &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;ERROR &amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fname&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+    &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Read: &amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;, &amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;join&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{}&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{}&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;k&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;v&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;k&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;v&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;items&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()]))&lt;/span&gt;
+
+    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;out&lt;/span&gt;
+
+&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;vm&#34;&gt;__name__&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+
+    &lt;span class=&#34;n&#34;&gt;path&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;AlPO-5-H&amp;#39;&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;patt&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;sa&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;([A-Za-z]+)\(([IV]+)\)-AlPO-5-O2-H\.traj&amp;#39;&lt;/span&gt;
+
+    &lt;span class=&#34;n&#34;&gt;halpo&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;read_structures&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;patt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+    &lt;span class=&#34;n&#34;&gt;atoms&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Atoms&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+
+    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;me&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;halpo&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;IV&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;items&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;atoms&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;atoms&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;
+
+    &lt;span class=&#34;n&#34;&gt;transmittances&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.8&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;atoms&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+    &lt;span class=&#34;n&#34;&gt;ase&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;write&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Me-AlPO-5-H.pov&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;atoms&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;rotation&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;-15y&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;show_unit_cell&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;run_povray&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;True&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;display&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;False&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;pause&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;True&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;canvas_width&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1024&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;camera_type&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;perspective&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;transmittances&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;transmittances&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+    &lt;span class=&#34;n&#34;&gt;ase&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;write&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Me-AlPO-5-H_0y.pov&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;atoms&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;rotation&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;show_unit_cell&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;run_povray&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;True&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;display&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;False&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;pause&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;True&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;canvas_width&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1024&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;camera_type&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;perspective&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;transmittances&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;transmittances&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Rendering the scenes for multiple structures was a bit too slow for my laptop so I had to use
+a supercomputer to speed things up.&lt;/p&gt;
+&lt;p&gt;This is a bit of a special case since the structures are taken from a periodic crystals
+and therefore all have the same unit cell size. It simpifies things a lot since then all
+the coordinates are given with respect to origin of the unit cell which is the same for
+all the materials. For (non-periodic) molecules we would have to align the molecules first
+since their coordinates can be defined with respect to different origins. One possible solution
+is to minimize the &lt;a href=&#34;https://en.wikipedia.org/wiki/Root-mean-square_deviation_of_atomic_positions&#34;&gt;root mean square deviation&lt;/a&gt; between the structures in order
+to realign them which is usually done using the &lt;a href=&#34;https://doi.org/10.1107/S0567739476001873&#34;&gt;Kabsch&lt;/a&gt; algorithm. For those curious
+to see it in practice e is also a python available &lt;a href=&#34;https://github.com/charnley/rmsd&#34;&gt;rmsdpy&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
+  <entry xml:base="http://localhost/latest.atom/">
+    <title type="text">Debian 9</title>
+    <id>http://localhost/blog/debian9/</id>
+    <updated>2017-06-18T12:00:00Z</updated>
+    <published>2017-06-18T12:00:00Z</published>
+    <link href="http://localhost/blog/debian9/" />
+    <content type="html">&lt;p&gt;For quite some time I&#39;ve been using &lt;a href=&#34;https://www.debian.org/&#34;&gt;Debian&lt;/a&gt; as my main (and only) operating system. When I
+started my adventure into the unix world Debian was not my first choice and I had to go through
+a few different distributions to finally realize where I feel most comfortable. Before Debian 
+I&#39;ve tried some of the popular distros such as &lt;a href=&#34;http://crux.nu/&#34;&gt;crux&lt;/a&gt;, &lt;a href=&#34;https://www.ubuntu.com/&#34;&gt;Ubuntu&lt;/a&gt;, &lt;a href=&#34;https://www.archlinux.org/&#34;&gt;Arch linux&lt;/a&gt;, &lt;a href=&#34;https://linuxmint.com/&#34;&gt;linux Mint&lt;/a&gt;, &lt;a href=&#34;https://www.linuxmint.com/download_lmde.php&#34;&gt;LMDE&lt;/a&gt;
+but I didn&#39;t stick to any of them for long. At the time of writing &lt;a href=&#34;https://www.debian.org/&#34;&gt;Debian&lt;/a&gt; is second on &lt;/p&gt;
+&lt;p&gt;On June 17th &lt;a href=&#34;https://www.debian.org/News/2017/20170617&#34;&gt;Debian 9 codename &lt;em&gt;stretch&lt;/em&gt; was released&lt;/a&gt;.&lt;/p&gt;
+&lt;div style=&#34;text-align:center;padding-top: 30px;padding-bottom: 30px;&#34;&gt;
+&lt;a href=&#34;https://www.debian.org/News/2017/20170617&#34;&gt;
+&lt;img src=&#34;https://wiki.debian.org/DebianArt/Themes/softWaves?action=AttachFile&amp;do=get&amp;target=wikiBanner.png&#34;
+alt=&#34;Debian Stretch graphic&#34;&gt;
+&lt;/a&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;After 26 months of development the Debian project is proud to present its new
+stable version 9 (code name Stretch), which will be supported for the next 5
+years thanks to the combined work of the Debian Security team and of the Debian
+Long Term Support team.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Some of the main changes that I was most excited about included:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://lukaszmentel.com/batchcalculator/&quot;&gt;batchcalculator&lt;/a&gt; - A GUI app based on wxPython for calculating the correct amount of reactants (batch) for a particular composition given by the molar ratio of its components.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://pythonhosted.org/chempy/&quot;&gt;chempy&lt;/a&gt; - ChemPy is a package useful for chemistry (mainly physical/inorganic/analytical chemistry).&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://lewisamarshall.github.io/ionize/&quot;&gt;ionize&lt;/a&gt; - Calculates the properties of individual ionic species in aqueous solution, as well as aqueous solutions containing arbitrary sets of ions.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://mendeleev.readthedocs.io/en/stable/&quot;&gt;mendeleev&lt;/a&gt; - A package that provides a python API for accessing various properties of elements from the periodic table of elements.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://openbabel.org/wiki/Main_Page&quot;&gt;Open Babel&lt;/a&gt; - A chemical toolbox designed to speak the many languages of chemical data.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.reflectometry.org/danse/elements.html&quot;&gt;periodictable&lt;/a&gt; - This package provides a periodic table of the elements with support for mass, density and xray/neutron scattering information.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://pubchempy.readthedocs.io/en/latest/&quot;&gt;pubchempy&lt;/a&gt; - PubChemPy provides a way to interact with PubChem in Python.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://openbabel.org/docs/dev/UseTheLibrary/Python_Pybel.html&quot;&gt;pybel&lt;/a&gt; - Pybel provides convenience functions and classes that make it simpler to use the Open Babel libraries from Python.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://pyeql.readthedocs.io/en/latest/index.html&quot;&gt;pyEQL&lt;/a&gt; - A set of tools for conventional calculations involving solutions (mixtures) and electrolytes.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://pymatgen.org/&quot;&gt;pymatgen&lt;/a&gt; - Python Materials Genomics is a robust, open-source library for materials analysis.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://pythonhosted.org/symmetry/&quot;&gt;symmetry&lt;/a&gt; - Symmetry is a library for materials symmetry analysis.&lt;/li&gt;
+&lt;li&gt;new &lt;a href=&#34;https://www.kernel.org/&#34;&gt;kernel&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;update to &lt;a href=&#34;https://xfce.org/&#34;&gt;XFCE&lt;/a&gt; 4.12&lt;/li&gt;
+&lt;li&gt;updated gcc, gfortran&lt;/li&gt;
+&lt;li&gt;ffmpeg&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.libreoffice.org/&#34;&gt;libreoffice&lt;/a&gt; &lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.vim.org/&#34;&gt;vim&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&quot;simulations&quot;&gt;Simulations&lt;/h2&gt;
-&lt;p&gt;&lt;em&gt;Packages for atomistic simulations and computational chemistry.&lt;/em&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://amp.readthedocs.io/en/latest/&quot;&gt;amp&lt;/a&gt; - Is an open-source package designed to easily bring machine-learning to atomistic calculations.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://wiki.fysik.dtu.dk/ase/index.html&quot;&gt;Atomic Silumation Environment (ASE)&lt;/a&gt; - Is a set of tools and modules for setting up, manipulating, running, visualizing and analyzing atomistic simulations. &lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://downloads.ccdc.cam.ac.uk/documentation/API/index.html&quot;&gt;ccdc&lt;/a&gt; - An API for the Cambridge Structural Database System.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://cclib.github.io/&quot;&gt;cclib&lt;/a&gt; - A library for parsing output files various quantum chemical programs.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://chemlab.readthedocs.io/en/latest/index.html&quot;&gt;chemlab&lt;/a&gt; - Is a library that can help the user with chemistry-relevant calculations.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://deepchem.io/&quot;&gt;deepchem&lt;/a&gt; - Deep-learning models for Drug Discovery and Quantum Chemistry.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://theochem.github.io/horton/2.0.1/index.html&quot;&gt;horton&lt;/a&gt; - Helpful Open-source Research TOol for N-fermion system, a quantum-chemistry program that can perform computations involving model Hamiltonians.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://mathchem.iam.upr.si/&quot;&gt;mathchem&lt;/a&gt; - Is a free open source package for calculating topological indices and other invariants of molecular graphs.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.mdanalysis.org/&quot;&gt;MDAnalysis&lt;/a&gt; - Is an object-oriented library to analyze trajectories from molecular dynamics (MD) simulations in many popular formats.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://dirac.cnrs-orleans.fr/MMTK/&quot;&gt;MMTK&lt;/a&gt; - The Molecular Modeling Toolkit is an Open Source program library for molecular simulation applications.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://molmod.github.io/molmod/index.html&quot;&gt;MolMod&lt;/a&gt; - A library with many components that are useful to write molecular modeling programs.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://pygauss.readthedocs.io/en/stable/index.html&quot;&gt;pygauss&lt;/a&gt; - An interactive tool for supporting the lifecycle of a computational molecular chemistry investigations.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://pyquante.sourceforge.net/&quot;&gt;PyQuante&lt;/a&gt; -  Is an open-source suite of programs for developing quantum chemistry methods&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/thynnine/pysic&quot;&gt;pysic&lt;/a&gt; - A calculator incorporating various empirical pair and many-body potentials.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/sunqm/pyscf&quot;&gt;Pyscf&lt;/a&gt; - A quantum chemistry package written in Python.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.rdkit.org/&quot;&gt;RDKit&lt;/a&gt; - Open-Source Cheminformatics Software.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://libatoms.github.io/QUIP/&quot;&gt;QUIP&lt;/a&gt; - A collection of software tools to carry out molecular dynamics simulations.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://theory.cm.utexas.edu/tsase/&quot;&gt;tsase&lt;/a&gt; - The library which depends on ASE to tackle transition state calculations.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;molecular-visualization&quot;&gt;Molecular Visualization&lt;/h2&gt;
-&lt;p&gt;&lt;em&gt;Packages for viewing molecular structures.&lt;/em&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://wiki.fysik.dtu.dk/ase/ase/gui/gui.html#module-ase.gui&quot;&gt;ase-gui&lt;/a&gt; - The graphical user-interface allows users to visualize, manipulate, and render molecular systems and atoms objects.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://chemview.readthedocs.io/en/latest/&quot;&gt;chemview&lt;/a&gt; - An interactive molecular viewer designed for the IPython notebook. &lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://futurefullers.com/imolecule/&quot;&gt;imolecule&lt;/a&gt; - An embeddable webGL molecule viewer and file format converter.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://pgi-jcns.fz-juelich.de/portal/pages/pymoldyn-main.html&quot;&gt;pymoldyn&lt;/a&gt; - A viewer for atomic clusters, crystalline and amorphous materials in a unit cell corresponding to one of the seven 3D Bravais lattices.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;general-scientific-packages&quot;&gt;General Scientific Packages&lt;/h2&gt;
-&lt;p&gt;&lt;em&gt;Packages for scientific computing and data analyzing.&lt;/em&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/blaze/blaze&quot;&gt;blaze&lt;/a&gt; - NumPy and Pandas interface to Big Data.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://networkx.github.io/&quot;&gt;NetworkX&lt;/a&gt; - A high-productivity software for complex networks.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://neupy.com/pages/home.html&quot;&gt;Neupy&lt;/a&gt; - Running and testing different Artificial Neural Networks algorithms.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://numba.pydata.org/&quot;&gt;Numba&lt;/a&gt; - Python JIT (just in time) complier to LLVM aimed at scientific Python by the developers of Cython and NumPy.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.numpy.org/&quot;&gt;NumPy&lt;/a&gt; - A fundamental package for scientific computing with Python.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/mining/mining&quot;&gt;Open Mining&lt;/a&gt; - Business Intelligence (BI) in Python (Pandas web interface)&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://orange.biolab.si/&quot;&gt;orange&lt;/a&gt; - Data mining, data visualization, analysis and machine learning through visual programming or Python scripting.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://pandas.pydata.org/&quot;&gt;Pandas&lt;/a&gt; - A library providing high-performance, easy-to-use data structures and data analysis tools.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.pydy.org/&quot;&gt;PyDy&lt;/a&gt; - Short for Python Dynamics, used to assist with workflow in the modeling of dynamic motion based around NumPy, SciPy, IPython, and matplotlib.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/pymc-devs/pymc3&quot;&gt;PyMC&lt;/a&gt; - Markov Chain Monte Carlo sampling toolkit.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://openbabel.org/docs/dev/UseTheLibrary/Python_Pybel.html&quot;&gt;scikit-learn&lt;/a&gt; - Very powerful and rich machine learning library, built on NumPy, SciPy, and matplotlib.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.scipy.org/&quot;&gt;SciPy&lt;/a&gt; - A Python-based ecosystem of open-source software for mathematics, science, and engineering.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/statsmodels/statsmodels&quot;&gt;statsmodels&lt;/a&gt; - Statistical modeling and econometrics in Python.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/sympy/sympy&quot;&gt;SymPy&lt;/a&gt; - A Python library for symbolic mathematics.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;data-visualization&quot;&gt;Data Visualization&lt;/h2&gt;
-&lt;p&gt;&lt;em&gt;Libraries for visualizing data.&lt;/em&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://matplotlib.org/&quot;&gt;matplotlib&lt;/a&gt; - A Python 2D plotting library.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/bokeh/bokeh&quot;&gt;bokeh&lt;/a&gt; - Interactive Web Plotting for Python.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/yhat/ggplot&quot;&gt;ggplot&lt;/a&gt; - Same API as ggplot2 for R.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://plot.ly/python/&quot;&gt;plotly&lt;/a&gt; - Collaborative web plotting for Python and matplotlib.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.pygal.org/en/latest/&quot;&gt;pygal&lt;/a&gt; - A Python SVG Charts Creator.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://pypi.python.org/pypi/pygraphviz&quot;&gt;pygraphviz&lt;/a&gt; - Python interface to &lt;a href=&quot;http://www.graphviz.org/&quot;&gt;Graphviz&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.pyqtgraph.org/&quot;&gt;PyQtGraph&lt;/a&gt; - Interactive and real time 2D/3D/Image plotting and science/engineering widgets.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://jiffyclub.github.io/snakeviz/&quot;&gt;SnakeViz&lt;/a&gt; - A browser based graphical viewer for the output of Python's cProfile module.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/wrobstory/vincent&quot;&gt;vincent&lt;/a&gt; - A Python to Vega translator.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://vispy.org/&quot;&gt;VisPy&lt;/a&gt; - High-performance scientific visualization based on OpenGL.&lt;/li&gt;
-&lt;/ul&gt;</content>
+&lt;p&gt;The extended list of updates can be found in the &lt;a href=&#34;https://www.debian.org/News/2017/20170617&#34;&gt;release notes&lt;/a&gt;
+or in the &lt;a href=&#34;https://www.debian.org/releases/stretch/amd64/release-notes/ch-whats-new.en.html&#34;&gt;what&#39;s new&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The update process itself was not very involved and included just a few steps that most of
+the linux users should be familiar with.&lt;/p&gt;
+&lt;p&gt;in &lt;code&gt;/etc/apt/sources.list&lt;/code&gt; I replaced all the instances of &lt;code&gt;jessie&lt;/code&gt; to &lt;code&gt;stretch&lt;/code&gt; and did the standard&lt;/p&gt;
+&lt;p&gt;from jessie to stretch&lt;/p&gt;
+&lt;div class=&#34;codehilite&#34;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo apt-get update
+sudo apt-get upgrade
+sudo apt full-upgrade
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Before diving in and doing the update it might be worth while to read the
+[official upgrade guide] just in case something goes wrong during your
+installation.&lt;/p&gt;</content>
   </entry>
 </feed>
