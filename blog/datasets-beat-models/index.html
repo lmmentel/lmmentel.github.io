@@ -9,7 +9,7 @@
     <meta name="author" content="Łukasz Mentel">
     <meta name="copyright" content="Łukasz Mentel">
 
-    <title>Łukasz Mentel's Homepage</title>
+    <title>Datasets beat Models</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,7 +46,7 @@
         <div class="navbar-collapse collapse w-100" id="navbarResponsive">
             <ul class="nav navbar-nav ms-auto">
               <li class="nav-item">
-                <a href="../../blog/index.html" class="nav-link"> Writing </a>
+                <a href="../index.html" class="nav-link"> Writing </a>
               </li>
               <li class="nav-item">
                 <a href="../../software/index.html" class="nav-link"> Projects </a>
@@ -83,52 +83,64 @@
 
   
 
-  <div class="container mb-5">
+  <div class="container">
     <div class="row">
       <div class="col post mx-auto">
 
-        <h2 class="page-heading text-center py-4">Blog posts with tag <span class="tag">machine learning<span></h2>
+        <p class="text-muted mt-3 text-end">
+          
+            <a href="../../tag/machine%20learning/index.html" class="tag">machine learning</a>
+          
+            <a href="../../tag/datasets/index.html" class="tag">datasets</a>
+          
+          24 June 2021
+        </p>
+        <h1>Datasets beat Models</h1>
+        <h2 class="subtitle">Endless possiblities with pandas</h2>
+        <p><img class="rounded mx-auto shadow-lg d-block" src="../static/img/1624540361257.jpeg" alt="datasets beat models"></p>
+<hr>
 
-        
-<div class="row spaced">
-  <div class="col-md-3 text-right">
-    24 Jun 2021
-  <p class="text-muted">(2 min)</p>
-  </div>
+<p>I know it’s easy to get carried away by all the shiny, sophisticated ML models out there,
+ but we need to have a serious conversation about datasets. In most industrial applications
+ of ML it’s the datasets that limit performance not model complexity. </p>
+<p>Lack of high quality training datasets is the biggest challenge for industrial machine
+learning right now. That should not be surprising if you consider how much bigger the
+supply of models is compared to datasets.  A big portion of the ML algorithms development
+happens thanks to open source and academic communities which gladly publish their work in
+exchange for reputation points. In contrast, developing and curating datasets is often
+less valued and not as glamorous. </p>
+<p>My experience from working on data-driven solutions for industrial problems is that there
+is no shortage of data and huge volumes are available in raw form; however converting them
+into training and validation datasets is what usually blocks ML/AI progress.  </p>
+<p>I won't be controversial if I attribute 80% of a data scientist's time to what is collectively
+termed preprocessing, cleaning or structuring the data. The result of all of those activities
+is a dataset that hopefully accurately represents reality and can serve as ground truth for
+model development and evaluation. Creating high quality datasets however takes effort, skills
+and a right blend of domain knowledge and experience with data.</p>
+<p>This is exactly what we are passionate about at unifai. We are approaching dataset development
+as an engineering practice and we are creating high quality datasets to increase adoption of
+machine learning in the industry. Our experience in data science, data engineering, software
+development and heavy asset industry puts us in a unique position to deliver datasets with a
+perfect mix of domain knowledge.</p>
+<p>Unifai is not alone in betting on datasets, one of the biggest names in AI: Andrew Ng recently
+started promoting a more data-centric view of AI instead of the model-centric view. In a recent
+announcement together with landing.ai and deeplearning.ai he launched a competition that focuses
+on improving data while keeping the model fixed to inspire new methods for improving data.</p>
+<p>Get in touch with me if you share similar challenges or if you're sitting on piles of raw data 
+and your organization wants to get some quick wins with machine learning.</p>
 
-  <div class="col-md-9">
-    <h3><a href="../../blog/datasets-beat-models/index.html">Datasets beat Models</a></h3>
-    <p class="subtitle close">Endless possiblities with pandas</p>
-    <p class="dense">
-      
-        <a href="../machine%20learning/index.html" class="tag"><small>machine learning</small></a>
-      
-        <a href="../datasets/index.html" class="tag"><small>datasets</small></a>
-        
-    </p>
-  </div>
-</div>
+      </div>
+    </div>
 
-<div class="row spaced">
-  <div class="col-md-3 text-right">
-    21 Jan 2017
-  <p class="text-muted">(2 min)</p>
-  </div>
-
-  <div class="col-md-9">
-    <h3><a href="../../blog/geilo-winter-school/index.html">Geilo Winter School</a></h3>
-    <p class="subtitle close">Machine Learning, Deep Learning and Data Analytics</p>
-    <p class="dense">
-      
-        <a href="../machine%20learning/index.html" class="tag"><small>machine learning</small></a>
-      
-        <a href="../deep%20learning/index.html" class="tag"><small>deep learning</small></a>
-        
-    </p>
-  </div>
-</div>
-
-
+    <div class="row">
+      <div class="col post mx-auto">
+        <script src="https://utteranc.es/client.js"
+          repo="lmmentel/lmmentel.github.io"
+          issue-term="title"
+          theme="github-light"
+          crossorigin="anonymous"
+          async>
+        </script>
       </div>
     </div>
   </div>

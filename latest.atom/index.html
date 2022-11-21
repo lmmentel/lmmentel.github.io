@@ -15,7 +15,7 @@
     <updated>2022-10-16T23:55:00Z</updated>
     <published>2022-10-16T23:55:00Z</published>
     <link href="http://localhost/blog/better-select-form-django/" />
-    <content type="html">&lt;p&gt;&lt;img class=&#34;rounded mx-auto shadow-lg d-block&#34; src=&#34;../static/img/kelly-sikkema-hLit2zL-Dhk-unsplash.jpg&#34; alt=&#34;web design&#34;&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;img class=&#34;rounded mx-auto shadow-lg d-block&#34; src=&#34;../static/img/kelly-sikkema-hLit2zL-Dhk-unsplash-small.jpg&#34; alt=&#34;web design&#34;&gt;&lt;/p&gt;
 &lt;p class=&#34;text-muted small text-end&#34;&gt;Photo by &lt;a href=&#34;https://unsplash.com/@kellysikkema?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText&#34;&gt;Kelly Sikkema&lt;/a&gt; on &lt;a href=&#34;https://unsplash.com/s/photos/user-interaction?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText&#34;&gt;Unsplash&lt;/a&gt;
 &lt;/p&gt;
 
@@ -281,6 +281,44 @@ for how to improve usability.&lt;/p&gt;
 &lt;hr&gt;</content>
   </entry>
   <entry xml:base="http://localhost/latest.atom/">
+    <title type="text">Datasets beat Models</title>
+    <id>http://localhost/blog/datasets-beat-models/</id>
+    <updated>2021-06-24T12:00:00Z</updated>
+    <published>2021-06-24T12:00:00Z</published>
+    <link href="http://localhost/blog/datasets-beat-models/" />
+    <content type="html">&lt;p&gt;&lt;img class=&#34;rounded mx-auto shadow-lg d-block&#34; src=&#34;../static/img/1624540361257.jpeg&#34; alt=&#34;datasets beat models&#34;&gt;&lt;/p&gt;
+&lt;hr&gt;
+
+&lt;p&gt;I know it’s easy to get carried away by all the shiny, sophisticated ML models out there,
+ but we need to have a serious conversation about datasets. In most industrial applications
+ of ML it’s the datasets that limit performance not model complexity. &lt;/p&gt;
+&lt;p&gt;Lack of high quality training datasets is the biggest challenge for industrial machine
+learning right now. That should not be surprising if you consider how much bigger the
+supply of models is compared to datasets.  A big portion of the ML algorithms development
+happens thanks to open source and academic communities which gladly publish their work in
+exchange for reputation points. In contrast, developing and curating datasets is often
+less valued and not as glamorous. &lt;/p&gt;
+&lt;p&gt;My experience from working on data-driven solutions for industrial problems is that there
+is no shortage of data and huge volumes are available in raw form; however converting them
+into training and validation datasets is what usually blocks ML/AI progress.  &lt;/p&gt;
+&lt;p&gt;I won&#39;t be controversial if I attribute 80% of a data scientist&#39;s time to what is collectively
+termed preprocessing, cleaning or structuring the data. The result of all of those activities
+is a dataset that hopefully accurately represents reality and can serve as ground truth for
+model development and evaluation. Creating high quality datasets however takes effort, skills
+and a right blend of domain knowledge and experience with data.&lt;/p&gt;
+&lt;p&gt;This is exactly what we are passionate about at unifai. We are approaching dataset development
+as an engineering practice and we are creating high quality datasets to increase adoption of
+machine learning in the industry. Our experience in data science, data engineering, software
+development and heavy asset industry puts us in a unique position to deliver datasets with a
+perfect mix of domain knowledge.&lt;/p&gt;
+&lt;p&gt;Unifai is not alone in betting on datasets, one of the biggest names in AI: Andrew Ng recently
+started promoting a more data-centric view of AI instead of the model-centric view. In a recent
+announcement together with landing.ai and deeplearning.ai he launched a competition that focuses
+on improving data while keeping the model fixed to inspire new methods for improving data.&lt;/p&gt;
+&lt;p&gt;Get in touch with me if you share similar challenges or if you&#39;re sitting on piles of raw data 
+and your organization wants to get some quick wins with machine learning.&lt;/p&gt;</content>
+  </entry>
+  <entry xml:base="http://localhost/latest.atom/">
     <title type="text">Zeolite pore size oddity</title>
     <id>http://localhost/blog/zeolite-pore-size-oddity/</id>
     <updated>2017-10-31T12:00:00Z</updated>
@@ -445,50 +483,5 @@ sudo apt full-upgrade
 &lt;p&gt;Before diving in and doing the update it might be worth while to read the
 [official upgrade guide] just in case something goes wrong during your
 installation.&lt;/p&gt;</content>
-  </entry>
-  <entry xml:base="http://localhost/latest.atom/">
-    <title type="text">Chemical kinetics with python</title>
-    <id>http://localhost/blog/chemical-kinetics-with-python/</id>
-    <updated>2017-06-12T12:00:00Z</updated>
-    <published>2017-06-12T12:00:00Z</published>
-    <link href="http://localhost/blog/chemical-kinetics-with-python/" />
-    <content type="html">&lt;p&gt;Chemical reactions is what nearly all branches of chemistry
-are dealing with on daily basis. They provide a fundamental framework
-to express observable changes of matter in a quantitative manner.&lt;/p&gt;
-&lt;div class=&#34;row&#34; style=&#34;padding-top: 20px;padding-bottom: 20px;&#34;&gt;
-  &lt;figure&gt;
-    &lt;img class=&#34;img-responsive center-block&#34; width=760px src=&#34;../../static/img/pfr_animation.gif&#34;&gt;
-  &lt;/figure&gt; 
-&lt;/div&gt;
-
-&lt;p&gt;\begin{align}
-A &amp;amp; \xrightarrow{k_1} B \\
-A &amp;amp; \xrightarrow{k_2} C \\
-\end{align}&lt;/p&gt;
-&lt;p&gt;leading to the set of kinetic equations&lt;/p&gt;
-&lt;p&gt;\begin{align}
-\frac{d[A]}{dt} &amp;amp;= -(k_1 + k_2) [A] \\
-\frac{d[B]}{dt} &amp;amp;= k_1 [A] \\
-\frac{d[C]}{dt} &amp;amp;= k_2 [A] \\
-\end{align}&lt;/p&gt;
-&lt;p&gt;with a solution new&lt;/p&gt;
-&lt;p&gt;\begin{align}
-[A] &amp;amp;= [A]_{0} e^{-(k_1 + k_2)t} \\
-[B] &amp;amp;= \frac{k_1}{k_1 + k_2}  [A]_{0} \left(1 - e^{-(k_1 + k_2)t}\right) \\
-[C] &amp;amp;= \frac{k_2}{k_1 + k_2} [A]_{0} \left(1 - e^{-(k_1 + k_2)t}\right) \\
-\end{align}&lt;/p&gt;
-&lt;p&gt;in python&lt;/p&gt;
-&lt;div class=&#34;codehilite&#34;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;numpy&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;np&lt;/span&gt;
-&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;scipy&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;sp&lt;/span&gt;
-
-&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;args&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
-    &lt;span class=&#34;k&#34;&gt;pass&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;or in fortran&lt;/p&gt;
-&lt;div class=&#34;codehilite&#34;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class=&#34;k&#34;&gt;use &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;newmodule&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;
-
-&lt;span class=&#34;k&#34;&gt;write&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;hello world&amp;quot;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content>
   </entry>
 </feed>
