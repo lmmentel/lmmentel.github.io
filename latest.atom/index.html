@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title type="text">Latest Blog Posts</title>
   <id>http://localhost/latest.atom/</id>
-  <updated>2017-12-27T12:00:00Z</updated>
+  <updated>2022-10-16T23:55:00Z</updated>
   <link href="http://localhost/" />
   <link href="http://localhost/latest.atom/" rel="self" />
   <author>
@@ -10,75 +10,275 @@
   </author>
   <generator>Werkzeug</generator>
   <entry xml:base="http://localhost/latest.atom/">
-    <title type="text">Automating slide presentations</title>
-    <id>http://localhost/blog/cookiecutter-mdbeamer/</id>
-    <updated>2017-12-27T12:00:00Z</updated>
-    <published>2017-12-27T12:00:00Z</published>
-    <link href="http://localhost/blog/cookiecutter-mdbeamer/" />
-    <content type="html">&lt;p&gt;Delivering an interesting and engaging talk is hard.&lt;/p&gt;
-&lt;p&gt;Creating beautiful and visually appealing presentations is undoubtedly an art. The process is usally
-not so straightforward since there a  lot of moving parts, formats. My weapon
-of choice was always LaTeX equipped with beamer that does an amazing job in
-figuring out some of the aesthetics for you. However to be honest most of the
-standard beamer themes offered do not look very modern and to say the least are
-far away from being stunning. Potentially this can easily be be fixed since
-LaTeX is extremely flexible and configurable but would require a peculiar set
-of skills namely graphic design and high level of proficiency in LaTeX
-internals. I guess no one should be surprized that those two rarely come
-together in a form that would benefit a larger community.&lt;/p&gt;
-&lt;p&gt;The main idea is to automate as much of the process as possiblee, so that once
-everything is set up and configured you can focus only on creating the actual
-content&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Beamer_(LaTeX)&#34;&gt;beamer&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://cookiecutter.readthedocs.io/en/latest/installation.html&#34;&gt;cookiecutter&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://pandoc.org/&#34;&gt;pandoc&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://daringfireball.net/projects/markdown/&#34;&gt;markdown&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http&#34;&gt;metropolis theme&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;[lualatex]&lt;/li&gt;
-&lt;/ul&gt;</content>
-  </entry>
-  <entry xml:base="http://localhost/latest.atom/">
-    <title type="text">Lists in Dataframe cells</title>
-    <id>http://localhost/blog/lists-in-dataframes/</id>
-    <updated>2017-11-06T12:00:00Z</updated>
-    <published>2017-11-06T12:00:00Z</published>
-    <link href="http://localhost/blog/lists-in-dataframes/" />
-    <content type="html">&lt;p&gt;&lt;a href=&#34;http://pandas.pydata.org/&#34;&gt;Pandas&lt;/a&gt; DataFrame is an essential tool for everyone doing data analysis with &lt;a href=&#34;https://python.org&#34;&gt;Python&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Much of the power comes from allowing tabular data to be contained together despite  having different types.
-It also provides an extensive set of  operations to manipulate the
-heterogeneous data on equal footing.&lt;/p&gt;
-&lt;p&gt;The entries can go beyond primitive types such as: boolean, integer, float and
-string. It can also store lists, dicts, tuples,custom classes. Of all those
-objects the one I&#39;ve used most often is lists since dicts acn easily be
-integrated into a DataFrame with keys as columns names and values in the cells.&lt;/p&gt;
-&lt;p&gt;Lists however give you the possiblity to store data of unknown length in a
-column and then do column-wise operations on it.&lt;/p&gt;
-&lt;h2&gt;Setting&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;to set new values as list the type of the column needs to be &lt;code&gt;object&lt;/code&gt;
-  https://stackoverflow.com/questions/38133961/pandas-how-to-store-a-list-in-a-dataframe&lt;/li&gt;
-&lt;li&gt;setting individual cell to lists&lt;/li&gt;
-&lt;li&gt;setting individual lists values
-https://stackoverflow.com/questions/34887957/subsetting-pandas-dataframe-with-list-in-cell&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;appending to a list&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;converting a string column (comma separated) into a list&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Getting&lt;/h2&gt;
-&lt;h2&gt;Transforming&lt;/h2&gt;
-&lt;p&gt;calculating min, max, len&lt;/p&gt;
-&lt;h2&gt;wide/long&lt;/h2&gt;
-&lt;p&gt;how to extend the list to a wide version (separate values into columns) and a long version (separate values into rows)
-https://chrisalbon.com/python/pandas_expand_cells_containing_lists.html
-https://stackoverflow.com/questions/27263805/pandas-when-cell-contents-are-lists-create-a-row-for-each-element-in-the-list&lt;/p&gt;
-&lt;p&gt;fetching/loading related object to/from dbs&lt;/p&gt;
-&lt;p&gt;z listy do long format through wide
-pandas.apply(pd.Series).&lt;/p&gt;
-&lt;p&gt;z long format to list&lt;/p&gt;</content>
+    <title type="text">Better select forms with django and Bootstrap 5</title>
+    <id>http://localhost/blog/better-select-form-django/</id>
+    <updated>2022-10-16T23:55:00Z</updated>
+    <published>2022-10-16T23:55:00Z</published>
+    <link href="http://localhost/blog/better-select-form-django/" />
+    <content type="html">&lt;p&gt;&lt;img class=&#34;rounded mx-auto shadow-lg d-block&#34; src=&#34;../static/img/kelly-sikkema-hLit2zL-Dhk-unsplash.jpg&#34; alt=&#34;web design&#34;&gt;&lt;/p&gt;
+&lt;p class=&#34;text-muted small text-end&#34;&gt;Photo by &lt;a href=&#34;https://unsplash.com/@kellysikkema?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText&#34;&gt;Kelly Sikkema&lt;/a&gt; on &lt;a href=&#34;https://unsplash.com/s/photos/user-interaction?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText&#34;&gt;Unsplash&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;I enjoy working with &lt;a href=&#34;https://www.djangoproject.com/&#34;&gt;Django&lt;/a&gt; for many
+reasons but mostly since I can focus on what I want my app to do 
+and django happily takes care of the rest. In 2022 it&#39;s probably not
+the sexiest choice when it comes to web frameworks, but there are good reasons it is still as popular as it is.
+There is a recent wave of excitement about server side rendering frameworks thanks
+to a new batch of tools like &lt;a href=&#34;https://htmx.org/&#34;&gt;HTMX&lt;/a&gt;, &lt;a href=&#34;https://www.django-unicorn.com/&#34;&gt;django-unicorn&lt;/a&gt; and
+&lt;a href=&#34;https://github.com/jonathan-s/django-sockpuppet&#34;&gt;django-sockpuppet&lt;/a&gt; that give django
+superpowers and put into question the &lt;code&gt;React&lt;/code&gt; based paradigm for building apps. 
+But that&#39;s a digression for another time.&lt;/p&gt;
+&lt;p&gt;Django takes care of a lot of stuff behind the scenes and that is a solid productivity
+boost. Being a mature framework means that is has opinions (mostly for very good reasons) and
+provides you with defaults that are sensible in most o the cases. There are
+however cases when it&#39;s worth to make some changes to improve end-user experience.&lt;/p&gt;
+&lt;p&gt;One such aspect is the default UI widget for selecting items. I am of course
+talking about &lt;a href=&#34;https://en.wikipedia.org/wiki/Drop-down_list&#34;&gt;dropdowns&lt;/a&gt;.
+They have been around since forever and although being familiar they are usually
+not the best choice when it comes to modern UX standards. Out in the wild
+you can find professionals suggesting &lt;a href=&#34;https://www.nngroup.com/articles/drop-down-menus/&#34;&gt;caution when using dropdowns&lt;/a&gt;
+and calls to &lt;a href=&#34;https://adrianroselli.com/2020/03/stop-using-drop-down.html&#34;&gt;stop using drop-downs&lt;/a&gt; at all. &lt;/p&gt;
+&lt;p&gt;Personally I would like to adhere to good UX practices as far as I can 
+and although my level of comfort increases with
+proximity to backend side of things I cannot be annoyed by all the low hanging
+fruit that sometimes plague otherwise good products. Wanting things to look good
+without a massive design effort is one of the reasons I usually reach for a
+frontend framework, most often &lt;a href=&#34;https://getbootstrap.com/&#34;&gt;bootstrap&lt;/a&gt;. 
+With django that means using &lt;a href=&#34;https://github.com/django-crispy-forms/django-crispy-forms&#34;&gt;django crispy forms&lt;/a&gt;
+to get the forms looking sharp and consistent with an extra line in the template.&lt;/p&gt;
+&lt;h2&gt;Making choices&lt;/h2&gt;
+&lt;p&gt;One of the things I was recently working on is a django-based dashboard where
+I wanted to have the option to choose the aggregation level between: &lt;code&gt;daily&lt;/code&gt;, &lt;code&gt;weekly&lt;/code&gt;, &lt;code&gt;monthly&lt;/code&gt; aggregates.
+Of course my first pass was the default &lt;code&gt;forms.Select&lt;/code&gt; widget that is a dropdown.
+Once I saw the result on the screen though, I felt something is off, and that this should probably be improved.
+Usually I try to move on until I have a working prototype that I can iterate over. Following the
+Kent Beck&#39;s principle&lt;/p&gt;
+&lt;blockquote class=&#34;blockquote text-center py-5&#34;&gt;make it work, make it right, make it fast&lt;/blockquote&gt;
+
+&lt;p&gt;When I got everything wired up and working it seemed like a good time get back to the select widget and scratch that itch. &lt;/p&gt;
+&lt;p&gt;On the django side I had a form to represent the choices &lt;/p&gt;
+&lt;div class=&#34;codehilite&#34;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;django&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;forms&lt;/span&gt;
+
+&lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;FrequencyForm&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;forms&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Form&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;choices&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;1D&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;Daily&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;1W&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;Weekly),&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;1M&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;Monthly&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;freq&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;forms&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ChoiceField&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;label&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;Frequency&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;choices&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;choices&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;which was being rendered in a template with pretty standard django&lt;/p&gt;
+&lt;div class=&#34;codehilite&#34;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;{% load crispy_forms_tags %}
+...
+{{ form|crispy }}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The effect isn&#39;t surprising either&lt;/p&gt;
+&lt;div class=&#34;row mb-5&#34;&gt;
+&lt;div class=&#34;col-md-4 mx-auto&#34;&gt;
+&lt;div id=&#34;div_id_freq&#34; class=&#34;mb-3&#34;&gt; &lt;label for=&#34;id_freq&#34; class=&#34;form-label requiredField&#34;&gt;
+    Frequency&lt;span class=&#34;asteriskField&#34;&gt;*&lt;/span&gt; &lt;/label&gt; &lt;select name=&#34;freq&#34; class=&#34;select form-select&#34; id=&#34;id_freq&#34;&gt;
+    &lt;option value=&#34;1D&#34;&gt;Daily&lt;/option&gt; &lt;option value=&#34;1W&#34; selected=&#34;&#34;&gt;Weekly&lt;/option&gt;
+    &lt;option value=&#34;1M&#34;&gt;Monthly&lt;/option&gt;
+&lt;/select&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;I didn&#39;t want for the options to be hidden, so the next best thing was to switch to a radio select
+by changing the for widget to &lt;code&gt;RadioSelect&lt;/code&gt; and keeping the template as is&lt;/p&gt;
+&lt;div class=&#34;codehilite&#34;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;django&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;forms&lt;/span&gt;
+
+&lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;FrequencyForm&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;forms&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Form&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;choices&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;1D&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;Daily&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;1W&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;Weekly),&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;1M&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;Monthly&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;freq&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;forms&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ChoiceField&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;label&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;Frequency&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;choices&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;choices&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;widget&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;forms&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;RadioSelect&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(),&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This gives&lt;/p&gt;
+&lt;div class=&#34;row mb-5&#34;&gt;
+&lt;div class=&#34;col-md-4 mx-auto&#34;&gt;
+&lt;div id=&#34;div_id_freq&#34; class=&#34;mb-3&#34;&gt;
+    &lt;label class=&#34;form-label requiredField&#34;&gt;Frequency&lt;span class=&#34;asteriskField&#34;&gt;*&lt;/span&gt;&lt;/label&gt;
+    &lt;div&gt;
+        &lt;div class=&#34;form-check&#34;&gt; &lt;input type=&#34;radio&#34; class=&#34;form-check-input&#34; name=&#34;freq&#34; value=&#34;1D&#34; id=&#34;id_freq_0&#34; required=&#34;&#34;&gt; &lt;label for=&#34;id_freq_0&#34; class=&#34;form-check-label&#34;&gt;
+            Daily
+        &lt;/label&gt; &lt;/div&gt;
+        &lt;div class=&#34;form-check&#34;&gt; &lt;input type=&#34;radio&#34; class=&#34;form-check-input&#34; name=&#34;freq&#34; value=&#34;W&#34; id=&#34;id_freq_1&#34; required=&#34;&#34; checked=&#34;&#34;&gt; &lt;label for=&#34;id_freq_1&#34; class=&#34;form-check-label&#34;&gt;
+            Weekly
+        &lt;/label&gt; &lt;/div&gt;
+        &lt;div class=&#34;form-check&#34;&gt; &lt;input type=&#34;radio&#34; class=&#34;form-check-input&#34; name=&#34;freq&#34; value=&#34;MS&#34; id=&#34;id_freq_2&#34; required=&#34;&#34;&gt; &lt;label for=&#34;id_freq_2&#34; class=&#34;form-check-label&#34;&gt;
+            Monthly
+        &lt;/label&gt; &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Bettter but I still wasn&#39;t happy with the result. When looking for inspiration I
+found &lt;a href=&#34;https://www.learnui.design/blog/4-rules-intuitive-ux.html&#34;&gt;this post&lt;/a&gt;
+suggesting a segmented button that reminded me of what I saw in latest
+&lt;a href=&#34;https://getbootstrap.com/docs/5.0/components/button-group/#checkbox-and-radio-button-groups&#34;&gt;Bootstrap 5 docs&lt;/a&gt;
+so I decided to give it a go since I was already using Bootstrap.&lt;/p&gt;
+&lt;p&gt;Looking at the example from Bootstrap it became clear that I would have to render
+the form manually. The example I started from was this:&lt;/p&gt;
+&lt;div class=&#34;codehilite&#34;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;div&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;btn-group&amp;quot;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;role&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;group&amp;quot;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;aria-label&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;Basic radio toggle button group&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;input&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;radio&amp;quot;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;btn-check&amp;quot;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;btnradio&amp;quot;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;btnradio1&amp;quot;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;autocomplete&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;off&amp;quot;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;checked&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;label&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;btn btn-outline-primary&amp;quot;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;for&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;btnradio1&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;Radio 1&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;label&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;input&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;radio&amp;quot;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;btn-check&amp;quot;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;btnradio&amp;quot;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;btnradio2&amp;quot;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;autocomplete&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;off&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;label&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;btn btn-outline-primary&amp;quot;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;for&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;btnradio2&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;Radio 2&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;label&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;input&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;radio&amp;quot;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;btn-check&amp;quot;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;btnradio&amp;quot;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;btnradio3&amp;quot;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;autocomplete&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;off&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;label&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;btn btn-outline-primary&amp;quot;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;for&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;btnradio3&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;Radio 3&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;label&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;div&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;which looks like &lt;/p&gt;
+&lt;div class=&#34;row justify-content-center py-5&#34;&gt;
+&lt;div class=&#34;col text-center&#34;&gt;
+&lt;div class=&#34;btn-group&#34; role=&#34;group&#34; aria-label=&#34;Basic radio toggle button group&#34;&gt;
+&lt;input type=&#34;radio&#34; class=&#34;btn-check&#34; name=&#34;btnradio&#34; id=&#34;btnradio1&#34; autocomplete=&#34;off&#34; checked&gt;
+&lt;label class=&#34;btn btn-outline-primary&#34; for=&#34;btnradio1&#34;&gt;Radio 1&lt;/label&gt;
+
+&lt;input type=&#34;radio&#34; class=&#34;btn-check&#34; name=&#34;btnradio&#34; id=&#34;btnradio2&#34; autocomplete=&#34;off&#34;&gt;
+&lt;label class=&#34;btn btn-outline-primary&#34; for=&#34;btnradio2&#34;&gt;Radio 2&lt;/label&gt;
+
+&lt;input type=&#34;radio&#34; class=&#34;btn-check&#34; name=&#34;btnradio&#34; id=&#34;btnradio3&#34; autocomplete=&#34;off&#34;&gt;
+&lt;label class=&#34;btn btn-outline-primary&#34; for=&#34;btnradio3&#34;&gt;Radio 3&lt;/label&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Pretty nice! I went ahead and updated my template and instead of the &lt;code&gt;{{ form|crispy }}&lt;/code&gt;
+elements I went ahead and unfolded the form and added the classes and attributes to render
+the button group:&lt;/p&gt;
+&lt;div class=&#34;codehilite&#34;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;div&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;btn-group&amp;quot;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;role&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;group&amp;quot;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;aria-label&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;Basic radio toggle button group&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+    {% for choice in form.freq %}
+        {{ choice.tag }}
+        &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;label&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;btn btn-outline-primary&amp;quot;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;for&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;{{ choice.id_for_label }}&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;{{ choice.choice_label }}&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;label&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+    {% endfor %}
+&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;div&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Everything looked nice when rendered however when clicking on the buttons they wouldn&#39;t stay selected as they should. They would
+change back to unselected which was annoying. I had to compare the original HTML with my rendered version to
+realize that the &lt;code&gt;&amp;lt;input&amp;gt;&lt;/code&gt; tags in my case were missing s &lt;code&gt;class=&#34;btn-check&#34;&lt;/code&gt; attribute, so I modified
+the form to have that added &lt;/p&gt;
+&lt;div class=&#34;codehilite&#34;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;FrequencyForm&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;forms&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Form&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;choices&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;1D&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;Daily&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;1W&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;Weekly),&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;1M&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;Monthly&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;freq&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;forms&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ChoiceField&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;label&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Category&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;choices&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;choices&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;widget&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;forms&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;RadioSelect&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;attrs&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;class&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;btn-check&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}),&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Adding that attribute to the form did the trick. With that little tweak I was able to achieve way better UX and eliminate
+and unnecessary dropdown. &lt;/p&gt;
+&lt;div class=&#34;row justify-content-center py-5&#34;&gt;
+&lt;div class=&#34;col text-center&#34;&gt;
+&lt;div class=&#34;btn-group&#34; role=&#34;group&#34; aria-label=&#34;Basic radio toggle button group&#34;&gt;
+&lt;input type=&#34;radio&#34; class=&#34;btn-check&#34; name=&#34;freqbtnradio&#34; id=&#34;freqbtnradio1&#34; autocomplete=&#34;off&#34; checked&gt;
+&lt;label class=&#34;btn btn-outline-primary&#34; for=&#34;freqbtnradio1&#34;&gt;Daily&lt;/label&gt;
+
+&lt;input type=&#34;radio&#34; class=&#34;btn-check&#34; name=&#34;freqbtnradio&#34; id=&#34;freqbtnradio2&#34; autocomplete=&#34;off&#34;&gt;
+&lt;label class=&#34;btn btn-outline-primary&#34; for=&#34;freqbtnradio2&#34;&gt;Weekly&lt;/label&gt;
+
+&lt;input type=&#34;radio&#34; class=&#34;btn-check&#34; name=&#34;freqbtnradio&#34; id=&#34;freqbtnradio3&#34; autocomplete=&#34;off&#34;&gt;
+&lt;label class=&#34;btn btn-outline-primary&#34; for=&#34;freqbtnradio3&#34;&gt;Monthly&lt;/label&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This was it for me but in case you have a few more choices to select from (maybe 5-9 items) and you still
+would like to present them to the user this might not be a good choice since button group will
+most likely be too wide for small screens and overflow. &lt;/p&gt;
+&lt;p&gt;In this case you can switch to splitting choices into individual buttons and arranging them in a grid
+rather than a single row. Then your CSS framework can take over and manage the responsive layout for
+smaller screens where you probably want to either switch to a more vertical layout or a grid layout.&lt;/p&gt;
+&lt;p&gt;Let me add two more choices to my original form to illustrate how could it look like&lt;/p&gt;
+&lt;div class=&#34;codehilite&#34;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;FrequencyForm&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;forms&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Form&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;choices&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;1D&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;Daily&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;1W&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;Weekly),&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;1M&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;Monthly&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;1Q&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;Quarterly&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;1Y&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;Yearly&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;freq&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;forms&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ChoiceField&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;label&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Category&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;choices&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;choices&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;widget&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;forms&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;RadioSelect&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;attrs&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;class&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;btn-check&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}),&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In the template we need to wrap all choice fields in a &lt;code&gt;row&lt;/code&gt; and each input + label
+tag in a &lt;code&gt;col&lt;/code&gt; with appropriate widths for each display breakpoint. This is bootstrap
+specific so check out &lt;a href=&#34;https://getbootstrap.com/docs/5.2/layout/breakpoints/&#34;&gt;bootstrap layout&lt;/a&gt;
+if you want to know more. &lt;/p&gt;
+&lt;div class=&#34;codehilite&#34;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;form&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;div&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;row&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+{% for choice in form.freq %}
+    &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;div&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;col-4 col-md-3 col-lg-2&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+    {{ choice.tag }}
+    &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;label&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;btn btn-outline-primary&amp;quot;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;for&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;{{ choice.id_for_label }}&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;{{ choice.choice_label }}&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;label&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;div&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+{% endfor %}
+&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;form&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This is now rendered as independent radio buttons &lt;/p&gt;
+&lt;div class=&#34;row justify-content-center py-5&#34;&gt;
+&lt;div class=&#34;col text-center&#34;&gt;
+    &lt;form&gt;
+    &lt;div class=&#34;row justify-content-center&#34;&gt;
+        &lt;div class=&#34;col-4 col-md-3 col-lg-2 py-2&#34;&gt;
+        &lt;input type=&#34;radio&#34; class=&#34;btn-check&#34; name=&#34;choice&#34; id=&#34;radio-1&#34; value=&#34;1D&#34;&gt;
+        &lt;label class=&#34;btn btn-outline-primary btn-lg&#34; for=&#34;radio-1&#34;&gt;Daily&lt;/label&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;col-4 col-md-3 col-lg-2 py-2&#34;&gt;
+        &lt;input type=&#34;radio&#34; class=&#34;btn-check&#34; name=&#34;choice&#34; id=&#34;radio-2&#34; value=&#34;1W&#34;&gt;
+        &lt;label class=&#34;btn btn-outline-primary btn-lg&#34; for=&#34;radio-2&#34;&gt;Weekly&lt;/label&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;col-4 col-md-3 col-lg-2 py-2&#34;&gt;
+        &lt;input type=&#34;radio&#34; class=&#34;btn-check&#34; name=&#34;choice&#34; id=&#34;radio-3&#34; value=&#34;1M&#34;&gt;
+        &lt;label class=&#34;btn btn-outline-primary btn-lg&#34; for=&#34;radio-3&#34;&gt;Monthly&lt;/label&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;col-4 col-md-3 col-lg-2 py-2&#34;&gt;
+        &lt;input type=&#34;radio&#34; class=&#34;btn-check&#34; name=&#34;choice&#34; id=&#34;radio-4&#34; value=&#34;1Q&#34;&gt;
+        &lt;label class=&#34;btn btn-outline-primary btn-lg&#34; for=&#34;radio-4&#34;&gt;Quartely&lt;/label&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;col-4 col-md-3 col-lg-2 py-2&#34;&gt;
+        &lt;input type=&#34;radio&#34; class=&#34;btn-check&#34; name=&#34;choice&#34; id=&#34;radio-5&#34; value=&#34;1Y&#34;&gt;
+        &lt;label class=&#34;btn btn-outline-primary btn-lg&#34; for=&#34;radio-5&#34;&gt;Yearly&lt;/label&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;/form&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;p&gt;If you&#39;re using django and a css framework like bootstrap it does not take much
+effort to adapt your forms and improve overall user experience and at the same
+time conform to modern standard for look and feel of your web app. If you have
+similar quick improvements please share below since I&#39;m always on the lookout
+for how to improve usability.&lt;/p&gt;
+&lt;hr&gt;</content>
   </entry>
   <entry xml:base="http://localhost/latest.atom/">
     <title type="text">Zeolite pore size oddity</title>
@@ -245,5 +445,50 @@ sudo apt full-upgrade
 &lt;p&gt;Before diving in and doing the update it might be worth while to read the
 [official upgrade guide] just in case something goes wrong during your
 installation.&lt;/p&gt;</content>
+  </entry>
+  <entry xml:base="http://localhost/latest.atom/">
+    <title type="text">Chemical kinetics with python</title>
+    <id>http://localhost/blog/chemical-kinetics-with-python/</id>
+    <updated>2017-06-12T12:00:00Z</updated>
+    <published>2017-06-12T12:00:00Z</published>
+    <link href="http://localhost/blog/chemical-kinetics-with-python/" />
+    <content type="html">&lt;p&gt;Chemical reactions is what nearly all branches of chemistry
+are dealing with on daily basis. They provide a fundamental framework
+to express observable changes of matter in a quantitative manner.&lt;/p&gt;
+&lt;div class=&#34;row&#34; style=&#34;padding-top: 20px;padding-bottom: 20px;&#34;&gt;
+  &lt;figure&gt;
+    &lt;img class=&#34;img-responsive center-block&#34; width=760px src=&#34;../../static/img/pfr_animation.gif&#34;&gt;
+  &lt;/figure&gt; 
+&lt;/div&gt;
+
+&lt;p&gt;\begin{align}
+A &amp;amp; \xrightarrow{k_1} B \\
+A &amp;amp; \xrightarrow{k_2} C \\
+\end{align}&lt;/p&gt;
+&lt;p&gt;leading to the set of kinetic equations&lt;/p&gt;
+&lt;p&gt;\begin{align}
+\frac{d[A]}{dt} &amp;amp;= -(k_1 + k_2) [A] \\
+\frac{d[B]}{dt} &amp;amp;= k_1 [A] \\
+\frac{d[C]}{dt} &amp;amp;= k_2 [A] \\
+\end{align}&lt;/p&gt;
+&lt;p&gt;with a solution new&lt;/p&gt;
+&lt;p&gt;\begin{align}
+[A] &amp;amp;= [A]_{0} e^{-(k_1 + k_2)t} \\
+[B] &amp;amp;= \frac{k_1}{k_1 + k_2}  [A]_{0} \left(1 - e^{-(k_1 + k_2)t}\right) \\
+[C] &amp;amp;= \frac{k_2}{k_1 + k_2} [A]_{0} \left(1 - e^{-(k_1 + k_2)t}\right) \\
+\end{align}&lt;/p&gt;
+&lt;p&gt;in python&lt;/p&gt;
+&lt;div class=&#34;codehilite&#34;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;numpy&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;np&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;scipy&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;sp&lt;/span&gt;
+
+&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;args&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;pass&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;or in fortran&lt;/p&gt;
+&lt;div class=&#34;codehilite&#34;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class=&#34;k&#34;&gt;use &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;newmodule&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;
+
+&lt;span class=&#34;k&#34;&gt;write&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;hello world&amp;quot;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content>
   </entry>
 </feed>

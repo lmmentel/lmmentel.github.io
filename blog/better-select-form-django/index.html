@@ -1,0 +1,475 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Homepage">
+    <meta name="author" content="Łukasz Mentel">
+    <meta name="copyright" content="Łukasz Mentel">
+
+    <title>Better select forms with django and Bootstrap 5</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;400;600&family=Roboto+Mono&family=Sanchez&display=swap" rel="stylesheet">
+
+    <link rel="icon" href="../../static/img/favicon.ico">
+
+    <!-- Font Awesome  -->
+    <link rel="stylesheet" href="../../static/css/font-awesome.min.css">
+
+    <!-- Acadmicons  -->
+    <link rel="stylesheet" href="../../static/css/academicons.min.css">
+
+    <!-- Pygments -->
+    <link rel="stylesheet" type="text/css" href="../../static/css/codehilite.monokai.css">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="../../static/css/styling.css">
+
+    <!-- MathJax -->
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+
+  <body class="d-flex flex-column min-vh-100">
+
+  <nav class="navbar navbar-expand-lg container-lg justify-content-center py-3 post mx-auto">
+    <div class="container-xl">
+        <a href="../../index.html" class="navbar-brand me-auto"><span class="logo-thin">Łukasz</span><span class="logo-thick">Mentel</span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive">
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="navbar-collapse collapse w-100" id="navbarResponsive">
+            <ul class="nav navbar-nav ms-auto">
+              <li class="nav-item">
+                <a href="../index.html" class="nav-link"> Writing </a>
+              </li>
+              <li class="nav-item">
+                <a href="../../software/index.html" class="nav-link"> Projects </a>
+              </li>
+              <li class="nav-item">
+                <a href="../../about/index.html" class="nav-link"> About </a>
+              </li>
+              <li class="nav-item">
+                <a href="../../contact/index.html" class="nav-link"> Contact </a>
+              </li>
+              <li class="nav-item">
+                <button title="Switch Theme" aria-label="Switch Theme" class="toggle-theme"id="themeSwitch">
+                  <svg width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" stroke="none" class="icon-dark">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                  </svg>
+                  <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-light">
+                      <circle cx="12" cy="12" r="5" fill="currentColor"></circle>
+                      <line x1="12" y1="1" x2="12" y2="3"></line>
+                      <line x1="12" y1="21" x2="12" y2="23"></line>
+                      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                      <line x1="1" y1="12" x2="3" y2="12"></line>
+                      <line x1="21" y1="12" x2="23" y2="12"></line>
+                      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                  </svg>
+                </button>
+              </li>
+            </ul>
+        </div>
+    </div>
+  </nav>
+
+
+  
+
+  <div class="container">
+    <div class="row">
+      <div class="col post mx-auto">
+
+        <p class="text-muted mt-3 text-end">
+          
+            <a href="../../tag/django/index.html" class="tag">django</a>
+          
+            <a href="../../tag/python/index.html" class="tag">python</a>
+          
+            <a href="../../tag/ux/index.html" class="tag">ux</a>
+          
+          16 October 2022
+        </p>
+        <h1>Better select forms with django and Bootstrap 5</h1>
+        <h2 class="subtitle">Small tweaks to improve user experience and avoid dropdowns</h2>
+        <p><img class="rounded mx-auto shadow-lg d-block" src="../static/img/kelly-sikkema-hLit2zL-Dhk-unsplash.jpg" alt="web design"></p>
+<p class="text-muted small text-end">Photo by <a href="https://unsplash.com/@kellysikkema?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Kelly Sikkema</a> on <a href="https://unsplash.com/s/photos/user-interaction?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+</p>
+
+<hr>
+
+<p>I enjoy working with <a href="https://www.djangoproject.com/">Django</a> for many
+reasons but mostly since I can focus on what I want my app to do 
+and django happily takes care of the rest. In 2022 it's probably not
+the sexiest choice when it comes to web frameworks, but there are good reasons it is still as popular as it is.
+There is a recent wave of excitement about server side rendering frameworks thanks
+to a new batch of tools like <a href="https://htmx.org/">HTMX</a>, <a href="https://www.django-unicorn.com/">django-unicorn</a> and
+<a href="https://github.com/jonathan-s/django-sockpuppet">django-sockpuppet</a> that give django
+superpowers and put into question the <code>React</code> based paradigm for building apps. 
+But that's a digression for another time.</p>
+<p>Django takes care of a lot of stuff behind the scenes and that is a solid productivity
+boost. Being a mature framework means that is has opinions (mostly for very good reasons) and
+provides you with defaults that are sensible in most o the cases. There are
+however cases when it's worth to make some changes to improve end-user experience.</p>
+<p>One such aspect is the default UI widget for selecting items. I am of course
+talking about <a href="https://en.wikipedia.org/wiki/Drop-down_list">dropdowns</a>.
+They have been around since forever and although being familiar they are usually
+not the best choice when it comes to modern UX standards. Out in the wild
+you can find professionals suggesting <a href="https://www.nngroup.com/articles/drop-down-menus/">caution when using dropdowns</a>
+and calls to <a href="https://adrianroselli.com/2020/03/stop-using-drop-down.html">stop using drop-downs</a> at all. </p>
+<p>Personally I would like to adhere to good UX practices as far as I can 
+and although my level of comfort increases with
+proximity to backend side of things I cannot be annoyed by all the low hanging
+fruit that sometimes plague otherwise good products. Wanting things to look good
+without a massive design effort is one of the reasons I usually reach for a
+frontend framework, most often <a href="https://getbootstrap.com/">bootstrap</a>. 
+With django that means using <a href="https://github.com/django-crispy-forms/django-crispy-forms">django crispy forms</a>
+to get the forms looking sharp and consistent with an extra line in the template.</p>
+<h2>Making choices</h2>
+<p>One of the things I was recently working on is a django-based dashboard where
+I wanted to have the option to choose the aggregation level between: <code>daily</code>, <code>weekly</code>, <code>monthly</code> aggregates.
+Of course my first pass was the default <code>forms.Select</code> widget that is a dropdown.
+Once I saw the result on the screen though, I felt something is off, and that this should probably be improved.
+Usually I try to move on until I have a working prototype that I can iterate over. Following the
+Kent Beck's principle</p>
+<blockquote class="blockquote text-center py-5">make it work, make it right, make it fast</blockquote>
+
+<p>When I got everything wired up and working it seemed like a good time get back to the select widget and scratch that itch. </p>
+<p>On the django side I had a form to represent the choices </p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
+
+<span class="k">class</span> <span class="nc">FrequencyForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
+    <span class="n">choices</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;1D&quot;</span><span class="p">,</span> <span class="s2">&quot;Daily&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;1W&quot;</span><span class="p">,</span> <span class="s2">&quot;Weekly),</span>
+        <span class="p">(</span><span class="s2">&quot;1M&quot;</span><span class="p">,</span> <span class="s2">&quot;Monthly&quot;</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="n">freq</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">ChoiceField</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Frequency&quot;</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">choices</span><span class="p">)</span>
+</code></pre></div>
+
+<p>which was being rendered in a template with pretty standard django</p>
+<div class="codehilite"><pre><span></span><code>{% load crispy_forms_tags %}
+...
+{{ form|crispy }}
+</code></pre></div>
+
+<p>The effect isn't surprising either</p>
+<div class="row mb-5">
+<div class="col-md-4 mx-auto">
+<div id="div_id_freq" class="mb-3"> <label for="id_freq" class="form-label requiredField">
+    Frequency<span class="asteriskField">*</span> </label> <select name="freq" class="select form-select" id="id_freq">
+    <option value="1D">Daily</option> <option value="1W" selected="">Weekly</option>
+    <option value="1M">Monthly</option>
+</select>
+</div>
+</div>
+</div>
+
+<p>I didn't want for the options to be hidden, so the next best thing was to switch to a radio select
+by changing the for widget to <code>RadioSelect</code> and keeping the template as is</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
+
+<span class="k">class</span> <span class="nc">FrequencyForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
+    <span class="n">choices</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;1D&quot;</span><span class="p">,</span> <span class="s2">&quot;Daily&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;1W&quot;</span><span class="p">,</span> <span class="s2">&quot;Weekly),</span>
+        <span class="p">(</span><span class="s2">&quot;1M&quot;</span><span class="p">,</span> <span class="s2">&quot;Monthly&quot;</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="n">freq</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">ChoiceField</span><span class="p">(</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Frequency&quot;</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="n">choices</span><span class="p">,</span>
+        <span class="n">widget</span><span class="o">=</span><span class="n">forms</span><span class="o">.</span><span class="n">RadioSelect</span><span class="p">(),</span>
+    <span class="p">)</span>
+</code></pre></div>
+
+<p>This gives</p>
+<div class="row mb-5">
+<div class="col-md-4 mx-auto">
+<div id="div_id_freq" class="mb-3">
+    <label class="form-label requiredField">Frequency<span class="asteriskField">*</span></label>
+    <div>
+        <div class="form-check"> <input type="radio" class="form-check-input" name="freq" value="1D" id="id_freq_0" required=""> <label for="id_freq_0" class="form-check-label">
+            Daily
+        </label> </div>
+        <div class="form-check"> <input type="radio" class="form-check-input" name="freq" value="W" id="id_freq_1" required="" checked=""> <label for="id_freq_1" class="form-check-label">
+            Weekly
+        </label> </div>
+        <div class="form-check"> <input type="radio" class="form-check-input" name="freq" value="MS" id="id_freq_2" required=""> <label for="id_freq_2" class="form-check-label">
+            Monthly
+        </label> </div>
+    </div>
+</div>
+</div>
+</div>
+
+<p>Bettter but I still wasn't happy with the result. When looking for inspiration I
+found <a href="https://www.learnui.design/blog/4-rules-intuitive-ux.html">this post</a>
+suggesting a segmented button that reminded me of what I saw in latest
+<a href="https://getbootstrap.com/docs/5.0/components/button-group/#checkbox-and-radio-button-groups">Bootstrap 5 docs</a>
+so I decided to give it a go since I was already using Bootstrap.</p>
+<p>Looking at the example from Bootstrap it became clear that I would have to render
+the form manually. The example I started from was this:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn-group&quot;</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;group&quot;</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;Basic radio toggle button group&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;radio&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn-check&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;btnradio&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;btnradio1&quot;</span> <span class="na">autocomplete</span><span class="o">=</span><span class="s">&quot;off&quot;</span> <span class="na">checked</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">label</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-outline-primary&quot;</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;btnradio1&quot;</span><span class="p">&gt;</span>Radio 1<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;radio&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn-check&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;btnradio&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;btnradio2&quot;</span> <span class="na">autocomplete</span><span class="o">=</span><span class="s">&quot;off&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">label</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-outline-primary&quot;</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;btnradio2&quot;</span><span class="p">&gt;</span>Radio 2<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;radio&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn-check&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;btnradio&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;btnradio3&quot;</span> <span class="na">autocomplete</span><span class="o">=</span><span class="s">&quot;off&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">label</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-outline-primary&quot;</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;btnradio3&quot;</span><span class="p">&gt;</span>Radio 3<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<p>which looks like </p>
+<div class="row justify-content-center py-5">
+<div class="col text-center">
+<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+<label class="btn btn-outline-primary" for="btnradio1">Radio 1</label>
+
+<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+<label class="btn btn-outline-primary" for="btnradio2">Radio 2</label>
+
+<input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+<label class="btn btn-outline-primary" for="btnradio3">Radio 3</label>
+</div>
+</div>
+</div>
+
+<p>Pretty nice! I went ahead and updated my template and instead of the <code>{{ form|crispy }}</code>
+elements I went ahead and unfolded the form and added the classes and attributes to render
+the button group:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn-group&quot;</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;group&quot;</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;Basic radio toggle button group&quot;</span><span class="p">&gt;</span>
+    {% for choice in form.freq %}
+        {{ choice.tag }}
+        <span class="p">&lt;</span><span class="nt">label</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-outline-primary&quot;</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;{{ choice.id_for_label }}&quot;</span><span class="p">&gt;</span>{{ choice.choice_label }}<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+    {% endfor %}
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<p>Everything looked nice when rendered however when clicking on the buttons they wouldn't stay selected as they should. They would
+change back to unselected which was annoying. I had to compare the original HTML with my rendered version to
+realize that the <code>&lt;input&gt;</code> tags in my case were missing s <code>class="btn-check"</code> attribute, so I modified
+the form to have that added </p>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">FrequencyForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
+    <span class="n">choices</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;1D&quot;</span><span class="p">,</span> <span class="s2">&quot;Daily&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;1W&quot;</span><span class="p">,</span> <span class="s2">&quot;Weekly),</span>
+        <span class="p">(</span><span class="s2">&quot;1M&quot;</span><span class="p">,</span> <span class="s2">&quot;Monthly&quot;</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="n">freq</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">ChoiceField</span><span class="p">(</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Category&#39;</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="n">choices</span><span class="p">,</span>
+        <span class="n">widget</span><span class="o">=</span><span class="n">forms</span><span class="o">.</span><span class="n">RadioSelect</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span><span class="s1">&#39;btn-check&#39;</span><span class="p">}),</span>
+    <span class="p">)</span>
+</code></pre></div>
+
+<p>Adding that attribute to the form did the trick. With that little tweak I was able to achieve way better UX and eliminate
+and unnecessary dropdown. </p>
+<div class="row justify-content-center py-5">
+<div class="col text-center">
+<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+<input type="radio" class="btn-check" name="freqbtnradio" id="freqbtnradio1" autocomplete="off" checked>
+<label class="btn btn-outline-primary" for="freqbtnradio1">Daily</label>
+
+<input type="radio" class="btn-check" name="freqbtnradio" id="freqbtnradio2" autocomplete="off">
+<label class="btn btn-outline-primary" for="freqbtnradio2">Weekly</label>
+
+<input type="radio" class="btn-check" name="freqbtnradio" id="freqbtnradio3" autocomplete="off">
+<label class="btn btn-outline-primary" for="freqbtnradio3">Monthly</label>
+</div>
+</div>
+</div>
+
+<p>This was it for me but in case you have a few more choices to select from (maybe 5-9 items) and you still
+would like to present them to the user this might not be a good choice since button group will
+most likely be too wide for small screens and overflow. </p>
+<p>In this case you can switch to splitting choices into individual buttons and arranging them in a grid
+rather than a single row. Then your CSS framework can take over and manage the responsive layout for
+smaller screens where you probably want to either switch to a more vertical layout or a grid layout.</p>
+<p>Let me add two more choices to my original form to illustrate how could it look like</p>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">FrequencyForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
+    <span class="n">choices</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;1D&quot;</span><span class="p">,</span> <span class="s2">&quot;Daily&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;1W&quot;</span><span class="p">,</span> <span class="s2">&quot;Weekly),</span>
+        <span class="p">(</span><span class="s2">&quot;1M&quot;</span><span class="p">,</span> <span class="s2">&quot;Monthly&quot;</span><span class="p">)</span>
+        <span class="p">(</span><span class="s2">&quot;1Q&quot;</span><span class="p">,</span> <span class="s2">&quot;Quarterly&quot;</span><span class="p">)</span>
+        <span class="p">(</span><span class="s2">&quot;1Y&quot;</span><span class="p">,</span> <span class="s2">&quot;Yearly&quot;</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="n">freq</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">ChoiceField</span><span class="p">(</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Category&#39;</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="n">choices</span><span class="p">,</span>
+        <span class="n">widget</span><span class="o">=</span><span class="n">forms</span><span class="o">.</span><span class="n">RadioSelect</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span><span class="s1">&#39;btn-check&#39;</span><span class="p">}),</span>
+    <span class="p">)</span>
+</code></pre></div>
+
+<p>In the template we need to wrap all choice fields in a <code>row</code> and each input + label
+tag in a <code>col</code> with appropriate widths for each display breakpoint. This is bootstrap
+specific so check out <a href="https://getbootstrap.com/docs/5.2/layout/breakpoints/">bootstrap layout</a>
+if you want to know more. </p>
+<div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">form</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="p">&gt;</span>
+{% for choice in form.freq %}
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-4 col-md-3 col-lg-2&quot;</span><span class="p">&gt;</span>
+    {{ choice.tag }}
+    <span class="p">&lt;</span><span class="nt">label</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-outline-primary&quot;</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;{{ choice.id_for_label }}&quot;</span><span class="p">&gt;</span>{{ choice.choice_label }}<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+{% endfor %}
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<p>This is now rendered as independent radio buttons </p>
+<div class="row justify-content-center py-5">
+<div class="col text-center">
+    <form>
+    <div class="row justify-content-center">
+        <div class="col-4 col-md-3 col-lg-2 py-2">
+        <input type="radio" class="btn-check" name="choice" id="radio-1" value="1D">
+        <label class="btn btn-outline-primary btn-lg" for="radio-1">Daily</label>
+        </div>
+        <div class="col-4 col-md-3 col-lg-2 py-2">
+        <input type="radio" class="btn-check" name="choice" id="radio-2" value="1W">
+        <label class="btn btn-outline-primary btn-lg" for="radio-2">Weekly</label>
+        </div>
+        <div class="col-4 col-md-3 col-lg-2 py-2">
+        <input type="radio" class="btn-check" name="choice" id="radio-3" value="1M">
+        <label class="btn btn-outline-primary btn-lg" for="radio-3">Monthly</label>
+        </div>
+        <div class="col-4 col-md-3 col-lg-2 py-2">
+        <input type="radio" class="btn-check" name="choice" id="radio-4" value="1Q">
+        <label class="btn btn-outline-primary btn-lg" for="radio-4">Quartely</label>
+        </div>
+        <div class="col-4 col-md-3 col-lg-2 py-2">
+        <input type="radio" class="btn-check" name="choice" id="radio-5" value="1Y">
+        <label class="btn btn-outline-primary btn-lg" for="radio-5">Yearly</label>
+        </div>
+    </div>
+    </form>
+</div>
+</div>
+
+<h2>Summary</h2>
+<p>If you're using django and a css framework like bootstrap it does not take much
+effort to adapt your forms and improve overall user experience and at the same
+time conform to modern standard for look and feel of your web app. If you have
+similar quick improvements please share below since I'm always on the lookout
+for how to improve usability.</p>
+<hr>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col post mx-auto">
+        <script src="https://utteranc.es/client.js"
+          repo="lmmentel/lmmentel.github.io"
+          issue-term="title"
+          theme="github-light"
+          crossorigin="anonymous"
+          async>
+        </script>
+      </div>
+    </div>
+  </div>
+
+
+  
+  <footer class="blog-footer mx-auto mt-auto">
+    <div class="row">
+      <div class="col">
+        <p class="text-muted text-center">
+          <i class="fa fa-copyright" aria-hidden="true"></i> Copyright 2015-2022 by Łukasz Mentel
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="social text-center" style="font-size: 32px;">
+          <ul class="list-inline" id="socialicons">
+
+          <script language="JavaScript">
+            u = 'lmmentel';
+            s = 'gmail.com';
+            document.write('<a href=\"mailto:' + u + '@' + s + '\" target=\"_blank\" title=\"Gmail\">');
+          </script>
+              <li><i class="fa fa-envelope-o" aria-hidden="true"></i> </li>
+          </a>
+
+            <li><a href="https://github.com/lmmentel" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a></li>
+            <li><a href="https://bitbucket.org/lukaszmentel" title="Bitbucket"><i class="fa fa-bitbucket" aria-hidden="true"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/lukasz-mentel" title="LinkedIn"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+            <li><a href="https://www.mendeley.com/profiles/lukasz-mentel2/" title="Mendeley"><i class="ai ai-mendeley"></i></a></li>
+            <li><a href="http://scholar.google.com/citations?user=TTL9ux0AAAAJ&hl=en" title="GoogleScholar"><i class="ai ai-google-scholar"></i></a></li>
+            <li><a href="https://www.researchgate.net/profile/Lukasz_Mentel/" title="ResearchGate"><i class="ai ai-researchgate"></i></a></li>
+            <li><a href="../../latest.atom/index.html" title="Atom"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div><a href="../../credits/index.html" class="text-muted">Credits</a></div>
+  </footer>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <!-- Google Analytics code -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-87210403-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
+    <script>
+      const changeThemeToDark = () => {
+          document.body.classList.add('theme-dark')
+          localStorage.setItem("data-theme", "dark")
+      }
+      const changeThemeToLight = () => {
+          document.body.classList.remove('theme-dark')
+          localStorage.setItem("data-theme", 'light')
+      }
+      // set initial value
+      let theme = localStorage.getItem('data-theme');
+      console.log(theme);
+      if (theme === 'dark') {
+          changeThemeToDark()
+        }
+        else {
+          changeThemeToLight()  
+        };
+
+      document.getElementById('themeSwitch').addEventListener('click',()=>{
+        let theme = localStorage.getItem('data-theme');
+        console.log(theme);
+        if (theme === 'dark') {
+            changeThemeToLight()
+          }
+          else {
+            changeThemeToDark()  
+          }
+      })
+    </script>
+
+    
+    
+
+  </body>
+</html>

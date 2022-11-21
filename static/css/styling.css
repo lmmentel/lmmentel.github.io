@@ -10321,6 +10321,17 @@ a:focus {
   color: #c9266a;
 }
 
+.pill {
+  background-color: #d4d4d4;
+  border-radius: 20px;
+  color: #212529;
+  display: inline-block;
+  line-height: 1.5em;
+  padding: 0.5em 1em;
+  vertical-align: central;
+  font-size: 90%;
+}
+
 .tag,
 a.tag {
   background-color: #d4d4d4;
