@@ -100,7 +100,7 @@
           22 May 2017
         </p>
         <h1>Visualizing reactor simulation results</h1>
-        <h2 class="subtitle">Exploring the versatile matplotlib package.</h2>
+        <h2 class="subtitle text-muted">Exploring the versatile matplotlib package.</h2>
         <p>Recently I was involved in a project where I was simulating a chemical
 reaction network leading to the deactivation of a solid catalyst in a tubular
 reactor. As a result of those simulations I obtained concentrations of several
@@ -113,7 +113,7 @@ most powerful python plotting libraries, namely <a href="https://matplotlib.org/
 <!-- The same colormap was chosen for all the visualizations for easier visual comparison
 between the results. -->
 
-<h2>The data</h2>
+<h2 id="the-data">The data</h2>
 <p>Going into a detailed description of the particular model used to produce the
 data deserves a separate post and therefore I'll just mention a few important
 points here and probably write a full length post about it some time in the future.</p>
@@ -130,7 +130,7 @@ shape 438 x 200. This means that for a given specie each row of the array
 holds it's concentration profile along the reactor at a specific time.
 Analogously each column of the array stores the evolution of the concentration
 in a discrete reactor segment.</p>
-<h2>Heatmap</h2>
+<h2 id="heatmap">Heatmap</h2>
 <p>A <a href="https://en.wikipedia.org/wiki/Heat_map">heat map</a> is probably the most
 obvious way of graphically representing a 3D dataset on a flat 2D plot. Each
 value of the matrix is mapped into (or encoded with) a color patch placed at
@@ -156,7 +156,7 @@ have meaningful axis labels and tick values I tweaked some of the respective
 settings.</p>
 <script src="https://gist.github.com/lmmentel/688d0c5d4101a2cfdb3bb3913c9aa674.js"></script>
 
-<h2>3D Plot</h2>
+<h2 id="3d-plot">3D Plot</h2>
 <p>Since the data we have is 3-dimensional in a sense that we can assign an <em>x</em>,
 <em>y</em> and <em>z</em> axes it seems only natural to try and plot it in 3D (more
 accurately a 2D projection of a 3D plot). Since we can safely assume that the
@@ -176,7 +176,7 @@ method to do the work for us. As in the previous case rest of the code is mostly
 of the display settings of the axes and labels.</p>
 <script src="https://gist.github.com/lmmentel/5ef001dece7165f71d4b114fbe43c2a9.js"></script>
 
-<h2>Animation</h2>
+<h2 id="animation">Animation</h2>
 <p><a href="https://matplotlib.org/">matplotlib</a> also allows making
 <a href="http://matplotlib.org/examples/animation/">animations</a> and saving them as
 gifs or one of the video formats. Here I'll animate the deactivation data
@@ -211,7 +211,7 @@ creates a pseudocolor plot of a 2D array and can be thought of as a low-level
 function for creating heatmaps.</p>
 <script src="https://gist.github.com/lmmentel/1154b9289eb4a06e4823ffb38f4f3a7a.js"></script>
 
-<h2>Summary</h2>
+<h2 id="summary">Summary</h2>
 <p>Out of the three visualization methods above I think the most intuitive one is
 the animation since it quickly conveys the message and it's mostly self
 explanatory. This makes it a preferable choice for slide presentations, web pages
@@ -248,7 +248,7 @@ to be decided based on some trials and the features of the dataset. </p>
     <div class="row">
       <div class="col">
         <p class="text-muted text-center">
-          <i class="fa fa-copyright" aria-hidden="true"></i> Copyright 2015-2022 by Łukasz Mentel
+          <i class="fa fa-copyright" aria-hidden="true"></i> Copyright 2015-2023 by Łukasz Mentel
         </p>
       </div>
     </div>

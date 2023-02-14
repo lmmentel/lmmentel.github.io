@@ -100,7 +100,7 @@
           28 May 2017
         </p>
         <h1>Visualizing ASE structures in Jupyter notebook</h1>
-        <h2 class="subtitle">A few options worth considering.</h2>
+        <h2 class="subtitle text-muted">A few options worth considering.</h2>
         <p>Since I first heard about the <a href="http://jupyter.org/">Jupyter notebook</a> (around that time it
 was called <em>ipython notebook</em>) I instantly adopted it into my work flow for
 rapid testing, developing and most of all experimenting and playing around
@@ -142,7 +142,7 @@ alternative - let me know.</p>
 | jupyter   | 1.0.0                   |
 | OS        | Linux 3.16.0 debian 8.8 | -->
 
-<h1>html</h1>
+<h1 id="html">html</h1>
 <p><a href="https://wiki.fysik.dtu.dk/ase/">ASE</a> has a builtin format
 <a href="https://wiki.fysik.dtu.dk/ase/ase/io/io.html#module-ase.io">converter</a> (or
 writer) to html that uses the <a href="https://www.x3dom.org/">x3dom</a> library to
@@ -336,7 +336,7 @@ more examples see, the short <a href="http://nbviewer.jupyter.org/github/lmmente
   </X3D>
 </div>
 
-<h1>nglview</h1>
+<h1 id="nglview">nglview</h1>
 <p>The most feature rich option is offered by the <a href="https://github.com/arose/nglview">nglview</a> package that provides a
 <a href="http://jupyter.org/">Jupyter</a> widget for interactive visualizations of chemical structures and
 trajectories. It is built on top of the <a href="https://github.com/arose/ngl">NGL Viewer</a>
@@ -384,7 +384,7 @@ passing an additional parameter to the viewer</p>
 </code></pre></div>
 
 <p>that will show a menu with a lot of options to adjust.</p>
-<h1>imolecule</h1>
+<h1 id="imolecule">imolecule</h1>
 <p><a href="https://github.com/patrickfuller/imolecule">imolecule</a> is an embeddable
 <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API">WebGL</a>
 viewer that comes with a convenient chemical format
@@ -453,7 +453,7 @@ objects and returns a json representation compatible with <a href="https://githu
     <span class="k">return</span> <span class="n">imolecule</span><span class="o">.</span><span class="n">format_converter</span><span class="o">.</span><span class="n">pybel_to_json</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 </code></pre></div>
 
-<h1>chemview</h1>
+<h1 id="chemview">chemview</h1>
 <p><a href="https://chemview.readthedocs.io/en/latest/">chemview</a> is another option which utilizes the <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API">WebGL</a>
 and <a href="http://threejs.org/">three.js</a> libraries. It is pretty easy to install since it can be done
 using <a href="https://www.continuum.io/">conda</a>:</p>
@@ -549,7 +549,7 @@ where the above function is used to display a couple of <a href="https://wiki.fy
     <div class="row">
       <div class="col">
         <p class="text-muted text-center">
-          <i class="fa fa-copyright" aria-hidden="true"></i> Copyright 2015-2022 by Łukasz Mentel
+          <i class="fa fa-copyright" aria-hidden="true"></i> Copyright 2015-2023 by Łukasz Mentel
         </p>
       </div>
     </div>

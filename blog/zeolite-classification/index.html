@@ -98,8 +98,8 @@
           28 March 2017
         </p>
         <h1>Zeolite Framework Classification</h1>
-        <h2 class="subtitle">Visualization of zeolite topologies classification using bokeh.</h2>
-        <h1>Introduction</h1>
+        <h2 class="subtitle text-muted">Visualization of zeolite topologies classification using bokeh.</h2>
+        <h1 id="introduction">Introduction</h1>
 <p>Zeolites are fascinating materials with quite unique properties. They belong to what
 is often referred to as microporous materials which means that they contain
 pores that do not exceed 2 nm (20 &#8491;). That is probably why they earned
@@ -171,13 +171,13 @@ systems <em><strong>D</strong></em>=3.</p>
 <p>By the current count there are 229 unique topologies recognized by IZA.
 The complete listing of the channel system details for each framework can be 
 found in the <a href="http://www.sciencedirect.com/science/article/pii/B9780444530646503686">Appendix E – Channel System Dimensions</a> of the <a href="http://www.sciencedirect.com/science/book/9780444530646">Atlas of Zeolite Framework Types</a>.</p>
-<h1>Graphs</h1>
+<h1 id="graphs">Graphs</h1>
 <p>Having a convenient way for accessing the data on zeolite frameworks
 through the <a href="https://bitbucket.org/lukaszmentel/zefram">zefram package</a>
 we can explore how certain features are distributed. To 
 perform the basic data analysis and produce the nice visualizations below
 I chose <a href="http://bokeh.pydata.org/en/latest/">Bokeh</a> package since it's a very handy tool.</p>
-<h2>Channel size distribution</h2>
+<h2 id="channel-size-distribution">Channel size distribution</h2>
 <p>Let us start by looking at a histogram below showing the frequencies of the
 largest channel size (given as the number of T atoms) with a subdivision
 into different pore system dimensionalities. </p>
@@ -197,28 +197,28 @@ that belong to one of the categories described above as <em>small</em>, <em>medi
 <em>large</em> are color coded. Additionally if a given framework is composed solely
 of even numbered rings it is labeled as AlPO since it would be hypothetically
 possible to synthesize it as an aluminum phosphate (AlPO). </p>
-<h2>Zero-dimensional Frameworks</h2>
+<h2 id="zero-dimensional-frameworks">Zero-dimensional Frameworks</h2>
 <div style="padding-top: 30px;padding-bottom: 30px;">
 <img class="img-responsive center-block"
     src="../../static/img/zero_dimensional_frameworks.png"
     alt="Zero dimensional Zeolite Topologies" >
 </div>
 
-<h2>One-dimensional Frameworks</h2>
+<h2 id="one-dimensional-frameworks">One-dimensional Frameworks</h2>
 <div style="padding-top: 30px;padding-bottom: 30px;">
 <img class="img-responsive center-block" style="width:750px;margin: 0 auto;"
     src="../../static/img/one_dimensional_frameworks.png"
     alt="Unidirectional Zeolite Topologies">
 </div>
 
-<h1>Two-dimensional Frameworks</h1>
+<h1 id="two-dimensional-frameworks">Two-dimensional Frameworks</h1>
 <div style="padding-top: 30px;padding-bottom: 30px;">
 <img class="img-responsive center-block"
     src="../../static/img/two_dimensional_frameworks.png"
     alt="Bidirectional Zeolite Topologies">
 </div>
 
-<h1>Three-dimensional Frameworks</h1>
+<h1 id="three-dimensional-frameworks">Three-dimensional Frameworks</h1>
 <div style="text-align:right;padding-top: 30px;padding-bottom: 30px;">
 <img class="img-responsive center-block"
     src="../../static/img/three_dimensional_frameworks.png"
@@ -254,7 +254,7 @@ sphere that can be included.</p>
     <div class="row">
       <div class="col">
         <p class="text-muted text-center">
-          <i class="fa fa-copyright" aria-hidden="true"></i> Copyright 2015-2022 by Łukasz Mentel
+          <i class="fa fa-copyright" aria-hidden="true"></i> Copyright 2015-2023 by Łukasz Mentel
         </p>
       </div>
     </div>

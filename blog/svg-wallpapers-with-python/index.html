@@ -1,0 +1,804 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Homepage">
+    <meta name="author" content="Łukasz Mentel">
+    <meta name="copyright" content="Łukasz Mentel">
+
+    <title>Vector graphics wallpapers with python</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;400;600&family=Roboto+Mono&family=Sanchez&display=swap" rel="stylesheet">
+
+    <link rel="icon" href="../../static/img/favicon.ico">
+
+    <!-- Font Awesome  -->
+    <link rel="stylesheet" href="../../static/css/font-awesome.min.css">
+
+    <!-- Acadmicons  -->
+    <link rel="stylesheet" href="../../static/css/academicons.min.css">
+
+    <!-- Pygments -->
+    <link rel="stylesheet" type="text/css" href="../../static/css/codehilite.monokai.css">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="../../static/css/styling.css">
+
+    <!-- MathJax -->
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+
+  <body class="d-flex flex-column min-vh-100">
+
+  <nav class="navbar navbar-expand-lg container-lg justify-content-center py-3 post mx-auto">
+    <div class="container-xl">
+        <a href="../../index.html" class="navbar-brand me-auto"><span class="logo-thin">Łukasz</span><span class="logo-thick">Mentel</span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive">
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="navbar-collapse collapse w-100" id="navbarResponsive">
+            <ul class="nav navbar-nav ms-auto">
+              <li class="nav-item">
+                <a href="../index.html" class="nav-link"> Writing </a>
+              </li>
+              <li class="nav-item">
+                <a href="../../software/index.html" class="nav-link"> Projects </a>
+              </li>
+              <li class="nav-item">
+                <a href="../../about/index.html" class="nav-link"> About </a>
+              </li>
+              <li class="nav-item">
+                <a href="../../contact/index.html" class="nav-link"> Contact </a>
+              </li>
+              <li class="nav-item">
+                <button title="Switch Theme" aria-label="Switch Theme" class="toggle-theme"id="themeSwitch">
+                  <svg width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" stroke="none" class="icon-dark">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                  </svg>
+                  <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-light">
+                      <circle cx="12" cy="12" r="5" fill="currentColor"></circle>
+                      <line x1="12" y1="1" x2="12" y2="3"></line>
+                      <line x1="12" y1="21" x2="12" y2="23"></line>
+                      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                      <line x1="1" y1="12" x2="3" y2="12"></line>
+                      <line x1="21" y1="12" x2="23" y2="12"></line>
+                      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                  </svg>
+                </button>
+              </li>
+            </ul>
+        </div>
+    </div>
+  </nav>
+
+
+  
+
+  <div class="container">
+    <div class="row">
+      <div class="col post mx-auto">
+
+        <p class="text-muted mt-3 text-end">
+          
+            <a href="../../tag/python/index.html" class="tag">python</a>
+          
+            <a href="../../tag/graphics/index.html" class="tag">graphics</a>
+          
+          11 February 2023
+        </p>
+        <h1>Vector graphics wallpapers with python</h1>
+        <h2 class="subtitle text-muted">Creating repeatable patterns with basic shapes and lattices.</h2>
+        <p><img class="rounded mx-auto shadow-lg d-block" src="../../static/img/hexsin.svg" alt="sin wave on hexagonal lattice"></p>
+<p class="text-muted small text-end">Graphic by author
+</p>
+<hr>
+
+<h1 id="tldr">TL;DR</h1>
+<p>If you are not interested in any of the code or math but only want to see pretty graphics - jump straight to the
+<a href="#graphics">graphics</a> section.</p>
+<h1 id="introduction">Introduction</h1>
+<p>In the past months I've been working with a lot with vector graphics. Although I wouldn't call myself
+a graphic designer, I was mistaken for one a couple of times at tech events. I quite enjoy creative design work since
+it's a really refreshing mode change from writing code or looking at data. I've always enjoyed making things
+look aesthetically pleasing but in my work that was mainly limited around creating charts and data
+visualizations, arranging those into dashboards and laying it out in some app. Occasionally I'm creating
+diagrams, but that's mostly for technical purposes.</p>
+<p>Most of the work with vector graphics I've done to date was in <a href="https://inkscape.org/">Inkscape</a> which
+I fell most comfortable with since I've been using on and off for a few good years. Although I've tried
+more modern, web based tools like Canva or Figma but whenever I had something a bit more advanced I always went back
+to Inkscape. All tools have their strengths, but they all require some learning investment before becoming
+productive. Inkscape turned out to be a great investment for me, but I feel I could do much more with
+vector graphics if I could tap into my python skills. </p>
+<p>For some time I wanted to learn how to create vector graphics with python. I've watched a few conference
+talks on creative coding and the whole concept resonated with me instantly. I started exploring what's
+possible around the stack I'm familiar with. A good place to start was learning a bit more about
+<a href="https://developer.mozilla.org/en-US/docs/Web/SVG">SVG</a> itself which stands for <strong>Scalable Vector Graphics</strong>, and it
+is an XML-based markup language that describes 2D vector graphics. For our purposes we won't need to go
+very deep and only explore a few <code>elements</code> and <code>attributes</code> and that'll be sufficient to start creating
+graphics.</p>
+<p>What I would like to do is to be able to create repeated patterns (or tilings) of simple geometric shapes
+and apply a few effects to make it a bit less boring. I am aware that that Inkscape has a tool to create
+tilings based on repeating patterns, but I couldn't fully do what I had in mind and I wanted to try
+creating graphics programmatically. There is also a practical aspect to this project
+since I would like to come up with a design to cover a few windows with in a restaurant to increase privacy
+and comfort for guests.</p>
+<p>I'll start with a simple square lattice<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> and insert simple shapes like squares on the lattice positions.
+The plan is to start modifying the shapes to create interesting effects. In the end I'll repeat the whole
+set of designs on a hexagonal to compare the results.</p>
+<h2 id="creating-svg-graphics-with-python">Creating SVG graphics with python</h2>
+<p>As you might've expected, there are python packages out there, that can help you create SVGs without
+having to write raw XML and worrying
+about matching tags and debugging typos. I'll use <a href="https://svgwrite.readthedocs.io/en/latest/">svgwrite</a> since
+it works out of the box with JupyterLab. Alternatively you can try <a href="https://github.com/cduck/drawSvg">drawSvg</a>,
+they both seem to have a very similar API.</p>
+<p>I'm doing most of my coding here in a jupyter notebook it might be worth mentioning that notebooks can
+display SVGs natively. They can display SVG content directly in a cell either from a file or
+from SVG source with the handy <code>%%SVG</code> cell magic</p>
+<div class="codehilite"><pre><span></span><code>%%SVG
+<span class="nt">&lt;svg</span> <span class="na">height=</span><span class="s">&quot;210&quot;</span> <span class="na">width=</span><span class="s">&quot;500&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;polygon</span>
+    <span class="na">points=</span><span class="s">&quot;200,10 300,180 100,180&quot;</span>
+    <span class="na">style=</span><span class="s">&quot;fill:darkcyan;stroke:tomato;stroke-width:2&quot;</span>
+<span class="nt">/&gt;</span>
+<span class="nt">&lt;/svg&gt;</span>
+</code></pre></div>
+
+<p>should give you the following in the output cell:</p>
+<p><svg height="210" width="500">
+  <polygon points="200,10 300,180 100,180" style="fill:darkcyan;stroke:tomato;stroke-width:2" />
+</svg> </p>
+<p>Alternatively you can also use the builtin display system of IPython:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">SVG</span>
+<span class="n">SVG</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;&lt;svg height=&quot;210&quot; width=&quot;500&quot;&gt;</span>
+<span class="s2">&lt;polygon</span>
+<span class="s2">    points=&quot;100,200 200,200 150.0,113.39745962155614&quot;</span>
+<span class="s2">    style=&quot;fill:darkcyan;stroke:tomato;stroke-width:2&quot;</span>
+<span class="s2">/&gt;</span>
+<span class="s2">&lt;polygon</span>
+<span class="s2">    points=&quot;200,200 300,200 250.0,113.39745962155614&quot;</span>
+<span class="s2">    style=&quot;fill:darkcyan;stroke:tomato;stroke-width:2&quot;</span>
+<span class="s2">/&gt;</span>
+<span class="s2">&lt;/svg&gt;&quot;&quot;&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>should in turn produce:</p>
+<p><svg height="110" width="500">
+  <polygon points="100,100 200,100 150.0,13.39745962155614" style="fill:darkcyan;stroke:tomato;stroke-width:2" />
+  <polygon points="200,100 300,100 250.0,13.39745962155614" style="fill:darkcyan;stroke:tomato;stroke-width:2" />
+</svg></p>
+<p>As you can see SVG is quite straightforward. The drawing in enclosed in the <code>&lt;svg&gt;...&lt;/svg&gt;</code> tags, and I'm using
+the <code>polygon</code> element to draw the shapes by specifying the coordinates of all vertices. The appearance is then
+modifies with the <code>style</code> attribute in a CSS-like syntax.</p>
+<p>Turning to python and making graphics with <code>svgwrite</code> requires creating python representation of the drawing and
+adding shapes to it. I'm only going to use <code>rect</code>, <code>circle</code> and <code>polygon</code> elements with a few standard attributes like: <code>fill</code>, <code>stroke</code> and <code>opacity</code>. Here's an example that illustrates basic functionality:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">svgwrite</span>
+<span class="n">dwg</span> <span class="o">=</span> <span class="n">svgwrite</span><span class="o">.</span><span class="n">Drawing</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;example.svg&quot;</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">140</span><span class="p">))</span>
+<span class="n">dwg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">dwg</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span>
+    <span class="n">insert</span><span class="o">=</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span> <span class="n">fill</span><span class="o">=</span><span class="s2">&quot;darkcyan&quot;</span><span class="p">,</span> <span class="n">stroke</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.7</span><span class="p">))</span>
+<span class="n">dwg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">dwg</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span>
+    <span class="n">insert</span><span class="o">=</span><span class="p">(</span><span class="mi">180</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">fill</span><span class="o">=</span><span class="s2">&quot;darkcyan&quot;</span><span class="p">,</span> <span class="n">stroke</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">1.0</span><span class="p">))</span>
+<span class="n">dwg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">dwg</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span>
+    <span class="n">center</span><span class="o">=</span><span class="p">(</span><span class="mi">290</span><span class="p">,</span> <span class="mi">60</span><span class="p">),</span> <span class="n">r</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="s2">&quot;tomato&quot;</span><span class="p">,</span> <span class="n">stroke</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">))</span>
+<span class="n">dwg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">dwg</span><span class="o">.</span><span class="n">polygon</span><span class="p">(</span>
+    <span class="n">points</span><span class="o">=</span><span class="p">[(</span><span class="mi">350</span><span class="p">,</span> <span class="mi">120</span><span class="p">),</span> <span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">120</span><span class="p">),</span> <span class="p">(</span><span class="mf">375.0</span><span class="p">,</span> <span class="mf">13.5</span><span class="p">)],</span> <span class="n">fill</span><span class="o">=</span><span class="s2">&quot;tomato&quot;</span><span class="p">,</span> <span class="n">stroke</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+    <span class="n">opacity</span><span class="o">=</span><span class="mf">0.8</span><span class="p">))</span>
+</code></pre></div>
+
+<p><svg baseProfile="full" height="140" version="1.1" width="400" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs /><rect fill="darkcyan" height="50" opacity="0.7" stroke="none" width="100" x="50" y="20" /><rect fill="darkcyan" height="100" opacity="1.0" stroke="none" width="50" x="180" y="20" /><circle cx="290" cy="60" fill="tomato" r="40" stroke="none" /><polygon fill="tomato" opacity="0.8" points="350,120 400,120 375.0,13.5" stroke="none" /></svg></p>
+<p>That's it! We now know enough about SVG to start producing more advanced designs programmatically.</p>
+<h2 id="square-lattice">Square lattice</h2>
+<p>Square lattice is the best place to start since it's the simplest. What I want, specifically is a regular
+grid of points whose coordinates will be expressed as the SVG canvas coordinates<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>. Once we have the coordinates
+we can start putting shapes in those locations. To define a square lattice it is sufficient to define a single parameter
+<code>a</code> which is the lattice parameter<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup>. Defining the lattice and size of our graphics will allow us to determine how
+many tiles we'll be able to fit on the graphic of a given size. Here's how it might look in code:</p>
+<div class="codehilite"><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">SquareLattice</span><span class="p">:</span>
+    <span class="s2">&quot;Square Lattice in 2D&quot;</span>
+    <span class="n">a</span><span class="p">:</span> <span class="nb">float</span>
+
+    <span class="k">def</span> <span class="nf">coords</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">col</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">center</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">npt</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">:</span>
+        <span class="s2">&quot;Coordinates for a lattice position (row, col)&quot;</span>
+        <span class="k">if</span> <span class="n">center</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">*</span> <span class="p">(</span><span class="n">row</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">*</span> <span class="p">(</span><span class="n">col</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">*</span> <span class="n">row</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">*</span> <span class="n">col</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">height</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">npt</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">:</span>
+        <span class="s2">&quot;Size of the lattice in lattice postions&quot;</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">width</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">s</span><span class="p">,</span> <span class="n">s</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+</code></pre></div>
+
+<p><code>SquareLatttice</code> takes a single parameter <code>a</code> and with the <code>coords</code> method will generate <code>(x, y)</code>
+coordinates for each of the integer lattice positions <code>(i, j)</code>. To see how it works let's generate a few coordinate pairs:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">lat</span> <span class="o">=</span> <span class="n">SquareLattice</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;coordiantes for position (0, 0): </span><span class="si">{</span><span class="n">lat</span><span class="o">.</span><span class="n">coords</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;coordiantes for position (0, 0): </span><span class="si">{</span><span class="n">lat</span><span class="o">.</span><span class="n">coords</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;coordiantes for position (0, 0): </span><span class="si">{</span><span class="n">lat</span><span class="o">.</span><span class="n">coords</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;coordiantes for position (0, 0): </span><span class="si">{</span><span class="n">lat</span><span class="o">.</span><span class="n">coords</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">coordiantes</span> <span class="k">for</span> <span class="n">position</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="p">[</span><span class="mf">5.</span> <span class="mf">5.</span><span class="p">]</span>
+<span class="n">coordiantes</span> <span class="k">for</span> <span class="n">position</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="p">[</span><span class="mf">15.</span>  <span class="mf">5.</span><span class="p">]</span>
+<span class="n">coordiantes</span> <span class="k">for</span> <span class="n">position</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="p">[</span> <span class="mf">5.</span> <span class="mf">15.</span><span class="p">]</span>
+<span class="n">coordiantes</span> <span class="k">for</span> <span class="n">position</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="p">[</span><span class="mf">25.</span> <span class="mf">25.</span><span class="p">]</span>
+</code></pre></div>
+
+<p>By default, we get coordinates for the center of each cell. It will only be important later on,
+but it's good to notice. </p>
+<p>Now that we have the lattice positions we can put some elements there. For a square lattice, squares
+are a good starting point. Here's how we can create the drawing and repeat
+squares on the predefined lattice:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">draw_squares</span><span class="p">(</span>
+    <span class="n">lattice</span><span class="p">:</span> <span class="n">Lattice</span><span class="p">,</span>
+    <span class="n">side</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">800</span><span class="p">,</span>
+    <span class="n">height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">800</span><span class="p">,</span>
+    <span class="n">fill</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;darkcyan&quot;</span><span class="p">,</span>
+    <span class="n">stroke</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span>
+    <span class="n">opacity</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="s2">&quot;Draw SVG squares on a lattice&quot;</span>
+    <span class="n">dwg</span> <span class="o">=</span> <span class="n">svgwrite</span><span class="o">.</span><span class="n">Drawing</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">))</span>
+
+    <span class="n">xsize</span><span class="p">,</span> <span class="n">ysize</span> <span class="o">=</span> <span class="n">lattice</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">xsize</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ysize</span><span class="p">):</span>
+            <span class="n">dwg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+                <span class="n">dwg</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span>
+                    <span class="n">insert</span><span class="o">=</span><span class="n">lattice</span><span class="o">.</span><span class="n">coords</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span>
+                    <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">side</span><span class="p">,</span> <span class="n">side</span><span class="p">),</span>
+                    <span class="n">fill</span><span class="o">=</span><span class="n">fill</span><span class="p">,</span>
+                    <span class="n">stroke</span><span class="o">=</span><span class="n">stroke</span><span class="p">,</span>
+                    <span class="n">opacity</span><span class="o">=</span><span class="n">opacity</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+    <span class="k">return</span> <span class="n">dwg</span>
+</code></pre></div>
+
+<p>Since we can independently control the lattice spacing and size of the squares let's see a few variants:</p>
+<div class="row justify-content-center py-3">
+    <div class="col-4 py-2">
+        <figure class="figure">
+            <img src="../../static/img/square-lattice-a40-square-5.svg" width="100%" class="mb-2">
+            <figcaption class="figure-caption text-center">Lattice a=40, square size=5</figcaption>
+        </figure>
+    </div>
+    <div class="col-4 py-2">
+        <figure class="figure">
+            <img src="../../static/img/square-lattice-a40-square-20.svg" width="100%" class="mb-2">
+            <figcaption class="figure-caption text-center">Lattice a=40, square size=20</figcaption>
+        </figure>
+    </div>
+    <div class="col-4 py-2">
+        <figure class="figure">
+            <img src="../../static/img/square-lattice-a90-square-80.svg" width="100%" class="mb-2">
+            <figcaption class="figure-caption text-center">Lattice a=90, square size=80</figcaption>
+        </figure>
+    </div>
+</div>
+
+<p>Nothing spectacular yet but we need this foundation to be able to quickly modify the designs.</p>
+<h3 id="making-things-more-interesting">Making things more interesting</h3>
+<p>There are many ways to modify the grids we've produced so far to make it more interesting. Obvious
+example is probably changing the color channel but before going there I will try changing the size of
+the squares. The effect that I think it will have to imitate brightness where smaller shapes will
+be less intense and bigger elements more intense. Alternatively I would try to modify <em>opacity</em>
+in a similar fashion, but I think encoding brightness with size will be a nicer aesthetic. </p>
+<p>I want to simulate a fade effect with a square size gradient. I would
+like to try out a few different gradient functions, but I'll start with the linear gradient along the <em>y</em> axis,
+that we'll use to modify elements.</p>
+<p>With the function below I'm going to be able to create an array with coefficients <code>[0.0, 1.0]</code> to scale
+the squares by. Since the gradient will be applied along the <em>y</em> axis the size of the gradient array
+is the same as the number of lattice points in the <em>y</em> direction.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">linear_gradient</span><span class="p">(</span>
+    <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">offset</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="n">geom</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">start</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span>
+    <span class="p">):</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">size</span> <span class="o">*</span> <span class="n">offset</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">geom</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span> <span class="o">-</span> <span class="n">c</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span> <span class="o">-</span> <span class="n">c</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="p">))</span>
+</code></pre></div>
+
+<p>To make it work we'll need a small modification to the drawing function to take <code>gradient</code> argument
+and scale the squares with it. Here's the updated function:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">draw_squares</span><span class="p">(</span>
+    <span class="n">lattice</span><span class="p">:</span> <span class="n">Lattice</span><span class="p">,</span>
+    <span class="n">side</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">800</span><span class="p">,</span>
+    <span class="n">height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">800</span><span class="p">,</span>
+    <span class="n">fill</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;darkcyan&quot;</span><span class="p">,</span>
+    <span class="n">stroke</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span>
+    <span class="n">opacity</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+<span class="hll">    <span class="n">gradient</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">ArrayLike</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span class="p">):</span>
+    <span class="s2">&quot;Draw SVG squares on a lattice with gradient&quot;</span>
+    <span class="n">dwg</span> <span class="o">=</span> <span class="n">svgwrite</span><span class="o">.</span><span class="n">Drawing</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">))</span>
+
+    <span class="n">xsize</span><span class="p">,</span> <span class="n">ysize</span> <span class="o">=</span> <span class="n">lattice</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">xsize</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ysize</span><span class="p">):</span>
+<span class="hll">            <span class="n">size</span> <span class="o">=</span> <span class="n">side</span> <span class="o">*</span> <span class="n">gradient</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+</span>            <span class="n">dwg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+                <span class="n">dwg</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span>
+                    <span class="n">insert</span><span class="o">=</span><span class="n">lattice</span><span class="o">.</span><span class="n">coords</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span>
+<span class="hll">                    <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">),</span>
+</span>                    <span class="n">fill</span><span class="o">=</span><span class="n">fill</span><span class="p">,</span>
+                    <span class="n">stroke</span><span class="o">=</span><span class="n">stroke</span><span class="p">,</span>
+                    <span class="n">opacity</span><span class="o">=</span><span class="n">opacity</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+    <span class="k">return</span> <span class="n">dwg</span>
+</code></pre></div>
+
+<p>Putting it all together and generating the grid with the gradient gives the following result</p>
+<div class="row justify-content-center py-3">
+    <div class="col text-center">
+        <figure class="figure">
+            <img src="../../static/img/square-lattice-a40-square-15-gradient.svg" width="75%" class="mb-2">
+            <figcaption class="figure-caption">Lattice a=40, square size=15 with a linear gradient</figcaption>
+        </figure>
+    </div>
+</div>
+
+<p>If we draw squares that are a bit larger we'll notice a slight problem with the current approach since
+the default <code>rect</code> element is drawn with respect to top left corner which results in an alignment to the left.</p>
+<div class="row justify-content-center py-3">
+    <div class="col text-center">
+        <figure class="figure">
+            <img src="../../static/img/square-lattice-a80-square-75-gradient-left.svg" width="75%" class="mb-2">
+            <figcaption class="figure-caption">Lattice a=80, square size=75 with a linear gradient</figcaption>
+        </figure>
+    </div>
+</div>
+
+<p>Although it might be desirable is some cases I would rather have all the squares centered with respect
+to the lattice positions. To make that happen I created a custom <code>Square</code> class that I'll use with
+the <code>polygon</code> element instead of <code>rect</code>. Here's the <code>Square</code> class and updated <code>draw_squares</code> function</p>
+<div class="codehilite"><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Square</span><span class="p">:</span>
+    <span class="s2">&quot;Square&quot;</span>
+    <span class="n">side</span><span class="p">:</span> <span class="nb">int</span>
+
+    <span class="k">def</span> <span class="nf">coords</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s2">&quot;Vertex coordinates of a square with repect to its center (0, 0)&quot;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+            <span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">side</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">side</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>            
+            <span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">side</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">side</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>
+            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">side</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">side</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>
+            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">side</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">side</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">draw_squares</span><span class="p">(</span>
+    <span class="n">lattice</span><span class="p">:</span> <span class="n">Lattice</span><span class="p">,</span>
+    <span class="n">side</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">800</span><span class="p">,</span>
+    <span class="n">height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">800</span><span class="p">,</span>
+    <span class="n">fill</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;darkcyan&quot;</span><span class="p">,</span>
+    <span class="n">stroke</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span>
+    <span class="n">opacity</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">gradient</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">ArrayLike</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="s2">&quot;Draw SVG squares on a lattice&quot;</span>
+    <span class="n">dwg</span> <span class="o">=</span> <span class="n">svgwrite</span><span class="o">.</span><span class="n">Drawing</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">))</span>
+
+    <span class="n">xsize</span><span class="p">,</span> <span class="n">ysize</span> <span class="o">=</span> <span class="n">lattice</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">xsize</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ysize</span><span class="p">):</span>
+            <span class="n">square</span> <span class="o">=</span> <span class="n">Square</span><span class="p">(</span><span class="n">side</span><span class="o">=</span><span class="n">side</span> <span class="o">*</span> <span class="n">gradient</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+            <span class="n">points</span> <span class="o">=</span> <span class="n">square</span><span class="o">.</span><span class="n">coords</span><span class="p">()</span> <span class="o">+</span> <span class="n">lattice</span><span class="o">.</span><span class="n">coords</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+            <span class="n">dwg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+                <span class="n">dwg</span><span class="o">.</span><span class="n">polygon</span><span class="p">(</span>
+                    <span class="n">points</span> <span class="o">=</span> <span class="n">points</span><span class="p">,</span>
+                    <span class="n">fill</span><span class="o">=</span><span class="n">fill</span><span class="p">,</span>
+                    <span class="n">stroke</span><span class="o">=</span><span class="n">stroke</span><span class="p">,</span>
+                    <span class="n">opacity</span><span class="o">=</span><span class="n">opacity</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+    <span class="k">return</span> <span class="n">dwg</span>
+</code></pre></div>
+
+<p>Redrawing the previous graphic with the updates gives the expected result where all the squares are now
+centered around lattice positions.</p>
+<div class="row justify-content-center py-3">
+    <div class="col text-center">
+        <figure class="figure">
+            <img src="../../static/img/square-lattice-a80-square-75-gradient-center.svg" width="75%" class="mb-2">
+            <figcaption class="figure-caption">Lattice a=80, square size=75 with a linear gradient centered</figcaption>
+        </figure>
+    </div>
+</div>
+
+<h3 id="ridge">Ridge</h3>
+<p>With a slight modification to the <code>linear_gradient</code> function we can make the gradient symmetric with respect
+to the center. I'm calling it <code>ridge</code> gradient, and it should create a fade effect going both up and down.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">ridge</span><span class="p">(</span><span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">geom</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">):</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">size</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">geom</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span> <span class="o">-</span> <span class="n">c</span><span class="p">),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span> <span class="o">-</span> <span class="n">c</span><span class="p">),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="p">))</span>
+</code></pre></div>
+
+<p>Applying the ridge gradient give a nicely symmetric pattern.</p>
+<div class="row justify-content-center py-3">
+    <div class="col text-center">
+        <figure class="figure">
+            <img src="../../static/img/square-lattice-a20-square-15-gradient-ridge.svg" width="75%" class="mb-2">
+            <figcaption class="figure-caption">Lattice a=20, square size=15 with a ridge gradient</figcaption>
+        </figure>
+    </div>
+</div>
+
+<p>I guess it's easy to see how to modify the current code to change the direction or produce a different
+fade pattern. In the next step we're going to update the gradient from 1D to 2D to allow for more
+sophisticated patterns.</p>
+<h3 id="radial-gradient">Radial gradient</h3>
+<p>So far we've applied gradient along a single axis, but there is nothing preventing
+us from extending the gradient to 2D. One familiar concept we can try to implement is radial gradient.
+We'll need to modify the function for drawing the squares to modify the size of squares
+based on both <code>i</code> and <code>j</code> lattice positions, and we'll need a 2D array with sizes
+representing brightness. The <code>radial_gradient</code> function evaluates the distance between
+the <code>origin</code> of the gradient and given lattice position and scales the value to <code>[0.0, 1.0]</code>
+range within the specified <code>radius</code>. </p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">radial_gradient</span><span class="p">(</span>
+    <span class="n">lattice</span><span class="p">:</span> <span class="n">Lattice</span><span class="p">,</span>
+    <span class="n">origin</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">,</span>
+    <span class="n">radius</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">height</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">npt</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">:</span>
+    <span class="s2">&quot;Compute brightness for a radial gradient&quot;</span>
+    <span class="k">def</span> <span class="nf">radial_distance</span><span class="p">(</span><span class="n">origin</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+        <span class="n">distance</span> <span class="o">=</span> <span class="n">euclidean</span><span class="p">(</span><span class="n">origin</span><span class="p">,</span> <span class="n">coords</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">distance</span> <span class="o">/</span> <span class="n">radius</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+
+    <span class="n">xsize</span><span class="p">,</span> <span class="n">ysize</span> <span class="o">=</span> <span class="n">lattice</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+    <span class="n">gradient</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">xsize</span><span class="p">,</span> <span class="n">ysize</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">xsize</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ysize</span><span class="p">):</span>
+            <span class="n">gradient</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span>
+                <span class="n">gradient</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">],</span>
+                <span class="n">radial_distance</span><span class="p">(</span><span class="n">origin</span><span class="p">,</span> <span class="n">lattice</span><span class="o">.</span><span class="n">coords</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">radius</span><span class="p">)</span>
+            <span class="p">)</span>
+    <span class="k">return</span> <span class="n">gradient</span>
+</code></pre></div>
+
+<p>Now the returned array is 2D and can be applied to our grid. The modification to <code>draw_squares</code>
+is straightforward, so I'll not repeat the code here. Since the number in the gradient array
+are scaled to <code>[0.0, 1.0]</code> we can also compute the inverse gradient by subtracting the gradient from 1.
+Here are the two variants we get:</p>
+<div class="row justify-content-center py-3">
+    <div class="col-6 py-2">
+        <figure class="figure">
+            <img src="../../static/img/square-lattice-a20-square-15-radial-grad.svg" width="100%" class="mb-2">
+            <figcaption class="figure-caption text-center">Lattice a=20, square size=15, radial gradient</figcaption>
+        </figure>
+    </div>
+    <div class="col-6 py-2">
+        <figure class="figure">
+            <img src="../../static/img/square-lattice-a20-square-15-radial-grad-inverse.svg" width="100%" class="mb-2">
+            <figcaption class="figure-caption text-center">Lattice a=20, square size=15, inverse radial gradient</figcaption>
+        </figure>
+    </div>
+</div>
+
+<p>A nice effect here is that side by side these look like the right hand side one is "taken out" from the left hand
+side one. </p>
+<h2 id="hexagonal-lattice">Hexagonal lattice</h2>
+<p>Square lattice is not the only choice for a lattice. It's the most symmetric looking, and therefore
+it has an artificial or dry aesthetic. To check the effect that a lattice might have on the overall
+graphic I'll try also a hexagonal lattice also known as honeycomb structure.</p>
+<p>Just as in the case of a square lattice we need only a single parameter <code>a</code> to define the lattice.
+Since for the hexagonal lattice the translation vectors are no longer parallel we need to take that
+into account when computing lattice coordiantes<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup>.</p>
+<div class="codehilite"><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">HexLattice</span><span class="p">:</span>
+    <span class="s2">&quot;Hexagonal lattice&quot;</span>
+    <span class="n">a</span><span class="p">:</span> <span class="nb">float</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">vectors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">]])</span>
+
+    <span class="k">def</span> <span class="nf">coords</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">col</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">npt</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">:</span>
+        <span class="s2">&quot;Coordinates for a lattice position (row, col)&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vectors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">row</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">vectrors</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">col</span>
+</code></pre></div>
+
+<p>With the lattice defined I would like to have regular hexagons in cell positions
+in analogy to having squares on a square lattice. For a regular hexagon with the
+side <code>a</code> here is a diagram with the coordinates of the vertices with respect to the center of
+the hexagon<sup id="fnref:5"><a class="footnote-ref" href="#fn:5">5</a></sup>.</p>
+<div class="row justify-content-center py-3">
+    <div class="col text-center">
+        <figure class="figure">
+            <img src="../../static/img/hexagon.svg" width="500px" class="mb-2">
+            <figcaption class="figure-caption">Coordinates of the hexagon vertices with respect to its center</figcaption>
+        </figure>
+    </div>
+</div>
+
+<p>Based on that we can code up the <code>Hexagon</code> class to be drawn on the canvas as the
+<code>polygon</code> element.</p>
+<div class="codehilite"><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Hexagon</span><span class="p">:</span>
+    <span class="s2">&quot;Regular Hexagon&quot;</span>
+    <span class="n">side</span><span class="p">:</span> <span class="nb">int</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">height</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s2">&quot;Height of a flat top regular hexagon&quot;</span>
+        <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">side</span>
+
+    <span class="k">def</span> <span class="nf">coords</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s2">&quot;Coordinates of vertices with repect to hexagon center (0, 0)&quot;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+            <span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">side</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>            
+            <span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">side</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+            <span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">side</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>
+            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">side</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>
+            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">side</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">side</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="p">])</span>
+</code></pre></div>
+
+<p>With that we should be able to recreate the analogues of the graphics we created
+with squares on a square lattice. We'll also need a <code>draw_hexagons</code> function, but
+that again is pretty analogous to <code>draw_squares</code>, so I'll leave it for you to figure adapt.</p>
+<h2 id="graphics">Graphics</h2>
+<p>With all things in place here is a side by side comparison of the graphics with and
+without different gradient effects. You might notice that there is an extra wavy pattern
+generated which is also at the head of this post. It's essentially a sin wave with a
+fade based on distance from the curve. If you're curious about it let me in the comments
+and I'll more.</p>
+<div class="row justify-content-center py-3">
+    <div class="col-6 py-2">
+        <figure class="figure">
+            <img src="../../static/img/square-lattice-a33-square-25.svg" width="100%" class="mb-2">
+            <figcaption class="figure-caption text-center">Square lattice a=40, square side=20</figcaption>
+        </figure>
+    </div>
+    <div class="col-6 py-2">
+        <figure class="figure">
+            <img src="../../static/img/hex-lattice-side20-padding5.svg" width="100%" class="mb-2">
+            <figcaption class="figure-caption text-center">Hex lattice padding=5, hex side=20</figcaption>
+        </figure>
+    </div>
+    <div class="col-6 py-2">
+        <figure class="figure">
+            <img src="../../static/img/square-lattice-a33-square-25-gradient.svg" width="100%" class="mb-2">
+            <figcaption class="figure-caption text-center">Sq lattice a=33, square side=25, linear gradient</figcaption>
+        </figure>
+    </div>
+    <div class="col-6 py-2">
+        <figure class="figure">
+            <img src="../../static/img/hex-lattice-side20-padding5-gradient.svg" width="100%" class="mb-2">
+            <figcaption class="figure-caption text-center">Hex lattice padding=5, hex side=20, linear gradient</figcaption>
+        </figure>
+    </div>
+    <div class="col-6 py-2">
+        <figure class="figure">
+            <img src="../../static/img/square-lattice-a33-square-25-gradient-ridge.svg" width="100%" class="mb-2">
+            <figcaption class="figure-caption text-center">Sq lattice a=33, square side=25, ridge gradient</figcaption>
+        </figure>
+    </div>
+    <div class="col-6 py-2">
+        <figure class="figure">
+            <img src="../../static/img/hex-lattice-side20-padding5-ridge-gradient.svg" width="100%" class="mb-2">
+            <figcaption class="figure-caption text-center">Hex lattice a=20, hex side=20, ridge gradient</figcaption>
+        </figure>
+    </div>
+    <div class="col-6 py-2">
+        <figure class="figure">
+            <img src="../../static/img/square-lattice-a33-square-25-sin-gradient.svg" width="100%" class="mb-2">
+            <figcaption class="figure-caption text-center">Sq Lattice a=33, square size=25, sin gradient</figcaption>
+        </figure>
+    </div>
+    <div class="col-6 py-2">
+        <figure class="figure">
+            <img src="../../static/img/hex-lattice-side20-padding5-sin-gradient.svg" width="100%" class="mb-2">
+            <figcaption class="figure-caption text-center">Hex lattice a=20, hex side=20, sin gradient</figcaption>
+        </figure>
+    </div>
+    <div class="col-6 py-2">
+        <figure class="figure">
+            <img src="../../static/img/square-lattice-a33-square-25-radial-grad.svg" width="100%" class="mb-2">
+            <figcaption class="figure-caption text-center">Sq lattice a=33, square side=25, radial gradient</figcaption>
+        </figure>
+    </div>
+    <div class="col-6 py-2">
+        <figure class="figure">
+            <img src="../../static/img/hex-lattice-side20-padding5-radial-gradient.svg" width="100%" class="mb-2">
+            <figcaption class="figure-caption text-center">Hex lattice a=20, hex side=20, radial gradient</figcaption>
+        </figure>
+    </div>
+    <div class="col-6 py-2">
+        <figure class="figure">
+            <img src="../../static/img/square-lattice-a33-square-25-radial-grad-inverse.svg" width="100%" class="mb-2">
+            <figcaption class="figure-caption text-center">Sq lattice a=33, square side=25, inverse radial gradient</figcaption>
+        </figure>
+    </div>
+    <div class="col-6 py-2">
+        <figure class="figure">
+            <img src="../../static/img/hex-lattice-side20-padding5-radial-gradient-inverse.svg" width="100%" class="mb-2">
+            <figcaption class="figure-caption text-center">Hex lattice a=20, hex side=20, inverse radial gradient</figcaption>
+        </figure>
+    </div>
+</div>
+
+<h2 id="summary">Summary</h2>
+<p>Generating vector graphics programmatically was a lot more exciting than I expected
+and I was surprised how much I got sucked into it. Once it was clear how to create
+shapes and position them on the canvas create variations on the designs was quite easy.
+I am quite happy with the results so far and definitely prefer the hex-on-hex variant,
+but I would like to explore further and try out a few more things to make the designs
+a bit more organic and less perfect.</p>
+<p>To take it further I would probably explore ways of introducing randomness in various
+channels and to encode different attributes. So far all the designs were quite simple
+and deterministic and randomness would
+take them to next level. Breaking the perfect symmetries either by deforming the lattice
+of making the shapes a bit irregular (or both) might also produce an interesting result.</p>
+<p>On top of that I think that introducing various kinds of defects and imperfections
+inspired by real crystal structures where those phenomena occur would add yet another dimension
+to explore.   </p>
+<h2 id="footnotes">Footnotes</h2>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>This is going to be a nice journey back in to my crystallgraphy lectures.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>By default SVG coordinates start in the top-left corner at <code>(0, 0)</code> and go to <code>(width, height)</code> with the pixels as unit.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p>In general there are 5 types <a href="https://en.wikipedia.org/wiki/Bravais_lattice">Bravais lattices</a> in 2D, and they can be
+  specified by defining the parameters of the unit cell.&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p>If you want to know learn more about hexagonal coordinates check out <a href="https://www.redblobgames.com/grids/hexagons/">this post</a>.&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:5">
+<p>I choose the flat top orientation of the hexagon, an alternative would be the pointy
+  top hexagon orientation. They differ by a 90-degree rotation of all vertices, so it's quite
+  straightforward to switch between them.&#160;<a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col post mx-auto">
+        <script src="https://utteranc.es/client.js"
+          repo="lmmentel/lmmentel.github.io"
+          issue-term="title"
+          theme="github-light"
+          crossorigin="anonymous"
+          async>
+        </script>
+      </div>
+    </div>
+  </div>
+
+
+  
+  <footer class="blog-footer mx-auto mt-auto">
+    <div class="row">
+      <div class="col">
+        <p class="text-muted text-center">
+          <i class="fa fa-copyright" aria-hidden="true"></i> Copyright 2015-2023 by Łukasz Mentel
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="social text-center" style="font-size: 32px;">
+          <ul class="list-inline" id="socialicons">
+
+          <script language="JavaScript">
+            u = 'lmmentel';
+            s = 'gmail.com';
+            document.write('<a href=\"mailto:' + u + '@' + s + '\" target=\"_blank\" title=\"Gmail\">');
+          </script>
+              <li><i class="fa fa-envelope-o" aria-hidden="true"></i> </li>
+          </a>
+
+            <li><a href="https://github.com/lmmentel" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a></li>
+            <li><a href="https://bitbucket.org/lukaszmentel" title="Bitbucket"><i class="fa fa-bitbucket" aria-hidden="true"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/lukasz-mentel" title="LinkedIn"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+            <li><a href="https://www.mendeley.com/profiles/lukasz-mentel2/" title="Mendeley"><i class="ai ai-mendeley"></i></a></li>
+            <li><a href="http://scholar.google.com/citations?user=TTL9ux0AAAAJ&hl=en" title="GoogleScholar"><i class="ai ai-google-scholar"></i></a></li>
+            <li><a href="https://www.researchgate.net/profile/Lukasz_Mentel/" title="ResearchGate"><i class="ai ai-researchgate"></i></a></li>
+            <li><a href="../../latest.atom/index.html" title="Atom"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div><a href="../../credits/index.html" class="text-muted">Credits</a></div>
+  </footer>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <!-- Google Analytics code -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-87210403-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
+    <script>
+      const changeThemeToDark = () => {
+          document.body.classList.add('theme-dark')
+          localStorage.setItem("data-theme", "dark")
+      }
+      const changeThemeToLight = () => {
+          document.body.classList.remove('theme-dark')
+          localStorage.setItem("data-theme", 'light')
+      }
+      // set initial value
+      let theme = localStorage.getItem('data-theme');
+      console.log(theme);
+      if (theme === 'dark') {
+          changeThemeToDark()
+        }
+        else {
+          changeThemeToLight()  
+        };
+
+      document.getElementById('themeSwitch').addEventListener('click',()=>{
+        let theme = localStorage.getItem('data-theme');
+        console.log(theme);
+        if (theme === 'dark') {
+            changeThemeToLight()
+          }
+          else {
+            changeThemeToDark()  
+          }
+      })
+    </script>
+
+    
+    
+
+  </body>
+</html>
